@@ -2,23 +2,20 @@
 //reference System.Net.dll
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.IO;
 using System.Net.Sockets;
-using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using PattyKaki.DB;
 using PattyKaki.Events.ServerEvents;
 using PattyKaki.Events;
-using PattyKaki.SQL;
 
 namespace PattyKaki.Relay
 {
     public abstract class BotControllersCmd : Command2
     {
-        public override string type { get { return CommandTypes.Moderation; } }
-        public override LevelPermission defaultRank { get { return LevelPermission.Admin; } }
+        public override string Type { get { return CommandTypes.Moderation; } }
+        public override LevelPermission DefaultRank { get { return LevelPermission.Admin; } }
         public abstract RelayBot Bot { get; }
 
         public override void Use(Player p, string message, CommandData data)
@@ -67,7 +64,7 @@ namespace PattyKaki.Relay
 
                 case "list":
                     bot.Controllers.OutputPlain(p, bot.RelayName + " controllers",
-                                                name + " list", arg);
+                                                Name + " list", arg);
                     break;
 
                 case "rank":
@@ -102,7 +99,7 @@ namespace PattyKaki.Relay
 
         public override void Help(Player p)
         {
-            string cmd = name;
+            string cmd = Name;
             string relay = Bot.RelayName;
 
             p.Message("&T/{0} add/remove [name]", cmd);
@@ -655,7 +652,7 @@ namespace PattyKaki.Relay
             Command.Find("ServerUrl").Use(p, "", p.DefaultCmdData);
         }
 
-        public bool HandleCommand(RelayUser user, string channel, string message, string[] parts)
+        public bool HandleCommand(RelayUser user, string channel, string _, string[] parts)
         {
             string cmdName = parts.Length > 1 ? parts[1].ToLower() : "";
             string cmdArgs = parts.Length > 2 ? parts[2].Trim() : "";
@@ -688,7 +685,7 @@ namespace PattyKaki.Relay
                 }
                 if (!cmd.SuperUseable)
                 {
-                    p.Message(cmd.name + " can only be used in-game.");
+                    p.Message(cmd.Name + " can only be used in-game.");
                     return false;
                 }
                 cmd.Use(p, cmdArgs);
@@ -776,8 +773,8 @@ namespace PattyKaki.Relay
 
     public abstract class RelayBotCmd : Command2
     {
-        public override string type { get { return CommandTypes.Moderation; } }
-        public override LevelPermission defaultRank { get { return LevelPermission.Admin; } }
+        public override string Type { get { return CommandTypes.Moderation; } }
+        public override LevelPermission DefaultRank { get { return LevelPermission.Admin; } }
         public abstract RelayBot Bot { get; }
 
         public override void Use(Player p, string message, CommandData data)
@@ -806,7 +803,7 @@ namespace PattyKaki.Relay
 
         public override void Help(Player p)
         {
-            string cmd = name;
+            string cmd = Name;
             string relay = Bot.RelayName;
 
             p.Message("&T/{0} connect", cmd);

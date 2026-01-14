@@ -19,11 +19,11 @@ using System;
 
 namespace PattyKaki.Commands.Misc {
     public sealed class CmdSummon : Command2 {
-        public override string name { get { return "Summon"; } }
-        public override string shortcut { get { return "s"; } }
-        public override string type { get { return CommandTypes.Other; } }
-        public override bool museumUsable { get { return false; } }
-        public override LevelPermission defaultRank { get { return LevelPermission.Operator; } }
+        public override string Name { get { return "Summon"; } }
+        public override string Shortcut { get { return "s"; } }
+        public override string Type { get { return CommandTypes.Other; } }
+        public override bool MuseumUsable { get { return false; } }
+        public override LevelPermission DefaultRank { get { return LevelPermission.Operator; } }
         public override bool SuperUseable { get { return false; } }
         public override CommandAlias[] Aliases {
             get { return new[] { new CommandAlias("Fetch"), new CommandAlias("Bring"), new CommandAlias("BringAll", "all") }; }

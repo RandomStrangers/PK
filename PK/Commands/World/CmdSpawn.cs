@@ -19,8 +19,8 @@ using PattyKaki.Games;
 
 namespace PattyKaki.Commands.World {
     public sealed class CmdSpawn : Command2 {
-        public override string name { get { return "Spawn"; } }
-        public override string type { get { return CommandTypes.World; } }
+        public override string Name { get { return "Spawn"; } }
+        public override string Type { get { return CommandTypes.World; } }
         public override bool SuperUseable { get { return false; } }
 
         public override void Use(Player p, string message, CommandData data) {

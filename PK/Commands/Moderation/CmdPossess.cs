@@ -19,9 +19,9 @@
 namespace PattyKaki.Commands.Moderation {
     
     public sealed class CmdPossess : Command2 {
-        public override string name { get { return "Possess"; } }
-        public override string type { get { return CommandTypes.Moderation; } }
-        public override LevelPermission defaultRank { get { return LevelPermission.Admin; } }
+        public override string Name { get { return "Possess"; } }
+        public override string Type { get { return CommandTypes.Moderation; } }
+        public override LevelPermission DefaultRank { get { return LevelPermission.Admin; } }
         public override bool SuperUseable { get { return false; } }
 
         public static void Unpossess(Player target) {

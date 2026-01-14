@@ -40,9 +40,8 @@ namespace PattyKaki.Eco
         
         
         public void LoadConfig(string line) {
-            string prop, value;
-            line.Separate(':', out prop, out value);
-            
+            line.Separate(':', out string prop, out string value);
+
             if (prop.CaselessEq("enabled")) {
                 Enabled = value.CaselessEq("true");
             } else if (prop.CaselessEq("purchaserank")) {

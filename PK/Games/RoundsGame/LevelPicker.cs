@@ -128,7 +128,7 @@ namespace PattyKaki.Games
             }
         }
 
-        public string NextLevel(Random r, List<string> levels) {
+        public string NextLevel(Random _, List<string> __) {
             Player[] online = PlayerInfo.Online.Items;
             foreach (Player pl in online) pl.voted = false;
             

@@ -18,9 +18,9 @@
 
 namespace PattyKaki.Commands.Moderation {
     public sealed class CmdVIP : Command2 {
-        public override string name { get { return "VIP"; } }
-        public override string type { get { return CommandTypes.Moderation; } }
-        public override LevelPermission defaultRank { get { return LevelPermission.Admin; } }
+        public override string Name { get { return "VIP"; } }
+        public override string Type { get { return CommandTypes.Moderation; } }
+        public override LevelPermission DefaultRank { get { return LevelPermission.Admin; } }
 
         public override void Use(Player p, string message, CommandData data) {
             if (message.Length == 0) { List(p, ""); return; }

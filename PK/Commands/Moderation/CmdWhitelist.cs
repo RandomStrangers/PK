@@ -18,10 +18,10 @@
 
 namespace PattyKaki.Commands.Moderation {
     public sealed class CmdWhitelist : Command2 {
-        public override string name { get { return "Whitelist"; } }
-        public override string shortcut { get { return "w"; } }
-        public override string type { get { return CommandTypes.Moderation; } }
-        public override LevelPermission defaultRank { get { return LevelPermission.Operator; } }
+        public override string Name { get { return "Whitelist"; } }
+        public override string Shortcut { get { return "w"; } }
+        public override string Type { get { return CommandTypes.Moderation; } }
+        public override LevelPermission DefaultRank { get { return LevelPermission.Operator; } }
         public override CommandPerm[] ExtraPerms {
             get { return new[] { new CommandPerm(LevelPermission.Admin, "can enable/disable whitelisted only mode") }; }
         }

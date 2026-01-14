@@ -18,21 +18,25 @@
 using PattyKaki.Drawing.Ops;
 using PattyKaki.Generator;
 
-namespace PattyKaki.Commands.Building 
+namespace PattyKaki.Commands.Building
 {
-    public sealed class CmdMaze : DrawCmd 
+    public sealed class CmdMaze : DrawCmd
     {
-        public override string name { get { return "Maze"; } }
+        public override string Name { get { return "Maze"; } }
 
-        public override DrawOp GetDrawOp(DrawArgs dArgs) {
-            MazeDrawOp op = new MazeDrawOp();
-            op.rng        = MapGen.MakeRng(dArgs.Message);
+        public override DrawOp GetDrawOp(DrawArgs dArgs)
+        {
+            MazeDrawOp op = new MazeDrawOp
+            {
+                rng = MapGen.MakeRng(dArgs.Message)
+            };
             return op;
         }
 
         public override void GetBrush(DrawArgs dArgs) { dArgs.BrushName = "Normal"; }
-        
-        public override void Help(Player p) {
+
+        public override void Help(Player p)
+        {
             p.Message("&T/Maze");
             p.Message("&HGenerates a random maze between two points.");
         }

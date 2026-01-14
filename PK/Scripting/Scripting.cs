@@ -118,7 +118,7 @@ namespace PattyKaki.Scripting
         
         
         public static void AutoloadCommands() {
-            string[] files = AtomicIO.TryGetFiles(COMMANDS_DLL_DIR, "*.dll");
+            string[] files = FileIO.TryGetFiles(COMMANDS_DLL_DIR, "*.dll");
             if (files == null) return;
             
             foreach (string path in files) { AutoloadCommands(path); }
@@ -135,7 +135,7 @@ namespace PattyKaki.Scripting
             }
             
             Logger.Log(LogType.SystemActivity, "AUTOLOAD: Loaded {0} from {1}",
-                       cmds.Join(c => "/" + c.name), Path.GetFileName(path));
+                       cmds.Join(c => "/" + c.Name), Path.GetFileName(path));
         }
         
         /// <summary> Loads and registers all the commands from the given .dll path </summary>
@@ -148,8 +148,8 @@ namespace PattyKaki.Scripting
             
             foreach (Command cmd in commands)
             {
-                if (Command.Find(cmd.name) != null)
-                    throw new AlreadyLoadedException("/" + cmd.name + " is already loaded");
+                if (Command.Find(cmd.Name) != null)
+                    throw new AlreadyLoadedException("/" + cmd.Name + " is already loaded");
                 
                 Command.Register(cmd);
             }
@@ -171,7 +171,7 @@ namespace PattyKaki.Scripting
         
         
         public static void AutoloadPlugins() {
-            string[] files = AtomicIO.TryGetFiles(PLUGINS_DLL_DIR, "*.dll");
+            string[] files = FileIO.TryGetFiles(PLUGINS_DLL_DIR, "*.dll");
             if (files == null) return;
             
             // Ensure that plugin files are loaded in a consistent order,
@@ -195,8 +195,8 @@ namespace PattyKaki.Scripting
             
             foreach (Plugin pl in plugins)
             {
-                if (Plugin.FindCustom(pl.name) != null)
-                    throw new AlreadyLoadedException("Plugin " + pl.name + " is already loaded");
+                if (Plugin.FindCustom(pl.Name) != null)
+                    throw new AlreadyLoadedException("Plugin " + pl.Name + " is already loaded");
                 
                 Plugin.Load(pl, auto);
             }

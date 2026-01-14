@@ -18,11 +18,11 @@
 namespace PattyKaki.Commands.World {
     
     public sealed class CmdLockdown : Command2 {
-        public override string name { get { return "Lockdown"; } }
-        public override string shortcut { get { return "ld"; } }
-        public override string type { get { return CommandTypes.Other; } }
-        public override bool museumUsable { get { return false; } }
-        public override LevelPermission defaultRank { get { return LevelPermission.Operator; } }
+        public override string Name { get { return "Lockdown"; } }
+        public override string Shortcut { get { return "ld"; } }
+        public override string Type { get { return CommandTypes.Other; } }
+        public override bool MuseumUsable { get { return false; } }
+        public override LevelPermission DefaultRank { get { return LevelPermission.Operator; } }
         public override CommandAlias[] Aliases {
             get { return new[] { new CommandAlias("WLock"), new CommandAlias("WUnlock") }; }
         }

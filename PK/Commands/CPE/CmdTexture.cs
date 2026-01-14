@@ -21,9 +21,9 @@ namespace PattyKaki.Commands.CPE
 {
     public sealed class CmdTexture : Command2 
     {
-        public override string name { get { return "Texture"; } }
-        public override string type { get { return CommandTypes.Other; } }
-        public override LevelPermission defaultRank { get { return LevelPermission.Operator; } }
+        public override string Name { get { return "Texture"; } }
+        public override string Type { get { return CommandTypes.Other; } }
+        public override LevelPermission DefaultRank { get { return LevelPermission.Operator; } }
 
         public override void Use(Player p, string message, CommandData data) {
             if (message.Length == 0) { Help(p); return; }
@@ -96,7 +96,7 @@ namespace PattyKaki.Commands.CPE
 
         public static string GetPath(string url) { return url.Length == 0 ? "(none)" : url; }
 
-        public static void UpdateGlobal(Player p) {
+        public static void UpdateGlobal(Player _) {
             Player[] players = PlayerInfo.Online.Items;
             foreach (Player pl in players) {
                 pl.SendCurrentTextures();

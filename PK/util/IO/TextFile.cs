@@ -53,7 +53,7 @@ namespace PattyKaki.Util
         
         public void SetText(string[] text) {
             File.WriteAllLines(Filename, text);
-            if (OnTextChanged != null) OnTextChanged();
+            OnTextChanged?.Invoke();
         }
         
 

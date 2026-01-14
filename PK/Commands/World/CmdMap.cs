@@ -18,8 +18,8 @@
 
 namespace PattyKaki.Commands.World {
     public sealed class CmdMap : Command2 {
-        public override string name { get { return "Map"; } }
-        public override string type { get { return CommandTypes.World; } }
+        public override string Name { get { return "Map"; } }
+        public override string Type { get { return CommandTypes.World; } }
         public override CommandPerm[] ExtraPerms {
             get { return new[] { new CommandPerm(LevelPermission.Operator, "can edit map options"),
                     new CommandPerm(LevelPermission.Admin, "can set realm owners") }; }
@@ -37,30 +37,35 @@ namespace PattyKaki.Commands.World {
             }
 
             string[] args = message.SplitSpaces(3);
-            Level lvl = null;
-            string optName = null, value = null;
-            
-            if (IsMapOption(args)) {
+            Level lvl;
+            string optName;
+            string value;
+            if (IsMapOption(args))
+            {
                 if (p.IsSuper) { SuperRequiresArgs(p, "level name"); return; }
                 lvl = p.level;
-                
+
                 optName = args[0];
                 args = message.SplitSpaces(2);
                 value = args.Length > 1 ? args[1] : "";
-            } else if (args.Length == 1) {
+            }
+            else if (args.Length == 1)
+            {
                 string map = Matcher.FindMaps(p, args[0]);
                 if (map == null) return;
-                
+
                 PrintMapInfo(p, LevelInfo.GetConfig(map));
                 return;
-            } else {
+            }
+            else
+            {
                 lvl = Matcher.FindLevels(p, args[0]);
                 if (lvl == null) return;
-                
+
                 optName = args[1];
                 value = args.Length > 2 ? args[2] : "";
             }
-            
+
             if (!CheckExtraPerm(p, data, 1)) return;
             if (optName.CaselessEq(LevelOptions.RealmOwner) && !CheckExtraPerm(p, data, 2)) return;
             if (!LevelInfo.Check(p, data.Rank, lvl, "change map settings of this level")) return;

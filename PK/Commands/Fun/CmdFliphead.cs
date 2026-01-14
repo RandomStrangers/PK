@@ -17,8 +17,8 @@
 */
 namespace PattyKaki.Commands.Fun {    
     public sealed class CmdFlipHead : Command2 {    
-        public override string name { get { return "FlipHead"; } }
-        public override string type { get { return CommandTypes.Other; } }
+        public override string Name { get { return "FlipHead"; } }
+        public override string Type { get { return CommandTypes.Other; } }
 
         public override void Use(Player p, string message, CommandData data) {
             p.flipHead = !p.flipHead;

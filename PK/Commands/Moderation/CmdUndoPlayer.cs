@@ -25,10 +25,10 @@ using BlockID = System.UInt16;
 
 namespace PattyKaki.Commands.Moderation {
     public class CmdUndoPlayer : Command2 {
-        public override string name { get { return "UndoPlayer"; } }
-        public override string shortcut { get { return "up"; } }
-        public override string type { get { return CommandTypes.Moderation; } }
-        public override LevelPermission defaultRank { get { return LevelPermission.Operator; } }
+        public override string Name { get { return "UndoPlayer"; } }
+        public override string Shortcut { get { return "up"; } }
+        public override string Type { get { return CommandTypes.Moderation; } }
+        public override LevelPermission DefaultRank { get { return LevelPermission.Operator; } }
         public override CommandAlias[] Aliases {
             get { return new[] { new CommandAlias("XUndo","{args} all"),
                     new CommandAlias("UndoArea", "-area"), new CommandAlias("ua", "-area") }; }

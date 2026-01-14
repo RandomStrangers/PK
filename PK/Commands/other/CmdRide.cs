@@ -21,9 +21,9 @@ using PattyKaki.Tasks;
 
 namespace PattyKaki.Commands.Misc {
     public sealed class CmdRide : Command2 {
-        public override string name { get { return "Ride"; } }
-        public override string type { get { return CommandTypes.Other; } }
-        public override bool museumUsable { get { return false; } }
+        public override string Name { get { return "Ride"; } }
+        public override string Type { get { return CommandTypes.Other; } }
+        public override bool MuseumUsable { get { return false; } }
 
         public override void Use(Player p, string message, CommandData data) {
             p.onTrain = !p.onTrain;

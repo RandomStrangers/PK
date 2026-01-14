@@ -80,8 +80,7 @@ namespace PattyKaki {
                 
                 if (!part.CaselessStarts("jumpheight=")) continue;
                 string heightPart = part.Substring(part.IndexOf('=') + 1);
-                float value;
-                if (Utils.TryParseSingle(heightPart, out value))
+                if (Utils.TryParseSingle(heightPart, out float value))
                     maxJump = (short)(value * 32);
             }            
             return Packet.HackControl(fly, noclip, speed, respawn, thirdPerson, maxJump);

@@ -81,8 +81,7 @@ namespace PattyKaki.Drawing
         public static CopyState Rotate(CopyState state, CopyState flipped, int[] m, BlockID[] transform) {
             int volume = state.Volume;
             for (int i = 0; i < volume; i++) {
-                ushort x, y, z;
-                state.GetCoords(i, out x, out y, out z);
+                state.GetCoords(i, out ushort x, out ushort y, out ushort z);
                 BlockID block = transform[state.Get(i)];
                 
                 flipped.Set(block,
@@ -119,9 +118,11 @@ namespace PattyKaki.Drawing
 
         public static CopyState Clone(CopyState state) {
             CopyState newState = new CopyState(state.X, state.Y, state.Z,
-                                               state.Width, state.Height, state.Length);
-            newState.UsedBlocks = state.UsedBlocks;
-            newState.PasteAir = state.PasteAir;
+                                               state.Width, state.Height, state.Length)
+            {
+                UsedBlocks = state.UsedBlocks,
+                PasteAir = state.PasteAir
+            };
             return newState;
         }
 
@@ -208,8 +209,8 @@ namespace PattyKaki.Drawing
                 if (defs[i] == null) continue;
                 int dirIndex = defs[i].Name.LastIndexOf('-');
                 if (dirIndex == -1) continue;
-                
-                BlockDefinition transformed = null;
+
+                BlockDefinition transformed;
                 if (mirrorDirs != null) {
                     transformed = MirrorTransform(defs, i, dirIndex, mirrorDirs);
                 } else {

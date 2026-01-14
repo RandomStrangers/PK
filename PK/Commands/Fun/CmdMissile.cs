@@ -19,9 +19,9 @@ using PattyKaki.Games;
 
 namespace PattyKaki.Commands.Fun {
     public sealed class CmdMissile : Command2 {
-        public override string name { get { return "Missile"; } }
-        public override string type { get { return CommandTypes.Other; } }
-        public override LevelPermission defaultRank { get { return LevelPermission.AdvBuilder; } }
+        public override string Name { get { return "Missile"; } }
+        public override string Type { get { return CommandTypes.Other; } }
+        public override LevelPermission DefaultRank { get { return LevelPermission.AdvBuilder; } }
         public override bool SuperUseable { get { return false; } }
         
         public override void Use(Player p, string message, CommandData data) {

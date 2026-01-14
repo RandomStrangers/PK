@@ -167,8 +167,7 @@ namespace PattyKaki
         {
             if (value == null) return defPerm;
 
-            sbyte perm;
-            if (sbyte.TryParse(value, out perm))
+            if (sbyte.TryParse(value, out sbyte perm))
                 return (LevelPermission)perm;
 
             Group grp = Find(value);

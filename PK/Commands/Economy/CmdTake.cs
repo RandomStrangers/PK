@@ -20,8 +20,8 @@ using PattyKaki.Events.EconomyEvents;
 
 namespace PattyKaki.Commands.Eco {
     public sealed class CmdTake : MoneyCmd {
-        public override string name { get { return "Take"; } }
-        public override LevelPermission defaultRank { get { return LevelPermission.Admin; } }     
+        public override string Name { get { return "Take"; } }
+        public override LevelPermission DefaultRank { get { return LevelPermission.Admin; } }     
 
         public override void Use(Player p, string message, CommandData data) {
             bool all = true;

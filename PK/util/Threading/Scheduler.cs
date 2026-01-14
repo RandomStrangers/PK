@@ -32,8 +32,10 @@ namespace PattyKaki.Tasks {
         volatile SchedulerTask curTask; // for .ToString()
 
         public Scheduler(string name) {
-            thread = new Thread(Loop);
-            thread.Name = name;
+            thread = new Thread(Loop)
+            {
+                Name = name
+            };
             thread.Start();
         }
         

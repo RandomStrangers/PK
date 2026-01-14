@@ -80,9 +80,11 @@ namespace PattyKaki.Games
             foreach (Player pl in players) {
                 if (pl.level == Map) PlayerJoinedGame(pl);
             }
-            
-            Thread t = new Thread(RunGame);
-            t.Name = "Game_" + GameName;
+
+            Thread t = new Thread(RunGame)
+            {
+                Name = "Game_" + GameName
+            };
             t.Start();
         }
 
@@ -128,8 +130,7 @@ namespace PattyKaki.Games
 
         public virtual bool SetMap(string map) {
             Picker.QueuedMap = null;
-            Level next = LevelInfo.FindExact(map);
-            if (next == null) next = LevelActions.Load(Player.PK, map, false);
+            Level next = LevelInfo.FindExact(map) ?? LevelActions.Load(Player.PK, map, false);
             if (next == null) return false;
             
             Map = next;
@@ -278,12 +279,12 @@ namespace PattyKaki.Games
             // in case players left game partway through
             foreach (Player pl in players) { SaveStats(pl); }
             
-            if (Map != null) Map.Message(GameName + " &Sgame ended");
+            Map?.Message(GameName + " &Sgame ended");
             Logger.Log(LogType.GameActivity, "[{0}] Game ended", GameName);
-            if (Picker != null) Picker.Clear();
+            Picker?.Clear();
             
             LastMap = "";
-            if (Map != null) Map.AutoUnload();
+            Map?.AutoUnload();
             Map = null;
         }
 

@@ -25,11 +25,11 @@ using BlockID = System.UInt16;
 
 namespace PattyKaki.Commands.Moderation {
     public sealed class CmdZone : Command2 {
-        public override string name { get { return "Zone"; } }
-        public override string type { get { return CommandTypes.Moderation; } }
-        public override bool museumUsable { get { return false; } }
+        public override string Name { get { return "Zone"; } }
+        public override string Type { get { return CommandTypes.Moderation; } }
+        public override bool MuseumUsable { get { return false; } }
         public override bool SuperUseable { get { return false; } }
-        public override LevelPermission defaultRank { get { return LevelPermission.Operator; } }
+        public override LevelPermission DefaultRank { get { return LevelPermission.Operator; } }
         public override CommandAlias[] Aliases {
             get { return new[] { new CommandAlias("ZRemove", "del"), new CommandAlias("ZDelete", "del"),
                     new CommandAlias("ZAdd"), new CommandAlias("ZEdit", "perbuild") }; }
@@ -184,9 +184,9 @@ namespace PattyKaki.Commands.Moderation {
     }
     
     public sealed class CmdZoneTest : Command2 {
-        public override string name { get { return "ZoneTest"; } }
-        public override string shortcut { get { return "ZTest"; } }
-        public override string type { get { return CommandTypes.Moderation; } }
+        public override string Name { get { return "ZoneTest"; } }
+        public override string Shortcut { get { return "ZTest"; } }
+        public override string Type { get { return CommandTypes.Moderation; } }
         public override bool SuperUseable { get { return false; } }
         
         public override void Use(Player p, string message, CommandData data) {
@@ -221,9 +221,9 @@ namespace PattyKaki.Commands.Moderation {
     }
     
     public sealed class CmdZoneList : Command2 {
-        public override string name { get { return "ZoneList"; } }
-        public override string shortcut { get { return "Zones"; } }
-        public override string type { get { return CommandTypes.Moderation; } }
+        public override string Name { get { return "ZoneList"; } }
+        public override string Shortcut { get { return "Zones"; } }
+        public override string Type { get { return CommandTypes.Moderation; } }
         public override bool SuperUseable { get { return false; } }
         public override bool UseableWhenFrozen { get { return true; } }
         
@@ -246,9 +246,9 @@ namespace PattyKaki.Commands.Moderation {
     }
     
     public sealed class CmdZoneMark : Command2 {
-        public override string name { get { return "ZoneMark"; } }
-        public override string shortcut { get { return "ZMark"; } }
-        public override string type { get { return CommandTypes.Building; } }
+        public override string Name { get { return "ZoneMark"; } }
+        public override string Shortcut { get { return "ZMark"; } }
+        public override string Type { get { return CommandTypes.Building; } }
         public override bool SuperUseable { get { return false; } }
         public override CommandAlias[] Aliases {
             get { return new[] { new CommandAlias("zm") }; }

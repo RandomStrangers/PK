@@ -29,9 +29,9 @@ namespace PattyKaki.Commands.Info
 {
     public sealed class CmdMapInfo : Command2 
     {
-        public override string name { get { return "MapInfo"; } }
-        public override string shortcut { get { return "mi"; } }
-        public override string type { get { return CommandTypes.Information; } }
+        public override string Name { get { return "MapInfo"; } }
+        public override string Shortcut { get { return "mi"; } }
+        public override string Type { get { return CommandTypes.Information; } }
         public override bool UseableWhenFrozen { get { return true; } }
         public override CommandAlias[] Aliases {
             get { return new[] { new CommandAlias("WInfo"), new CommandAlias("WorldInfo") }; }

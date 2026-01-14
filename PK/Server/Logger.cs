@@ -92,7 +92,7 @@ namespace PattyKaki
         public static void Log(LogType type, string message) {
             lock (logLock) {
                 try {
-                    if (LogHandler != null) LogHandler(type, message);
+                    LogHandler?.Invoke(type, message);
                 } catch (Exception ex) {
                     // a LogHandler threw an exception, try to log that error
                     LogLoggerError(ex);
@@ -154,13 +154,11 @@ namespace PattyKaki
             
             // Exception-specific extra details
             try {
-                ReflectionTypeLoadException refEx = ex as ReflectionTypeLoadException;
-                if (refEx != null) LogLoaderErrors(refEx, sb);
+                if (ex is ReflectionTypeLoadException refEx) LogLoaderErrors(refEx, sb);
             } catch { }
             
             try {
-                SocketException sockEx = ex as SocketException;
-                if (sockEx != null) LogSocketErrors(sockEx, sb);
+                if (ex is SocketException sockEx) LogSocketErrors(sockEx, sb);
             } catch { }
         }
         

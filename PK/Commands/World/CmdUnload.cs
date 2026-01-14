@@ -17,9 +17,9 @@
 */
 namespace PattyKaki.Commands.World {
     public sealed class CmdUnload : Command2 {
-        public override string name { get { return "Unload"; } }
-        public override string type { get { return CommandTypes.World; } }
-        public override LevelPermission defaultRank { get { return LevelPermission.Operator; } }
+        public override string Name { get { return "Unload"; } }
+        public override string Type { get { return CommandTypes.World; } }
+        public override LevelPermission DefaultRank { get { return LevelPermission.Operator; } }
 
         public override void Use(Player p, string message, CommandData data) {
             if (CheckSuper(p, message, "level name")) return;

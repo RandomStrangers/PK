@@ -99,8 +99,7 @@ namespace PattyKaki.DB
             string tempPath = TempPath(db.MapName);
             
             using (Stream src = File.OpenRead(filePath), dst = File.Create(tempPath)) {
-                Vec3U16 dims;
-                ReadHeader(src, out dims);
+                ReadHeader(src, out Vec3U16 dims);
                 WriteHeader(dst, db.Dims);
                 int width = db.Dims.X, length = db.Dims.Z;
                 byte[] bulk = new byte[BulkEntries * EntrySize];
@@ -134,8 +133,7 @@ namespace PattyKaki.DB
             if (!File.Exists(path)) return 0;
 
             using (Stream src = new FileStream(path, FileMode.OpenOrCreate, FileAccess.Read, FileShare.ReadWrite)) {
-                Vec3U16 dims;
-                BlockDBFile file = ReadHeader(src, out dims);
+                BlockDBFile file = ReadHeader(src, out Vec3U16 dims);
                 return file.CountEntries(src);
             }
         }

@@ -22,9 +22,9 @@ namespace PattyKaki.Commands.Moderation
 {
     public sealed class CmdMute : Command2 
     {
-        public override string name { get { return "Mute"; } }
-        public override string type { get { return CommandTypes.Moderation; } }
-        public override LevelPermission defaultRank { get { return LevelPermission.Operator; } }
+        public override string Name { get { return "Mute"; } }
+        public override string Type { get { return CommandTypes.Moderation; } }
+        public override LevelPermission DefaultRank { get { return LevelPermission.Operator; } }
 
         public const string UNMUTE_FLAG = "-unmute";
 

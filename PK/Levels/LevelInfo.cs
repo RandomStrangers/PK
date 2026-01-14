@@ -103,9 +103,8 @@ namespace PattyKaki {
             foreach (string path in backups) 
             {
                 string backupName = BackupNameFrom(path);
-                int num;
-                
-                if (!int.TryParse(backupName, out num)) continue;
+
+                if (!int.TryParse(backupName, out int num)) continue;
                 latest = Math.Max(num, latest);
             }
             return latest;
@@ -124,7 +123,7 @@ namespace PattyKaki {
         }
         
         public static LevelConfig GetConfig(string map) {
-            Level lvl; return GetConfig(map, out lvl);
+            return GetConfig(map, out _);
         }
 
         public static LevelConfig GetConfig(string map, out Level lvl) {
@@ -138,7 +137,7 @@ namespace PattyKaki {
         }
         
         public static bool Check(Player p, LevelPermission plRank, string map, string action, out LevelConfig cfg) {
-            Level lvl; cfg = GetConfig(map, out lvl);
+            cfg = GetConfig(map, out Level lvl);
             if (p.IsPK) return true;
             if (lvl != null) return Check(p, plRank, lvl, action);
             
@@ -151,8 +150,7 @@ namespace PattyKaki {
         }
         
         public static bool Check(Player p, LevelPermission plRank, string map, string action) {
-            LevelConfig ignored;
-            return Check(p, plRank, map, action, out ignored);
+            return Check(p, plRank, map, action, out _);
         }
         
         public static bool Check(Player p, LevelPermission plRank, Level lvl, string action) {

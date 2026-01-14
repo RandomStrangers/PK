@@ -18,10 +18,10 @@
 
 namespace PattyKaki.Commands.Misc {
     public sealed class CmdFakeRank : Command2 {
-        public override string name { get { return "FakeRank"; } }
-        public override string shortcut { get { return "frk"; } }
-        public override string type { get { return CommandTypes.Other; } }
-        public override LevelPermission defaultRank { get { return LevelPermission.Admin; } }
+        public override string Name { get { return "FakeRank"; } }
+        public override string Shortcut { get { return "frk"; } }
+        public override string Type { get { return CommandTypes.Other; } }
+        public override LevelPermission DefaultRank { get { return LevelPermission.Admin; } }
         
         public override void Use(Player p, string message, CommandData data) {
             string[] args = message.SplitSpaces();
@@ -34,7 +34,7 @@ namespace PattyKaki.Commands.Misc {
             DoFakerank(p, who, newRank);
         }
 
-        public static void DoFakerank(Player p, Player who, Group newRank) {            
+        public static void DoFakerank(Player _, Player who, Group newRank) {            
             if (newRank.Permission == LevelPermission.Banned) {
                 Chat.MessageGlobal("{0} &Swas &8banned&S.", who.ColoredName);
             } else {

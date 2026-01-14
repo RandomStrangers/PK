@@ -20,9 +20,9 @@ using PattyKaki.Maths;
 
 namespace PattyKaki.Commands.Misc {
     public sealed class CmdTp : Command2 {
-        public override string name { get { return "TP"; } }
-        public override string shortcut { get { return "Move"; } }
-        public override string type { get { return CommandTypes.Other; } }
+        public override string Name { get { return "TP"; } }
+        public override string Shortcut { get { return "Move"; } }
+        public override string Type { get { return CommandTypes.Other; } }
         public override bool SuperUseable { get { return false; } }
         public override CommandAlias[] Aliases {
             get { return new [] { new CommandAlias("Teleport"), new CommandAlias("TPP", "-precise") }; }

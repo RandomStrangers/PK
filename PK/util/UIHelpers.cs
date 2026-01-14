@@ -63,7 +63,7 @@ namespace PattyKaki.UI
                 Logger.Log(LogType.Debug, "(PattyKaki): Unknown command \"{0}\"", name); return; 
             }
             if (!cmd.SuperUseable) { 
-                Logger.Log(LogType.Debug, "(PattyKaki): /{0} can only be used in-game.", cmd.name); return; 
+                Logger.Log(LogType.Debug, "(PattyKaki): /{0} can only be used in-game.", cmd.Name); return; 
             }
 
             Thread thread = new Thread(
@@ -74,11 +74,11 @@ namespace PattyKaki.UI
                         cmd.Use(Player.PK, args);
                         if (args.Length == 0)
                         {
-                            Logger.Log(LogType.Debug, "(PattyKaki) used /" + cmd.name);
+                            Logger.Log(LogType.Debug, "(PattyKaki) used /" + cmd.Name);
                         }
                         else
                         {
-                            Logger.Log(LogType.Debug, "(PattyKaki) used /" + cmd.name + " " + args);
+                            Logger.Log(LogType.Debug, "(PattyKaki) used /" + cmd.Name + " " + args);
                         }
                     }
                     catch (Exception ex)

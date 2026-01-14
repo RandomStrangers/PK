@@ -22,10 +22,10 @@ namespace PattyKaki.Commands.Info
 {
     public sealed class CmdClones : Command2 
     {
-        public override string name { get { return "Clones"; } }
-        public override string shortcut { get { return "Alts"; } }
-        public override string type { get { return CommandTypes.Information; } }
-        public override LevelPermission defaultRank { get { return LevelPermission.Owner; } }
+        public override string Name { get { return "Clones"; } }
+        public override string Shortcut { get { return "Alts"; } }
+        public override string Type { get { return CommandTypes.Information; } }
+        public override LevelPermission DefaultRank { get { return LevelPermission.Owner; } }
         public override bool UseableWhenFrozen { get { return true; } }
         public override CommandAlias[] Aliases {
             get { return new[] { new CommandAlias("WhoIP") }; }

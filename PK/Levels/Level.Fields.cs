@@ -95,7 +95,7 @@ namespace PattyKaki {
         public LevelAccessController VisitAccess, BuildAccess;
         
         // Physics fields and settings
-        public int physics { get { return Physicsint; } }
+        public int Physics { get { return Physicsint; } }
         public int Physicsint;
         public int currentUndo;
         

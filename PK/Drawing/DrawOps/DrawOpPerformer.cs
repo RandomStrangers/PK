@@ -80,8 +80,12 @@ namespace PattyKaki.Drawing.Ops
         }
 
         public static void DoQueuedDrawOp(Player p, DrawOp op, Brush brush, Vec3S32[] marks) {
-            PendingDrawOp item = new PendingDrawOp();
-            item.Op = op; item.Brush = brush; item.Marks = marks;
+            PendingDrawOp item = new PendingDrawOp
+            {
+                Op = op,
+                Brush = brush,
+                Marks = marks
+            };
 
             lock (p.pendingDrawOpsLock) {
                 p.PendingDrawOps.Add(item);
@@ -114,7 +118,7 @@ namespace PattyKaki.Drawing.Ops
             UndoDrawOpEntry entry = new UndoDrawOpEntry();
             entry.Init(op.Name, op.Level.name);
             
-            if (brush != null) brush.Configure(op, p);
+            brush?.Configure(op, p);
             DrawOpOutputter outputter = new DrawOpOutputter(op);
             
             if (op.AffectedByTransform) {
@@ -196,7 +200,7 @@ namespace PattyKaki.Drawing.Ops
                         lvl.blockqueue.Add(index, b.Block);
                     }
 
-                    if (lvl.physics > 0) {
+                    if (lvl.Physics > 0) {
                         if (old == Block.Sponge && b.Block != Block.Sponge)
                             OtherPhysics.DoSpongeRemoved(lvl, index, false);
                         if (old == Block.LavaSponge && b.Block != Block.LavaSponge)

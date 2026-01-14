@@ -20,8 +20,8 @@ namespace PattyKaki.Commands.Chatting
 {
     public sealed class CmdMe : Command2 
     {
-        public override string name { get { return "Me"; } }
-        public override string type { get { return CommandTypes.Chat; } }
+        public override string Name { get { return "Me"; } }
+        public override string Type { get { return CommandTypes.Chat; } }
         public override bool MessageBlockRestricted { get { return true; } }
         public override bool UseableWhenFrozen { get { return true; } }
         

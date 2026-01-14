@@ -23,11 +23,11 @@ namespace PattyKaki
 {
     public class CmdZombieSpawn : Command
     {
-        public override string name { get { return "Zombiespawn"; } }
-        public override string shortcut { get { return "zspawn"; } }
-        public override string type { get { return CommandTypes.Games; } }
-        public override bool museumUsable { get { return false; } }
-        public override LevelPermission defaultRank { get { return LevelPermission.Operator; } }
+        public override string Name { get { return "Zombiespawn"; } }
+        public override string Shortcut { get { return "zspawn"; } }
+        public override string Type { get { return CommandTypes.Games; } }
+        public override bool MuseumUsable { get { return false; } }
+        public override LevelPermission DefaultRank { get { return LevelPermission.Operator; } }
 
         // This is where the magic happens, naturally.
         //TOO MANY GLOBALS -_-

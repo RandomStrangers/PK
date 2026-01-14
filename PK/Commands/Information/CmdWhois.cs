@@ -21,9 +21,9 @@ namespace PattyKaki.Commands.Info
 {
     public sealed class CmdWhois : Command2 
     {
-        public override string name { get { return "WhoIs"; } }
-        public override string shortcut { get { return "WhoWas"; } }
-        public override string type { get { return CommandTypes.Information; } }
+        public override string Name { get { return "WhoIs"; } }
+        public override string Shortcut { get { return "WhoWas"; } }
+        public override string Type { get { return CommandTypes.Information; } }
         public override bool UseableWhenFrozen { get { return true; } }
         public override CommandPerm[] ExtraPerms {
             get { return new[] { new CommandPerm(LevelPermission.Owner, "can see sensitive player information (e.g. IP)") }; }

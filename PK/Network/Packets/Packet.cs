@@ -143,7 +143,7 @@ namespace PattyKaki.Network
             byte[] buffer = new byte[67];
             buffer[0] = Opcode.CpeExtInfo;
             NetUtils.Write(Server.SoftwareNameVersioned, buffer, 1, false);
-            NetUtils.WriteI16((short)extsCount, buffer, 65);
+            NetUtils.WriteI16(extsCount, buffer, 65);
             return buffer;
         }
 
@@ -615,7 +615,7 @@ namespace PattyKaki.Network
 
             for (int j = 0; j < MaxCustomModelAnims; j++)
             {
-                var anim = part.anims[j];
+                CustomModelAnim anim = part.anims[j];
 
                 buffer[i++] = (byte)(
                     ((byte)anim.type & 0x3F) | ((byte)anim.axis << 6)

@@ -24,7 +24,7 @@ namespace PattyKaki.Core
     {
 
         public static void HandleOnChat(ChatScope scope, Player source, string msg,
-                                          object arg, ref ChatMessageFilter filter, bool irc)
+                                          object _, ref ChatMessageFilter __, bool ___)
         {
             msg = msg.Replace("λFULL", source.name).Replace("λNICK", source.name);
             LogType logType = LogType.PlayerChat;
@@ -41,7 +41,7 @@ namespace PattyKaki.Core
             if (scope != ChatScope.PM) Logger.Log(logType, msg);
         }
 
-        public static void HandleCommand(Player p, string cmd, string args, CommandData data)
+        public static void HandleCommand(Player p, string cmd, string _, CommandData __)
         {
             if (!Server.Config.CoreSecretCommands) return;
             // DO NOT REMOVE THE TWO COMMANDS BELOW, /PONY AND /RAINBOWDASHLIKESCOOLTHINGS. -EricKilla
@@ -89,8 +89,8 @@ namespace PattyKaki.Core
 
                 if (used < 2)
                 {
-                    Chat.MessageFrom(p, "λNICK is now loved by Sparkie with all her heart. ^w^");
-                    p.Message("Sparkie now loves you with all her heart. ^w^");
+                    Chat.MessageFrom(p, "λNICK is now loved by Harmony with all her heart.");
+                    p.Message("Sparkie now loves you with all her heart.");
                     Logger.Log(LogType.CommandUsage, "{0} used /{1}", p.name, cmd);
                 }
                 else
@@ -107,7 +107,7 @@ namespace PattyKaki.Core
 
                 if (used < 2)
                 {
-                    p.Message("Random Strangers' bot army just simultaneously facepalm'd at your use of this command.");
+                    p.Message("Harmony's bot army just simultaneously facepalm'd at your use of this command.");
                     Logger.Log(LogType.CommandUsage, "{0} used /{1}", p.name, cmd);
                 }
                 else

@@ -20,10 +20,10 @@ using PattyKaki.Events.GroupEvents;
 
 namespace PattyKaki.Commands.Moderation {
     public sealed class CmdSetRank : Command2 {
-        public override string name { get { return "SetRank"; } }
-        public override string shortcut { get { return "Rank"; } }
-        public override string type { get { return CommandTypes.Moderation; } }
-        public override LevelPermission defaultRank { get { return LevelPermission.Operator; } }
+        public override string Name { get { return "SetRank"; } }
+        public override string Shortcut { get { return "Rank"; } }
+        public override string Type { get { return CommandTypes.Moderation; } }
+        public override LevelPermission DefaultRank { get { return LevelPermission.Operator; } }
         public override CommandAlias[] Aliases {
             get { return new[] { new CommandAlias("pr", "+up"), new CommandAlias("de", "-down"),
                     new CommandAlias("Promote", "+up"), new CommandAlias("Demote", "-down") }; }

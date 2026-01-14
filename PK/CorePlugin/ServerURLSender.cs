@@ -4,10 +4,10 @@ using PattyKaki.Tasks;
 
 namespace PattyKaki.Core
 {
-    public class ServerURLSender : Plugin_Simple
+    public class ServerURLSender : Plugin
     {
-        public override string name { get { return "Say URL"; } }
-        public override string creator { get { return Server.SoftwareName + " team"; } }
+        public override string Name { get { return "Say URL"; } }
+        public override string Creator { get { return Server.SoftwareName + " team"; } }
         public override string PK_Version {  get {  return Server.Version; } }
         public override void Load(bool startup)
         {

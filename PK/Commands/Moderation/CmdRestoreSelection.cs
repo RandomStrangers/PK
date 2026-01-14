@@ -23,11 +23,11 @@ using BlockID = System.UInt16;
 
 namespace PattyKaki.Commands.Moderation {    
     public sealed class CmdRestoreSelection : Command2 {        
-        public override string name { get { return "RS"; } }
-        public override string shortcut { get { return "RestoreSelection"; } }
-        public override string type { get { return CommandTypes.Moderation; } }
-        public override bool museumUsable { get { return false; } }
-        public override LevelPermission defaultRank { get { return LevelPermission.Operator; } }
+        public override string Name { get { return "RS"; } }
+        public override string Shortcut { get { return "RestoreSelection"; } }
+        public override string Type { get { return CommandTypes.Moderation; } }
+        public override bool MuseumUsable { get { return false; } }
+        public override LevelPermission DefaultRank { get { return LevelPermission.Operator; } }
 
         public override void Use(Player p, string message, CommandData data) {
             if (message.Length == 0) { Help(p); return; }

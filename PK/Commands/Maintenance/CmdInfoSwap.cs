@@ -22,9 +22,9 @@ using PattyKaki.SQL;
 
 namespace PattyKaki.Commands.Maintenance {
     public sealed class CmdInfoSwap : Command2 {       
-        public override string name { get { return "InfoSwap"; } }
-        public override string type { get { return CommandTypes.Moderation; } }
-        public override LevelPermission defaultRank { get { return LevelPermission.Owner; } }
+        public override string Name { get { return "InfoSwap"; } }
+        public override string Type { get { return CommandTypes.Moderation; } }
+        public override LevelPermission DefaultRank { get { return LevelPermission.Owner; } }
 
         public override void Use(Player p, string text, CommandData data) {
             string[] args = text.SplitSpaces();

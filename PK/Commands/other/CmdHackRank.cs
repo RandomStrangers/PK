@@ -23,8 +23,8 @@ using PattyKaki.Tasks;
 namespace PattyKaki.Commands.Misc {
     
     public sealed class CmdHackRank : Command2 {
-        public override string name { get { return "HackRank"; } }
-        public override string type { get { return CommandTypes.Other; } }
+        public override string Name { get { return "HackRank"; } }
+        public override string Type { get { return CommandTypes.Other; } }
         public override bool MessageBlockRestricted { get { return true; } }
         public override bool SuperUseable { get { return false; } }
 

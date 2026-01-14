@@ -18,10 +18,10 @@
 using PattyKaki.Games;
 namespace PattyKaki.Commands.World {
     public sealed class CmdReload : Command2 {
-        public override string name { get { return "Reload"; } }
-        public override string shortcut { get { return "Reveal"; } }
-        public override string type { get { return CommandTypes.World; } }
-        public override bool museumUsable { get { return false; } }
+        public override string Name { get { return "Reload"; } }
+        public override string Shortcut { get { return "Reveal"; } }
+        public override string Type { get { return CommandTypes.World; } }
+        public override bool MuseumUsable { get { return false; } }
         public override CommandAlias[] Aliases {
             get { return new [] { new CommandAlias("ReJoin"), new CommandAlias("rd"),
                     new CommandAlias("WFlush"), new CommandAlias("WorldFlush") }; }

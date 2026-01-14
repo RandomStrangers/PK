@@ -19,10 +19,10 @@
 namespace PattyKaki.Commands.World {
     public sealed class CmdSave : Command2 {
         
-        public override string name { get { return "Save"; } }
-        public override string type { get { return CommandTypes.World; } }
-        public override bool museumUsable { get { return false; } }
-        public override LevelPermission defaultRank { get { return LevelPermission.Operator; } }
+        public override string Name { get { return "Save"; } }
+        public override string Type { get { return CommandTypes.World; } }
+        public override bool MuseumUsable { get { return false; } }
+        public override LevelPermission DefaultRank { get { return LevelPermission.Operator; } }
         public override CommandAlias[] Aliases {
             get { return new[] { new CommandAlias("MapSave"), new CommandAlias("WSave"), new CommandAlias("WorldSave") }; }
         }

@@ -22,15 +22,15 @@ namespace PattyKaki.Commands.Chatting
 {    
     public sealed class CmdRankMsg : Command2 
     {        
-        public override string name { get { return "RankMsg"; } }
-        public override string shortcut { get { return "rm"; } }
-        public override string type { get { return CommandTypes.Chat; } }
-        public override LevelPermission defaultRank { get { return LevelPermission.AdvBuilder; } }
+        public override string Name { get { return "RankMsg"; } }
+        public override string Shortcut { get { return "rm"; } }
+        public override string Type { get { return CommandTypes.Chat; } }
+        public override LevelPermission DefaultRank { get { return LevelPermission.AdvBuilder; } }
         public override bool UseableWhenFrozen { get { return true; } }
         
         public override void Use(Player p, string message, CommandData data) {
             if (message.Length == 0) { Help(p); return; }
-            if (!MessageCmd.CanSpeak(p, name)) return;
+            if (!MessageCmd.CanSpeak(p, Name)) return;
             
             string[] args = message.SplitSpaces(2);
             string rank = args.Length == 1 ? p.group.Name : args[0];

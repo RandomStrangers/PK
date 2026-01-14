@@ -18,8 +18,8 @@
 
 namespace PattyKaki.Commands.Moderation {
     public abstract class ItemPermsCmd : Command2 {
-        public override string type { get { return CommandTypes.Moderation; } }
-        public override LevelPermission defaultRank { get { return LevelPermission.Operator; } }
+        public override string Type { get { return CommandTypes.Moderation; } }
+        public override LevelPermission DefaultRank { get { return LevelPermission.Operator; } }
 
         public void SetPerms(Player p, string[] args, CommandData data, ItemPerms perms, string type) {
             string grpName = args[1];          

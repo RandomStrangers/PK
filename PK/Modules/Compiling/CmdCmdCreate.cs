@@ -21,8 +21,8 @@ namespace PattyKaki.Modules.Compiling
 {
     public sealed class CmdCmdCreate : CmdCompile 
     {
-        public override string name { get { return "CmdCreate"; } }
-        public override string shortcut { get { return ""; } }
+        public override string Name { get { return "CmdCreate"; } }
+        public override string Shortcut { get { return ""; } }
         public override CommandAlias[] Aliases {
         	get { return new[] { new CommandAlias("PCreate", "plugin") }; }
         }

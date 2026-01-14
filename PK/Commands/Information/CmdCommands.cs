@@ -18,9 +18,9 @@ namespace PattyKaki.Commands.Info
 {
     public sealed class CmdCommands : Command2 
     {
-        public override string name { get { return "Commands"; } }
-        public override string shortcut { get { return "Cmds"; } }
-        public override string type { get { return CommandTypes.Information; } }
+        public override string Name { get { return "Commands"; } }
+        public override string Shortcut { get { return "Cmds"; } }
+        public override string Type { get { return CommandTypes.Information; } }
         public override bool UseableWhenFrozen { get { return true; } }
         public override CommandAlias[] Aliases {
             get { return new[] { new CommandAlias("CmdList") }; }
@@ -66,13 +66,13 @@ namespace PattyKaki.Commands.Info
         public static void PrintShortcuts(Player p, string modifier) {
             List<Command> shortcuts = new List<Command>();
             foreach (Command cmd in allCmds) {
-                if (cmd.shortcut.Length == 0) continue;
+                if (cmd.Shortcut.Length == 0) continue;
                 if (!p.CanUse(cmd)) continue;
                 shortcuts.Add(cmd);
             }
             
             Paginator.Output(p, shortcuts,
-                             (cmd) => "&b" + cmd.shortcut + " &S[" + cmd.name + "]",
+                             (cmd) => "&b" + cmd.Shortcut + " &S[" + cmd.Name + "]",
                              "Commands shortcuts", "shortcuts", modifier);
         }
 
@@ -121,7 +121,7 @@ namespace PattyKaki.Commands.Info
 
             foreach (Command c in allCmds) 
             {
-                string category = MapCategory(c.type);
+                string category = MapCategory(c.Type);
                 if (!type.CaselessEq(category)) continue;
                 
                 if (p.CanUse(c)) cmds.Add(c);
@@ -146,8 +146,8 @@ namespace PattyKaki.Commands.Info
 
         public static void SortCommands(List<Command> cmds, string sort) {
             if (sort == "name" || sort == "names") {
-                cmds.Sort((a, b) => a.name
-                          .CompareTo(b.name));
+                cmds.Sort((a, b) => a.Name
+                          .CompareTo(b.Name));
             }
             if (sort == "rank" || sort == "ranks") {
                 cmds.Sort((a, b) => a.Permissions.MinRank
@@ -173,7 +173,7 @@ namespace PattyKaki.Commands.Info
             Dictionary<string, bool> categories = new Dictionary<string, bool>();
             foreach (Command cmd in allCmds)
             {
-            	categories[MapCategory(cmd.type)] = true;
+            	categories[MapCategory(cmd.Type)] = true;
             }
             
             List<string> list = new List<string>(categories.Keys);

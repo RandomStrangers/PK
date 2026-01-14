@@ -17,10 +17,10 @@
  */
 namespace PattyKaki.Commands.World {
     public sealed class CmdSetspawn : Command2 {
-        public override string name { get { return "SetSpawn"; } }
-        public override string type { get { return CommandTypes.World; } }
-        public override bool museumUsable { get { return false; } }
-        public override LevelPermission defaultRank { get { return LevelPermission.Operator; } }
+        public override string Name { get { return "SetSpawn"; } }
+        public override string Type { get { return CommandTypes.World; } }
+        public override bool MuseumUsable { get { return false; } }
+        public override LevelPermission DefaultRank { get { return LevelPermission.Operator; } }
         public override bool SuperUseable { get { return false; } }
 
         public override void Use(Player p, string message, CommandData data) {

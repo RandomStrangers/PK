@@ -17,10 +17,10 @@
  */
 namespace PattyKaki.Commands.Misc {
     public sealed class CmdInvincible : Command2 {
-        public override string name { get { return "Invincible"; } }
-        public override string shortcut { get { return "Inv"; } }
-        public override string type { get { return CommandTypes.Other; } }
-        public override LevelPermission defaultRank { get { return LevelPermission.Operator; } }
+        public override string Name { get { return "Invincible"; } }
+        public override string Shortcut { get { return "Inv"; } }
+        public override string Type { get { return CommandTypes.Other; } }
+        public override LevelPermission DefaultRank { get { return LevelPermission.Operator; } }
         public override CommandAlias[] Aliases {
             get { return new CommandAlias[] { new CommandAlias("GodMode") }; }
         }

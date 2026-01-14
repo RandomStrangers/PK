@@ -17,9 +17,9 @@
 */
 namespace PattyKaki.Commands.Fun {    
     public sealed class CmdFlipHeads : Command2 {        
-        public override string name { get { return "FlipHeads"; } }
-        public override string type { get { return CommandTypes.Other; } }
-        public override LevelPermission defaultRank { get { return LevelPermission.Operator; } }
+        public override string Name { get { return "FlipHeads"; } }
+        public override string Type { get { return CommandTypes.Other; } }
+        public override LevelPermission DefaultRank { get { return LevelPermission.Operator; } }
 
         public override void Use(Player p, string message, CommandData data) {
             Server.flipHead = !Server.flipHead;

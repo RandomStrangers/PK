@@ -19,10 +19,10 @@ using PattyKaki.Events.PlayerEvents;
 
 namespace PattyKaki.Commands.Fun {
     public sealed class CmdReferee : Command2 {
-        public override string name { get { return "Referee"; } }
-        public override string shortcut { get { return "Ref"; } }
-        public override string type { get { return CommandTypes.Moderation; } }
-        public override LevelPermission defaultRank { get { return LevelPermission.Operator; } }
+        public override string Name { get { return "Referee"; } }
+        public override string Shortcut { get { return "Ref"; } }
+        public override string Type { get { return CommandTypes.Moderation; } }
+        public override LevelPermission DefaultRank { get { return LevelPermission.Operator; } }
         public override bool SuperUseable { get { return false; } }
         
         public override void Use(Player p, string message, CommandData data) {

@@ -23,9 +23,9 @@ namespace PattyKaki.Commands.Chatting
 {
     public sealed class CmdSend : Command2 
     {
-        public override string name { get { return "Send"; } }
-        public override string type { get { return CommandTypes.Chat; } }
-        public override LevelPermission defaultRank { get { return LevelPermission.Builder; } }
+        public override string Name { get { return "Send"; } }
+        public override string Type { get { return CommandTypes.Chat; } }
+        public override LevelPermission DefaultRank { get { return LevelPermission.Builder; } }
         public override bool UseableWhenFrozen { get { return true; } }
         public override CommandParallelism Parallelism { get { return CommandParallelism.NoAndWarn; } }
         

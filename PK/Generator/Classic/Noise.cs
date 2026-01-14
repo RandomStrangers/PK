@@ -2,7 +2,7 @@
 // Source from http://mrl.nyu.edu/~perlin/noise/
 // Optimised form as we can always treat Z as being = 0.
 // Octave and combined noise based on:
-// https://github.com/UnknownShadow200/ClassiCube/wiki/Minecraft-Classic-map-generation-algorithm
+// https://github.com/ClassiCube/ClassiCube/wiki/Minecraft-Classic-map-generation-algorithm
 
 namespace PattyKaki.Generator.Classic
 {
@@ -15,7 +15,7 @@ namespace PattyKaki.Generator.Classic
             
             for (int i = 0; i < 256; i++) {
                 int j = rnd.Next(i, 256);
-                byte temp = p[i]; p[i] = p[j]; p[j] = temp;
+                (p[j], p[i]) = (p[i], p[j]);
             }
             for (int i = 0; i < 256; i++)
                 p[i + 256] = p[i];
@@ -50,8 +50,8 @@ namespace PattyKaki.Generator.Classic
             
             return c1 + v * (c2 - c1);
         }
-        
-        byte[] p = new byte[512];
+
+        readonly byte[] p = new byte[512];
     }
     
     public sealed class OctaveNoise 

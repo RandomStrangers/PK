@@ -41,7 +41,7 @@ namespace PattyKaki {
         };
         
         public static EnvPreset Find(string name) {
-            foreach (var kvp in Presets) {
+            foreach (KeyValuePair<string, string> kvp in Presets) {
                 if (kvp.Key.CaselessEq(name)) return new EnvPreset(kvp.Value);
             }
             return null;

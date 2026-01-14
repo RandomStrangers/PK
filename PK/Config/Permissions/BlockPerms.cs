@@ -118,19 +118,17 @@ namespace PattyKaki.Blocks
                 if (line.IsCommentLine()) continue;
                 // Format - ID : Lowest : Disallow : Allow
                 line.Replace(" ", "").FixedSplit(args, ':');
-                
-                BlockID block;
-                if (!BlockID.TryParse(args[0], out block)) {
+
+                if (!BlockID.TryParse(args[0], out ushort block))
+                {
                     // Old format - Name : Lowest : Disallow : Allow
                     block = Block.Parse(Player.PK, args[0]);
                 }
                 if (block == Block.Invalid) continue;
 
                 try {
-                    LevelPermission min;
-                    List<LevelPermission> allowed, disallowed;
-                    
-                    Deserialise(args, 1, out min, out allowed, out disallowed);
+
+                    Deserialise(args, 1, out LevelPermission min, out List<LevelPermission> allowed, out List<LevelPermission> disallowed);
                     Set(block, min, allowed, disallowed);
                 } catch {
                     Logger.Log(LogType.Warning, "Hit an error on the block " + line);

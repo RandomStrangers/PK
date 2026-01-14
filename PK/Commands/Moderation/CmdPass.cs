@@ -21,9 +21,9 @@ using PattyKaki.Authentication;
 
 namespace PattyKaki.Commands.Moderation {
     public sealed class CmdPass : Command2 {
-        public override string name { get { return "Pass"; } }
-        public override string type { get { return CommandTypes.Moderation; } }
-        public override LevelPermission defaultRank { get { return LevelPermission.Operator; } }
+        public override string Name { get { return "Pass"; } }
+        public override string Type { get { return CommandTypes.Moderation; } }
+        public override LevelPermission DefaultRank { get { return LevelPermission.Operator; } }
         public override bool LogUsage { get { return false; } }
         public override bool UpdatesLastCmd { get { return false; } }
         public override CommandPerm[] ExtraPerms {

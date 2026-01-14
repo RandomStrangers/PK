@@ -28,62 +28,54 @@ namespace PattyKaki
     {
         /// <summary> Finds partial matches of 'name' against the list of all awards. </summary>
         public static string FindAwards(Player p, string name) {
-            int matches;
-            Award award = Find(p, name, out matches, AwardsList.Awards,
+            Award award = Find(p, name, out int matches, AwardsList.Awards,
                                null, a => a.Name, "awards");
-            return award == null ? null : award.Name;
+            return award?.Name;
         }
         
         /// <summary> Finds partial matches of 'color' against the list of colors. </summary>
         public static string FindColor(Player p, string color) {
-            int matches;
-            ColorDesc desc = Find(p, color, out matches, Colors.List,
+            ColorDesc desc = Find(p, color, out int matches, Colors.List,
                                   col => !col.Undefined, col => col.Name, "colors", 20);
             return desc.Undefined ? null : "&" + desc.Code;
         }
         
         /// <summary> Finds partial matches of 'name' against the list of bots in same level as player. </summary>
         public static PlayerBot FindBots(Player p, string name) {
-            int matches;
-            return Find(p, name, out matches, p.level.Bots.Items,
+            return Find(p, name, out int matches, p.level.Bots.Items,
                         null, b => b.name, "bots");
         }
         
         /// <summary> Find partial matches of 'name' against the list of loaded maps/levels. </summary>
         public static Level FindLevels(Player p, string name) {
-            int matches;
-            return Find(p, name, out matches, LevelInfo.Loaded.Items,
+            return Find(p, name, out int matches, LevelInfo.Loaded.Items,
                         null, l => l.name, l => l.ColoredName, "loaded levels");
         }
 
         /// <summary> Find partial matches of 'name' against the list of all map files. </summary>
         public static string FindMaps(Player pl, string name) {
-            if (!Formatter.ValidMapName(pl, name)) return null;            
-            int matches;
-            return Find(pl, name, out matches, LevelInfo.AllMapNames(),
+            if (!Formatter.ValidMapName(pl, name)) return null;
+            return Find(pl, name, out int matches, LevelInfo.AllMapNames(),
                         null, l => l, "levels", 10);
         }
         
         /// <summary> Find partial matches of 'name' against the list of ranks. </summary>
         public static Group FindRanks(Player p, string name) {
             Group.MapName(ref name);
-            int matches;
-            return Find(p, name, out matches, Group.AllRanks,
+            return Find(p, name, out int matches, Group.AllRanks,
                         null, g => Colors.Strip(g.Name), g => g.ColoredName, "ranks");
         }
         
         /// <summary> Find partial matches of 'name' against a list of warps. </summary>
         public static Warp FindWarps(Player p, WarpList warps, string name) {
             string group = (warps == WarpList.Global) ? "warps" : "waypoints";
-            int matches;
-            return Find(p, name, out matches, warps.Items,
+            return Find(p, name, out int matches, warps.Items,
                         null, wp => wp.Name, group);
         }
         
         /// <summary> Find partial matches of 'name' against the list of zones in a map. </summary>
         public static Zone FindZones(Player p, Level lvl, string name) {
-            int matches;
-            return Find(p, name, out matches, lvl.Zones.Items,
+            return Find(p, name, out int matches, lvl.Zones.Items,
                         null, z => z.Config.Name, "zones");
         }
         
@@ -101,7 +93,7 @@ namespace PattyKaki
         public static T Find<T>(Player p, string name, out int matches, IEnumerable<T> items,
                                 Predicate<T> filter, StringFormatter<T> nameGetter, 
                                 StringFormatter<T> itemFormatter, string group, int limit = 5)  {
-            T match = default(T); matches = 0;
+            T match = default; matches = 0;
             StringBuilder output = new StringBuilder();
             const StringComparison comp = StringComparison.OrdinalIgnoreCase;
 
@@ -122,7 +114,7 @@ namespace PattyKaki
             
             if (matches == 1) return match;
             if (matches == 0) {
-                p.Message("No {0} match \"{1}\".", group, name); return default(T);
+                p.Message("No {0} match \"{1}\".", group, name); return default;
             }
             
             string count = matches > limit ? limit + "+ " : matches + " ";
@@ -130,7 +122,7 @@ namespace PattyKaki
             
             p.Message("{0}{1} match \"{2}\":", count, group, name);
             p.Message(names);
-            return default(T);
+            return default;
         }
     }
 }

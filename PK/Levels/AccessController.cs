@@ -258,7 +258,7 @@ namespace PattyKaki {
         public override void ApplyChanges(Player p, Level lvl, string msg) {
             Update(lvl);
             Logger.Log(LogType.UserActivity, "{0} &Son {1}", msg, lvlName);            
-            if (lvl != null) lvl.Message(msg);
+            lvl?.Message(msg);
             
             if (p != Player.PK && p.level != lvl) {
                 p.Message("{0} &Son {1}", msg, ColoredName);

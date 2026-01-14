@@ -18,9 +18,9 @@
 
 namespace PattyKaki.Commands.World {
     public sealed class CmdLoad : Command2 {
-        public override string name { get { return "Load"; } }
-        public override string type { get { return CommandTypes.World; } }
-        public override LevelPermission defaultRank { get { return LevelPermission.Operator; } }
+        public override string Name { get { return "Load"; } }
+        public override string Type { get { return CommandTypes.World; } }
+        public override LevelPermission DefaultRank { get { return LevelPermission.Operator; } }
         public override CommandAlias[] Aliases {
             get { return new[] { new CommandAlias("MapLoad"), new CommandAlias("WLoad") }; }
         }

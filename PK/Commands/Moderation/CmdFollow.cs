@@ -18,9 +18,9 @@
 
 namespace PattyKaki.Commands.Moderation {
     public sealed class CmdFollow : Command2 {
-        public override string name { get { return "Follow"; } }
-        public override string type { get { return CommandTypes.Moderation; } }
-        public override LevelPermission defaultRank { get { return LevelPermission.Operator; } }
+        public override string Name { get { return "Follow"; } }
+        public override string Type { get { return CommandTypes.Moderation; } }
+        public override LevelPermission DefaultRank { get { return LevelPermission.Operator; } }
         public override bool SuperUseable { get { return false; } }
 
         public override void Use(Player p, string message, CommandData data) {
@@ -41,7 +41,7 @@ namespace PattyKaki.Commands.Moderation {
             if (name.CaselessEq(p.following) || (name.Length == 0 && p.following.Length > 0)) {
                 Unfollow(p, data, stealth);
             } else {
-                Follow(p, name, data, stealth);
+                Follow(p, name, data);
             }
         }
 
@@ -60,7 +60,7 @@ namespace PattyKaki.Commands.Moderation {
             }
         }
 
-        public static void Follow(Player p, string name, CommandData data, bool stealth) {
+        public static void Follow(Player p, string name, CommandData data) {
             Player target = PlayerInfo.FindMatches(p, name);
             if (target == null) return;
             if (target == p) { p.Message("Cannot follow yourself."); return; }

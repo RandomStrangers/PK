@@ -62,7 +62,7 @@ namespace PattyKaki {
             Save();
         }
 
-        public void Remove(Warp warp, Player p) {
+        public void Remove(Warp warp, Player _) {
             Items.Remove(warp);
             Save();
         }

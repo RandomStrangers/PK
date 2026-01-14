@@ -17,8 +17,8 @@
  */
 namespace PattyKaki.Commands.Moderation {
     public sealed class CmdCmdSet : ItemPermsCmd {
-        public override string name { get { return "CmdSet"; } }
-        public override string shortcut { get { return "SetCmd"; } }
+        public override string Name { get { return "CmdSet"; } }
+        public override string Shortcut { get { return "SetCmd"; } }
 
 
         public override void Use(Player p, string message, CommandData data) {
@@ -33,7 +33,7 @@ namespace PattyKaki.Commands.Moderation {
             
             if (!p.CanUse(cmd)) {
                 cmd.Permissions.MessageCannotUse(p);
-                p.Message("Therefore you cannot change the permissions of &T/{0}", cmd.name); return;
+                p.Message("Therefore you cannot change the permissions of &T/{0}", cmd.Name); return;
             }
             
             if (args.Length == 2) {
@@ -42,7 +42,7 @@ namespace PattyKaki.Commands.Moderation {
                 int num = 0;
                 if (!CommandParser.GetInt(p, args[2], "Extra permission number", ref num)) return;
                 
-                CommandExtraPerms perms = CommandExtraPerms.Find(cmd.name, num);
+                CommandExtraPerms perms = CommandExtraPerms.Find(cmd.Name, num);
                 if (perms == null) {
                     p.Message("This command has no extra permission by that number."); return;
                 }

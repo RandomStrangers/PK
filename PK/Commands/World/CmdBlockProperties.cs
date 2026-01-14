@@ -21,10 +21,10 @@ using BlockID = System.UInt16;
 
 namespace PattyKaki.Commands.World {
     public sealed class CmdBlockProperties : Command2 {
-        public override string name { get { return "BlockProperties"; } }
-        public override string shortcut { get { return "BlockProps"; } }
-        public override string type { get { return CommandTypes.World; } }
-        public override LevelPermission defaultRank { get { return LevelPermission.Admin; } }
+        public override string Name { get { return "BlockProperties"; } }
+        public override string Shortcut { get { return "BlockProps"; } }
+        public override string Type { get { return CommandTypes.World; } }
+        public override LevelPermission DefaultRank { get { return LevelPermission.Admin; } }
 
         public override void Use(Player p, string message, CommandData data) {
             if (message.Length == 0) { Help(p); return; }

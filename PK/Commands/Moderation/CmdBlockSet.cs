@@ -20,7 +20,7 @@ using BlockID = System.UInt16;
 
 namespace PattyKaki.Commands.Moderation {
     public sealed class CmdBlockSet : ItemPermsCmd {
-        public override string name { get { return "BlockSet"; } }
+        public override string Name { get { return "BlockSet"; } }
         
         public override void Use(Player p, string message, CommandData data) {
             string[] args = message.SplitSpaces(2);

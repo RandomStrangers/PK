@@ -23,9 +23,9 @@ namespace PattyKaki.Commands.Misc
 {
     public sealed class CmdRagequit : Command2 
     {
-        public override string name { get { return "RageQuit"; } }
-        public override string shortcut { get { return "rq"; } }
-        public override string type { get { return CommandTypes.Other; } }
+        public override string Name { get { return "RageQuit"; } }
+        public override string Shortcut { get { return "rq"; } }
+        public override string Type { get { return CommandTypes.Other; } }
         public override bool MessageBlockRestricted { get { return true; } }
         public override bool SuperUseable { get { return false; } }
         public override bool UseableWhenFrozen { get { return true; } }
@@ -42,8 +42,8 @@ namespace PattyKaki.Commands.Misc
     
     public sealed class CmdQuit : Command2 
     {
-        public override string name { get { return "Quit"; } }
-        public override string type { get { return CommandTypes.Other; } }
+        public override string Name { get { return "Quit"; } }
+        public override string Type { get { return CommandTypes.Other; } }
         public override bool MessageBlockRestricted { get { return true; } }
         public override bool SuperUseable { get { return false; } }
         public override bool UseableWhenFrozen { get { return true; } }
@@ -62,9 +62,9 @@ namespace PattyKaki.Commands.Misc
     
     public sealed class CmdCrashServer : Command2 
     {
-        public override string name { get { return "CrashServer"; } }
-        public override string shortcut { get { return "Crash"; } }
-        public override string type { get { return CommandTypes.Moderation; } }
+        public override string Name { get { return "CrashServer"; } }
+        public override string Shortcut { get { return "Crash"; } }
+        public override string Type { get { return CommandTypes.Moderation; } }
         public override bool MessageBlockRestricted { get { return true; } }
         public override bool SuperUseable { get { return false; } }
         public override bool UseableWhenFrozen { get { return true; } }
@@ -84,9 +84,9 @@ namespace PattyKaki.Commands.Misc
     
     public sealed class CmdHacks : Command2 
     {
-        public override string name { get { return "Hacks"; } }
-        public override string shortcut { get { return "Hax"; } }
-        public override string type { get { return CommandTypes.Moderation; } }
+        public override string Name { get { return "Hacks"; } }
+        public override string Shortcut { get { return "Hax"; } }
+        public override string Type { get { return CommandTypes.Moderation; } }
         public override bool MessageBlockRestricted { get { return true; } }
         public override bool SuperUseable { get { return false; } }
         public override bool UseableWhenFrozen { get { return true; } }

@@ -34,9 +34,8 @@ namespace PattyKaki.Levels.IO {
         public override Level Read(Stream src, string name, bool metadata) {
             NbtFile file = new NbtFile();
             file.LoadFromStream(src);
-            
-            Level lvl;
-            ReadData(file.RootTag, name, out lvl);
+
+            ReadData(file.RootTag, name, out Level lvl);
             if (!metadata) return lvl;
             
             if (file.RootTag.Contains("Metadata"))
@@ -69,9 +68,8 @@ namespace PattyKaki.Levels.IO {
             
             for (int i = 0; i < lo.Length; i++) {
                 if (hi[i] == 0 && lo[i] <= Block.CPE_MAX_BLOCK) continue;
-                ushort x, y, z;
-                
-                lvl.IntToPos(i, out x, out y, out z);
+
+                lvl.IntToPos(i, out ushort x, out ushort y, out ushort z);
                 int b = ((hi[i] << 8) | lo[i]) + Block.Extended;
                 lvl.SetBlock(x, y, z, (BlockID)b);
             }
@@ -142,8 +140,10 @@ namespace PattyKaki.Levels.IO {
                 if (tag.TagType != NbtTagType.Compound) continue;
                 
                 NbtCompound props = (NbtCompound)tag;
-                BlockDefinition def = new BlockDefinition();
-                def.RawID = props["ID"].ByteValue;
+                BlockDefinition def = new BlockDefinition
+                {
+                    RawID = props["ID"].ByteValue
+                };
                 // can't change "ID" to short since backwards compatibility
                 if (props.Contains("ID2")) def.RawID = (ushort)props["ID2"].ShortValue;
                 

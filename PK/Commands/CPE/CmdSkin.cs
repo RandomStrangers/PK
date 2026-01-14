@@ -22,9 +22,9 @@ namespace PattyKaki.Commands.CPE
 {
     public class CmdSkin : EntityPropertyCmd 
     {
-        public override string name { get { return "Skin"; } }
-        public override string type { get { return CommandTypes.Other; } }
-        public override LevelPermission defaultRank { get { return LevelPermission.Operator; } }
+        public override string Name { get { return "Skin"; } }
+        public override string Type { get { return CommandTypes.Other; } }
+        public override LevelPermission DefaultRank { get { return LevelPermission.Operator; } }
         public override CommandPerm[] ExtraPerms {
             get { return new[] { new CommandPerm(LevelPermission.Operator, "can change the skin of others"),
                     new CommandPerm(LevelPermission.Operator, "can change the skin of bots") }; }

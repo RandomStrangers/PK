@@ -21,10 +21,10 @@ namespace PattyKaki.Commands.Chatting
 {    
     public class CmdNick : EntityPropertyCmd 
     {       
-        public override string name { get { return "Nick"; } }
-        public override string shortcut { get { return "Nickname"; } }
-        public override string type { get { return CommandTypes.Chat; } }
-        public override LevelPermission defaultRank { get { return LevelPermission.AdvBuilder; } }
+        public override string Name { get { return "Nick"; } }
+        public override string Shortcut { get { return "Nickname"; } }
+        public override string Type { get { return CommandTypes.Chat; } }
+        public override LevelPermission DefaultRank { get { return LevelPermission.AdvBuilder; } }
         public override CommandPerm[] ExtraPerms {
             get { return new[] { new CommandPerm(LevelPermission.Operator, "can change the nick of others"),
                     new CommandPerm(LevelPermission.Operator, "can change the nick of bots") }; }
@@ -38,7 +38,7 @@ namespace PattyKaki.Commands.Chatting
         }
 
         public override void SetBotData(Player p, PlayerBot bot, string nick) {
-            if (!MessageCmd.CanSpeak(p, name)) return;
+            if (!MessageCmd.CanSpeak(p, Name)) return;
             
             if (nick.Length == 0) {
                 bot.DisplayName = bot.name;

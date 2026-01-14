@@ -19,9 +19,9 @@ using PattyKaki.Generator;
 
 namespace PattyKaki.Commands.World {
     public sealed class CmdResizeLvl : Command2 {
-        public override string name { get { return "ResizeLvl"; } }
-        public override string type { get { return CommandTypes.World; } }
-        public override LevelPermission defaultRank { get { return LevelPermission.Admin; } }
+        public override string Name { get { return "ResizeLvl"; } }
+        public override string Type { get { return CommandTypes.World; } }
+        public override LevelPermission DefaultRank { get { return LevelPermission.Admin; } }
         public override CommandAlias[] Aliases {
             get { return new[] { new CommandAlias("WResize"), new CommandAlias("WorldResize") }; }
         }
@@ -30,10 +30,9 @@ namespace PattyKaki.Commands.World {
         public override void Use(Player p, string message, CommandData data) {
             string[] args = message.SplitSpaces();
             if (args.Length < 4) { Help(p); return; }
-            
-            bool needConfirm;
-            if (DoResize(p, args, data, out needConfirm)) return;
-            
+
+            if (DoResize(p, args, data, out bool needConfirm)) return;
+
             if (!needConfirm) return;
             p.Message("Type &T/ResizeLvl {0} {1} {2} {3} confirm &Sif you're sure.",
                       args[0], args[1], args[2], args[3]);

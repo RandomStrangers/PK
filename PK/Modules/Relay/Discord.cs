@@ -36,8 +36,8 @@ namespace PattyKaki.Relay.Discord
     /// <summary> Message for sending text to a channel </summary>
     public class ChannelSendMessage : DiscordApiMessage
     {
-        static JsonArray default_allowed = new JsonArray() { "users", "roles" };
-        StringBuilder content;
+        public static JsonArray default_allowed = new JsonArray() { "users", "roles" };
+        public StringBuilder content;
         public JsonArray Allowed;
 
         public ChannelSendMessage(string channelID, string message)
@@ -63,8 +63,7 @@ namespace PattyKaki.Relay.Discord
 
         public override bool CombineWith(DiscordApiMessage prior)
         {
-            ChannelSendMessage msg = prior as ChannelSendMessage;
-            if (msg == null || msg.Path != Path) return false;
+            if (!(prior is ChannelSendMessage msg) || msg.Path != Path) return false;
 
             if (content.Length + msg.content.Length > 1024) return false;
 
@@ -90,7 +89,7 @@ namespace PattyKaki.Relay.Discord
         JsonArray GetFields()
         {
             JsonArray arr = new JsonArray();
-            foreach (var raw in Fields)
+            foreach (KeyValuePair<string, string> raw in Fields)
             {
                 JsonObject field = new JsonObject()
                 {
@@ -259,9 +258,8 @@ namespace PattyKaki.Relay.Discord
         {
             string resetAfter = res.Headers["X-RateLimit-Reset-After"];
             string retryAfter = res.Headers["Retry-After"];
-            float delay;
 
-            if (Utils.TryParseSingle(resetAfter, out delay) && delay > 0)
+            if (Utils.TryParseSingle(resetAfter, out float delay) && delay > 0)
             {
                 // Prefer Discord "X-RateLimit-Reset-After" (millisecond precision)
             }
@@ -286,12 +284,12 @@ namespace PattyKaki.Relay.Discord
         DiscordSession session;
         string botUserID;
 
-        Dictionary<string, byte> channelTypes = new Dictionary<string, byte>();
+        public Dictionary<string, byte> channelTypes = new Dictionary<string, byte>();
         const byte CHANNEL_DIRECT = 0;
         const byte CHANNEL_TEXT = 1;
 
-        List<string> filter_triggers = new List<string>();
-        List<string> filter_replacements = new List<string>();
+        public List<string> filter_triggers = new List<string>();
+        public List<string> filter_replacements = new List<string>();
         JsonArray allowed;
 
         public override string RelayName { get { return "Discord"; } }
@@ -299,7 +297,7 @@ namespace PattyKaki.Relay.Discord
         public override string UserID { get { return botUserID; } }
         public DiscordConfig Config;
 
-        TextFile replacementsFile = new TextFile("text/discord/replacements.txt",
+        public TextFile replacementsFile = new TextFile("text/discord/replacements.txt",
                                         "// This file is used to replace words/phrases sent to Discord",
                                         "// Lines starting with // are ignored",
                                         "// Lines should be formatted like this:",
@@ -314,18 +312,20 @@ namespace PattyKaki.Relay.Discord
 
         public override void DoConnect()
         {
-            socket = new DiscordWebsocket();
-            socket.Session = session;
-            socket.Token = Config.BotToken;
-            socket.Presence = Config.PresenceEnabled;
-            socket.Status = Config.Status;
-            socket.Activity = Config.Activity;
-            socket.GetStatus = GetStatusMessage;
+            socket = new DiscordWebsocket
+            {
+                Session = session,
+                Token = Config.BotToken,
+                Presence = Config.PresenceEnabled,
+                Status = Config.Status,
+                Activity = Config.Activity,
+                GetStatus = GetStatusMessage,
 
-            socket.OnReady = HandleReadyEvent;
-            socket.OnResumed = HandleResumedEvent;
-            socket.OnMessageCreate = HandleMessageEvent;
-            socket.OnChannelCreate = HandleChannelEvent;
+                OnReady = HandleReadyEvent,
+                OnResumed = HandleResumedEvent,
+                OnMessageCreate = HandleMessageEvent,
+                OnChannelCreate = HandleChannelEvent
+            };
             socket.Connect();
         }
 
@@ -431,12 +431,10 @@ namespace PattyKaki.Relay.Discord
         string GetNick(JsonObject data)
         {
             if (!Config.UseNicks) return null;
-            object raw;
-            if (!data.TryGetValue("member", out raw)) return null;
+            if (!data.TryGetValue("member", out object raw)) return null;
 
             // Make sure this is really a member object first
-            JsonObject member = raw as JsonObject;
-            if (member == null) return null;
+            if (!(raw is JsonObject member)) return null;
 
             member.TryGetValue("nick", out raw);
             return raw as string;
@@ -445,8 +443,7 @@ namespace PattyKaki.Relay.Discord
         string GetUser(JsonObject author)
         {
             // User's chosen display name (configurable)
-            object name = null;
-            author.TryGetValue("global_name", out name);
+            author.TryGetValue("global_name", out object name);
             if (name != null) return (string)name;
 
             return (string)author["username"];
@@ -456,9 +453,11 @@ namespace PattyKaki.Relay.Discord
         {
             JsonObject author = (JsonObject)data["author"];
 
-            RelayUser user = new RelayUser();
-            user.Nick = GetNick(data) ?? GetUser(author);
-            user.ID = (string)author["id"];
+            RelayUser user = new RelayUser
+            {
+                Nick = GetNick(data) ?? GetUser(author),
+                ID = (string)author["id"]
+            };
             return user;
         }
 
@@ -475,8 +474,10 @@ namespace PattyKaki.Relay.Discord
             // May not be null when reconnecting
             if (api == null)
             {
-                api = new DiscordApiClient();
-                api.Token = Config.BotToken;
+                api = new DiscordApiClient
+                {
+                    Token = Config.BotToken
+                };
                 api.RunAsync();
             }
             OnReady();
@@ -484,16 +485,13 @@ namespace PattyKaki.Relay.Discord
 
         void PrintAttachments(RelayUser user, JsonObject data, string channel)
         {
-            object raw;
-            if (!data.TryGetValue("attachments", out raw)) return;
+            if (!data.TryGetValue("attachments", out object raw)) return;
 
-            JsonArray list = raw as JsonArray;
-            if (list == null) return;
+            if (!(raw is JsonArray list)) return;
 
             foreach (object entry in list)
             {
-                JsonObject attachment = entry as JsonObject;
-                if (attachment == null) continue;
+                if (!(entry is JsonObject attachment)) continue;
 
                 string url = (string)attachment["url"];
                 HandleChannelMessage(user, channel, url);
@@ -508,7 +506,6 @@ namespace PattyKaki.Relay.Discord
 
             string channel = (string)data["channel_id"];
             string message = (string)data["content"];
-            byte type;
             if (IsProxy(message) == true) return;
             // Working out whether a channel is a direct message channel
             //  or not without querying the Discord API is a bit of a pain
@@ -519,7 +516,7 @@ namespace PattyKaki.Relay.Discord
             //  "Bots no longer receive Channel Create Gateway Event for DMs"
             // Therefore the code is now forced to instead calculate which
             //  channels are probably text channels, and which aren't
-            if (!channelTypes.TryGetValue(channel, out type))
+            if (!channelTypes.TryGetValue(channel, out byte type))
             {
                 type = GuessChannelType(data);
                 // channel is definitely a text/normal channel
@@ -627,7 +624,7 @@ namespace PattyKaki.Relay.Discord
 
         public void UpdateDiscordStatus()
         {
-            TimeSpan delay = default(TimeSpan);
+            TimeSpan delay = default;
             DateTime now = DateTime.UtcNow;
 
             // websocket gets disconnected with code 4008 if try to send too many updates too quickly
@@ -712,7 +709,7 @@ namespace PattyKaki.Relay.Discord
         public void Send(DiscordApiMessage msg)
         {
             // can be null in gap between initial connection and ready event received
-            if (api != null) api.QueueAsync(msg);
+            api?.QueueAsync(msg);
         }
 
         public override void DoSendMessage(string channel, string message)
@@ -728,8 +725,10 @@ namespace PattyKaki.Relay.Discord
                 int partLen = Math.Min(message.Length - offset, MAX_MSG_LEN);
                 string part = message.Substring(offset, partLen);
 
-                ChannelSendMessage msg = new ChannelSendMessage(channel, part);
-                msg.Allowed = allowed;
+                ChannelSendMessage msg = new ChannelSendMessage(channel, part)
+                {
+                    Allowed = allowed
+                };
                 Send(msg);
             }
         }
@@ -746,7 +745,7 @@ namespace PattyKaki.Relay.Discord
         }
 
         static readonly string[] markdown_special = { @"\", @"*", @"_", @"~", @"`", @"|", @"-", @"#" };
-        static readonly string[] markdown_escaped = { @"\\", @"\*", @"\_", @"\~", @"\`", @"\|", @"\-", @"\#" };
+        //static readonly string[] markdown_escaped = { @"\\", @"\*", @"\_", @"\~", @"\`", @"\|", @"\-", @"\#" };
         static string EscapeMarkdown(string message)
         {
             // don't let user use bold/italic etc markdown
@@ -783,8 +782,7 @@ namespace PattyKaki.Relay.Discord
         public override void MessagePlayers(RelayPlayer p)
         {
             ChannelSendEmbed embed = new ChannelSendEmbed(p.ChannelID);
-            int total;
-            List<OnlineListEntry> entries = PlayerInfo.GetOnlineList(p, p.Rank, out total);
+            List<OnlineListEntry> entries = PlayerInfo.GetOnlineList(p, p.Rank, out int total);
 
             embed.Color = Config.EmbedColor;
             embed.Title = string.Format("{0} player{1} currently online",
@@ -955,9 +953,9 @@ namespace PattyKaki.Relay.Discord
     public enum PresenceStatus { online, dnd, idle, invisible }
     public enum PresenceActivity { Playing = 0, Listening = 2, Watching = 3, Competing = 5, Empty = 6 }
 
-    public sealed class DiscordPlugin : Plugin_Simple
+    public sealed class DiscordPlugin : Plugin
     {
-        public override string name { get { return "Discord"; } }
+        public override string Name { get { return "Discord"; } }
         public override string PK_Version { get { return "0.0.0.1"; } }
         public static DiscordConfig Config = new DiscordConfig();
         public static DiscordBot Bot = new DiscordBot();
@@ -985,13 +983,13 @@ namespace PattyKaki.Relay.Discord
 
     public sealed class CmdDiscordBot : RelayBotCmd
     {
-        public override string name { get { return "DiscordBot"; } }
+        public override string Name { get { return "DiscordBot"; } }
         public override RelayBot Bot { get { return DiscordPlugin.Bot; } }
     }
 
     public sealed class CmdDiscordControllers : BotControllersCmd
     {
-        public override string name { get { return "DiscordControllers"; } }
+        public override string Name { get { return "DiscordControllers"; } }
         public override RelayBot Bot { get { return DiscordPlugin.Bot; } }
     }
     public sealed class DiscordSession
@@ -1181,8 +1179,7 @@ namespace PattyKaki.Relay.Discord
         void HandleDispatch(JsonObject obj)
         {
             // update last sequence number
-            object sequence;
-            if (obj.TryGetValue("s", out sequence))
+            if (obj.TryGetValue("s", out object sequence))
                 Session.LastSeq = (string)sequence;
 
             string eventName = (string)obj["t"];
@@ -1213,8 +1210,7 @@ namespace PattyKaki.Relay.Discord
 
         void HandleReady(JsonObject data)
         {
-            object session;
-            if (data.TryGetValue("session_id", out session))
+            if (data.TryGetValue("session_id", out object session))
                 Session.ID = (string)session;
         }
 
@@ -1242,8 +1238,10 @@ namespace PattyKaki.Relay.Discord
 
         void SendHeartbeat(SchedulerTask task)
         {
-            JsonObject obj = new JsonObject();
-            obj["op"] = OPCODE_HEARTBEAT;
+            JsonObject obj = new JsonObject
+            {
+                ["op"] = OPCODE_HEARTBEAT
+            };
 
             if (Session.LastSeq != null)
             {

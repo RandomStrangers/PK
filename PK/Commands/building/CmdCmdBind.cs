@@ -16,26 +16,28 @@
     permissions and limitations under the Licenses.
  */
 
-namespace PattyKaki.Commands.Building 
+namespace PattyKaki.Commands.Building
 {
-    public sealed class CmdCmdBind : Command2 
+    public sealed class CmdCmdBind : Command2
     {
-        public override string name { get { return "CmdBind"; } }
-        public override string shortcut { get { return "cb"; } }
-        public override string type { get { return CommandTypes.Building; } }
-        public override LevelPermission defaultRank { get { return LevelPermission.Builder; } }
+        public override string Name { get { return "CmdBind"; } }
+        public override string Shortcut { get { return "cb"; } }
+        public override string Type { get { return CommandTypes.Building; } }
+        public override LevelPermission DefaultRank { get { return LevelPermission.Builder; } }
         public override bool SuperUseable { get { return false; } }
         public override bool MessageBlockRestricted { get { return true; } }
-        
-        public override void Use(Player p, string message, CommandData data) {
-            if (message.Length == 0) {
+
+        public override void Use(Player p, string message, CommandData data)
+        {
+            if (message.Length == 0)
+            {
                 bool anyBinds = false;
-                foreach (var kvp in p.CmdBindings)
+                foreach (System.Collections.Generic.KeyValuePair<string, string> kvp in p.CmdBindings)
                 {
                     p.Message("&T/{0} &Sbound to &T/{1}", kvp.Key, kvp.Value);
                     anyBinds = true;
                 }
-                
+
                 if (!anyBinds) p.Message("You currently have no commands bound.");
                 return;
             }
@@ -43,7 +45,8 @@ namespace PattyKaki.Commands.Building
             string[] parts = message.SplitSpaces(2);
             string trigger = parts[0];
 
-            if (parts.Length == 1) {
+            if (parts.Length == 1)
+            {
                 if (!p.CmdBindings.TryGetValue(trigger, out string value))
                 {
                     p.Message("No command bound for &T/{0}", trigger);
@@ -52,13 +55,16 @@ namespace PattyKaki.Commands.Building
                 {
                     p.Message("&T/{0} &Sbound to &T/{1}", trigger, value);
                 }
-            } else {
+            }
+            else
+            {
                 p.CmdBindings[trigger] = parts[1];
                 p.Message("Bound &T/{1} &Sto &T/{0}", trigger, parts[1]);
             }
         }
-        
-        public override void Help(Player p) {
+
+        public override void Help(Player p)
+        {
             p.Message("&T/CmdBind [shortcut] [command]");
             p.Message("&HBinds [shortcut] to [command]");
             p.Message("&H  Use with \"&T/[shortcut]&H\" &f(example: &T/2&f)");

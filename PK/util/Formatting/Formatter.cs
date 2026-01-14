@@ -28,7 +28,7 @@ namespace PattyKaki
             p.Message("Usable by: " + cmd.Permissions.Describe());
             PrintAliases(p, cmd);
             
-            List<CommandExtraPerms> extraPerms = CommandExtraPerms.FindAll(cmd.name);
+            List<CommandExtraPerms> extraPerms = CommandExtraPerms.FindAll(cmd.Name);
             if (cmd.ExtraPerms == null) extraPerms.Clear();
             if (extraPerms.Count == 0) return;
             
@@ -41,8 +41,8 @@ namespace PattyKaki
         
         static void PrintAliases(Player p, Command cmd) {
             StringBuilder dst = new StringBuilder("Shortcuts: &T");
-            if (!string.IsNullOrEmpty(cmd.shortcut)) {
-                dst.Append('/').Append(cmd.shortcut).Append(", ");
+            if (!string.IsNullOrEmpty(cmd.Shortcut)) {
+                dst.Append('/').Append(cmd.Shortcut).Append(", ");
             }
             FindAliases(Alias.coreAliases, cmd, dst);
             FindAliases(Alias.aliases, cmd, dst);
@@ -54,13 +54,13 @@ namespace PattyKaki
         static void FindAliases(List<Alias> aliases, Command cmd, StringBuilder dst) {
             foreach (Alias a in aliases) 
             {
-                if (!a.Target.CaselessEq(cmd.name)) continue;
+                if (!a.Target.CaselessEq(cmd.Name)) continue;
                 
                 dst.Append('/').Append(a.Trigger);
                 if (a.Format == null) { dst.Append(", "); continue; }
                 
-                string name = string.IsNullOrEmpty(cmd.shortcut) ? cmd.name : cmd.shortcut;
-                if (name.Length > cmd.name.Length) name = cmd.name;
+                string name = string.IsNullOrEmpty(cmd.Shortcut) ? cmd.Name : cmd.Shortcut;
+                if (name.Length > cmd.Name.Length) name = cmd.Name;
                 string args = a.Format.Replace("{args}", "[args]");
                 
                 dst.Append(" for /").Append(name + " " + args);
@@ -100,8 +100,8 @@ namespace PattyKaki
             return false;
         }
         
-        static char[] separators = { '/', '\\', ':' };
-        static char[] invalid    = { '<', '>', '|', '"', '*', '?' };
+        static readonly char[] separators = { '/', '\\', ':' };
+        static readonly char[] invalid    = { '<', '>', '|', '"', '*', '?' };
         /// <summary> Checks that the input is a valid filename (non-empty and no directory separator) </summary>
         /// <remarks> If the input is invalid, messages the player the reason why </remarks>
         public static bool ValidFilename(Player p, string name) {

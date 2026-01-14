@@ -4,7 +4,7 @@ using System;
 namespace PattyKaki.Generator.fCraft 
 {
     /// <summary> Contains parameters for advanced map generation. </summary>
-    public sealed class fCraftMapGenArgs 
+    public sealed class FCraftMapGenArgs 
     {
         public string MapName;
         public MapGenBiomeName Biome = MapGenBiomeName.Forest;
@@ -52,10 +52,10 @@ namespace PattyKaki.Generator.fCraft
         public int   BeachHeight = 2;
         
 
-        public static fCraftMapGenArgs MakeTemplate( MapGenTemplate template ) {
+        public static FCraftMapGenArgs MakeTemplate( MapGenTemplate template ) {
             switch( template ) {
                 case MapGenTemplate.Archipelago:
-                    return new fCraftMapGenArgs {
+                    return new FCraftMapGenArgs {
                         MaxHeight = 8,
                         MaxDepth = 20,
                         FeatureScale = 3,
@@ -65,7 +65,7 @@ namespace PattyKaki.Generator.fCraft
                     };
 
                 case MapGenTemplate.Atoll:
-                    return new fCraftMapGenArgs {
+                    return new FCraftMapGenArgs {
                         //Biome = MapGenBiomeName.Sandy, TODO maybe?
                         MaxHeight = 2,
                         MaxDepth = 39,
@@ -82,7 +82,7 @@ namespace PattyKaki.Generator.fCraft
                     };
 
                 case MapGenTemplate.Bay:
-                    return new fCraftMapGenArgs {
+                    return new FCraftMapGenArgs {
                         MaxHeight = 22,
                         MaxDepth = 12,
                         UseBias = true,
@@ -97,7 +97,7 @@ namespace PattyKaki.Generator.fCraft
                     };
 
                 case MapGenTemplate.Dunes:
-                    return new fCraftMapGenArgs {
+                    return new FCraftMapGenArgs {
                         Biome = MapGenBiomeName.Desert,
                         MaxHeight = 12,
                         MaxDepth = 7,
@@ -109,7 +109,7 @@ namespace PattyKaki.Generator.fCraft
                     };
 
                 case MapGenTemplate.Hills:
-                    return new fCraftMapGenArgs {
+                    return new FCraftMapGenArgs {
                         Biome = MapGenBiomeName.Plains,
                         MaxHeight = 8,
                         MaxDepth = 8,
@@ -119,7 +119,7 @@ namespace PattyKaki.Generator.fCraft
                     };
 
                 case MapGenTemplate.Ice:
-                    return new fCraftMapGenArgs {
+                    return new FCraftMapGenArgs {
                         Biome = MapGenBiomeName.Arctic,
                         MaxHeight = 2,
                         MaxDepth = 2032,
@@ -133,7 +133,7 @@ namespace PattyKaki.Generator.fCraft
                     };
 
                 case MapGenTemplate.Island2:
-                    return new fCraftMapGenArgs {
+                    return new FCraftMapGenArgs {
                         MaxHeight = 16,
                         MaxDepth = 39,
                         UseBias = true,
@@ -149,7 +149,7 @@ namespace PattyKaki.Generator.fCraft
                     };
 
                 case MapGenTemplate.Lake:
-                    return new fCraftMapGenArgs {
+                    return new FCraftMapGenArgs {
                         MaxHeight = 14,
                         MaxDepth = 20,
                         UseBias = true,
@@ -163,7 +163,7 @@ namespace PattyKaki.Generator.fCraft
                     };
 
                 case MapGenTemplate.Mountains2:
-                    return new fCraftMapGenArgs {
+                    return new FCraftMapGenArgs {
                         Biome = MapGenBiomeName.Plains,
                         MaxHeight = 40,
                         MaxDepth = 10,
@@ -178,10 +178,10 @@ namespace PattyKaki.Generator.fCraft
                     };
 
                 case MapGenTemplate.Random:
-                    return new fCraftMapGenArgs();
+                    return new FCraftMapGenArgs();
 
                 case MapGenTemplate.River:
-                    return new fCraftMapGenArgs {
+                    return new FCraftMapGenArgs {
                         MaxHeight = 22,
                         MaxDepth = 8,
                         FeatureScale = 0,
@@ -192,7 +192,7 @@ namespace PattyKaki.Generator.fCraft
                     };
 
                 case MapGenTemplate.Streams:
-                    return new fCraftMapGenArgs {
+                    return new FCraftMapGenArgs {
                         MaxHeight = 5,
                         MaxDepth = 4,
                         FeatureScale = 2,
@@ -206,7 +206,7 @@ namespace PattyKaki.Generator.fCraft
                     };
 
                 case MapGenTemplate.Peninsula:
-                    return new fCraftMapGenArgs {
+                    return new FCraftMapGenArgs {
                         MaxHeight = 22,
                         MaxDepth = 12,
                         UseBias = true,

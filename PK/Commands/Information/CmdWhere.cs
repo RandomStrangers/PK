@@ -21,8 +21,8 @@ namespace PattyKaki.Commands.Info
 {
     public sealed class CmdWhere : Command2 
     {
-        public override string name { get { return "Where"; } }
-        public override string type { get { return CommandTypes.Information; } }
+        public override string Name { get { return "Where"; } }
+        public override string Type { get { return CommandTypes.Information; } }
         
         public override void Use(Player p, string message, CommandData data) {
             if (message.Length == 0) message = p.name;

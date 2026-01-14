@@ -21,9 +21,9 @@ namespace PattyKaki.Commands.Eco
 {
     public sealed class CmdStore : Command2 
     {
-        public override string name { get { return "Store"; } }
-        public override string shortcut { get { return "Shop"; } }
-        public override string type { get { return CommandTypes.Economy; } }
+        public override string Name { get { return "Store"; } }
+        public override string Shortcut { get { return "Shop"; } }
+        public override string Type { get { return CommandTypes.Economy; } }
         public override CommandAlias[] Aliases {
             get { return new[] { new CommandAlias("Item") }; }
         }

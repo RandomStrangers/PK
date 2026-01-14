@@ -43,10 +43,9 @@ namespace PattyKaki.Drawing.Brushes
             int count = parts.Length == 1 ? 1 : parts.Length - 1;
             BlockID[] toAffect = GetBlocks(args.Player, 0, count, parts);
             if (toAffect == null) return null;
-            
-            BlockID target;
-            if (!GetTargetBlock(args, parts, out target)) return null;
-            
+
+            if (!GetTargetBlock(args, parts, out ushort target)) return null;
+
             if (not) return new ReplaceNotBrush(toAffect, target);
             return new ReplaceBrush(toAffect, target);
         }

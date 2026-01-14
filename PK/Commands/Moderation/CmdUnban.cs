@@ -19,9 +19,9 @@ using PattyKaki.Events;
 
 namespace PattyKaki.Commands.Moderation {
     public sealed class CmdUnban : Command2 {
-        public override string name { get { return "Unban"; } }
-        public override string type { get { return CommandTypes.Moderation; } }
-        public override LevelPermission defaultRank { get { return LevelPermission.Operator; } }
+        public override string Name { get { return "Unban"; } }
+        public override string Type { get { return CommandTypes.Moderation; } }
+        public override LevelPermission DefaultRank { get { return LevelPermission.Operator; } }
         
         public override void Use(Player p, string message, CommandData data) {
             if (message.Length == 0) { Help(p); return; }
@@ -32,7 +32,7 @@ namespace PattyKaki.Commands.Moderation {
             if (reason == null) return;
             
             if (!Server.tempBans.Contains(args[0])) {
-                args[0] = Group.BannedRank.Players.FindMatches(p, args[0], "banned players", out int matches);
+                args[0] = Group.BannedRank.Players.FindMatches(p, args[0], "banned players", out _);
                 if (args[0] == null) return;
             }
             

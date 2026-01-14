@@ -44,8 +44,7 @@ namespace PattyKaki
             foreach (string path in backups) 
             {
                 string restore = LevelInfo.BackupNameFrom(path);
-                int num;
-                if (int.TryParse(restore, out num)) continue;
+                if (int.TryParse(restore, out int num)) continue;
 
                 count++;
                 custom.Append(", " + restore);

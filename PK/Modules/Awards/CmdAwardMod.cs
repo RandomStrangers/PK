@@ -20,10 +20,10 @@ namespace PattyKaki.Modules.Awards
 {
     public sealed class CmdAwardMod : Command2 
     {
-        public override string name { get { return "AwardMod"; } }
-        public override string type { get { return CommandTypes.Economy; } }
-        public override LevelPermission defaultRank { get { return LevelPermission.Admin; } }
-        static char[] awardArgs = new char[] { ':' };
+        public override string Name { get { return "AwardMod"; } }
+        public override string Type { get { return CommandTypes.Economy; } }
+        public override LevelPermission DefaultRank { get { return LevelPermission.Admin; } }
+        static readonly char[] awardArgs = new char[] { ':' };
 
         public override void Use(Player p, string message, CommandData data) {
             string[] args = message.SplitSpaces(2);

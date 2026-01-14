@@ -22,8 +22,8 @@ namespace PattyKaki.Commands.Info
 {
     public sealed class CmdBanInfo : Command2 
     {
-        public override string name { get { return "BanInfo"; } }
-        public override string type { get { return CommandTypes.Moderation; } }
+        public override string Name { get { return "BanInfo"; } }
+        public override string Type { get { return CommandTypes.Moderation; } }
         public override bool UseableWhenFrozen { get { return true; } }
         public override bool MessageBlockRestricted { get { return false; } }
         

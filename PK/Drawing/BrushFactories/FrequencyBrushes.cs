@@ -115,10 +115,8 @@ namespace PattyKaki.Drawing.Brushes
         };
         
         public override Brush Construct(BrushArgs args) {
-            List<BlockID> toAffect;
-            List<int> freqs;
-            
-            bool ok = FrequencyBrush.GetBlocks(args, out toAffect, out freqs, 
+
+            bool ok = FrequencyBrush.GetBlocks(args, out List<ushort> toAffect, out List<int> freqs,
                                                P => false, null);
             if (!ok) return null;
 
@@ -141,10 +139,8 @@ namespace PattyKaki.Drawing.Brushes
         
         public override Brush Construct(BrushArgs args) {
             CustomModelAnimAxis axis = GetAxis(ref args);
-            List<BlockID> toAffect;
-            List<int> freqs;
-            
-            bool ok = FrequencyBrush.GetBlocks(args, out toAffect, out freqs, 
+
+            bool ok = FrequencyBrush.GetBlocks(args, out List<ushort> toAffect, out List<int> freqs,
                                                P => false, null);
             if (!ok) return null;
 

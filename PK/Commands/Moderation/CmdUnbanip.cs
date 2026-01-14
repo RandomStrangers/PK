@@ -20,9 +20,9 @@ using PattyKaki.Events;
 
 namespace PattyKaki.Commands.Moderation {
     public sealed class CmdUnbanip : Command2 {
-        public override string name { get { return "UnbanIP"; } }
-        public override string type { get { return CommandTypes.Moderation; } }
-        public override LevelPermission defaultRank { get { return LevelPermission.Operator; } }
+        public override string Name { get { return "UnbanIP"; } }
+        public override string Type { get { return CommandTypes.Moderation; } }
+        public override LevelPermission DefaultRank { get { return LevelPermission.Operator; } }
         public override CommandAlias[] Aliases {
             get { return new CommandAlias[] { new CommandAlias("UnIPBan") }; }
         }
@@ -30,7 +30,7 @@ namespace PattyKaki.Commands.Moderation {
         public override void Use(Player p, string message, CommandData data) {
             if (message.Length == 0) { Help(p); return; }
             string[] args = message.SplitSpaces(2);
-            string addr = ModActionCmd.FindIP(p, args[0], "UnbanIP", out string name);
+            string addr = ModActionCmd.FindIP(p, args[0], "UnbanIP", out _);
             if (addr == null) return;
 
             if (!IPAddress.TryParse(addr, out IPAddress ip)) { p.Message("\"{0}\" is not a valid IP.", addr); return; }

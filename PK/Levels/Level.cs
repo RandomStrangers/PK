@@ -88,7 +88,7 @@ namespace PattyKaki
             listUpdateExists = new SparseBitSet(width, height, length);
         }
 
-        public List<Player> players { get { return getPlayers(); } }
+        public List<Player> Players { get { return GetPlayers(); } }
 
         public void Dispose() {
             Extras.Clear();
@@ -132,9 +132,9 @@ namespace PattyKaki
             try {
                 t = physThread;
                 // Wake up physics thread from Thread.Sleep
-                if (t != null) t.Interrupt();
+                t?.Interrupt();
                 // Wait up to 1 second for physics thread to finish
-                if (t != null) t.Join(1000);
+                t?.Join(1000);
             } catch {
                 // No physics thread at all
             }
@@ -247,7 +247,7 @@ namespace PattyKaki
             SaveSettings();
 
             Logger.Log(LogType.SystemActivity, "SAVED: Level \"{0}\". ({1}/{2}/{3})",
-                       name, players.Count, PlayerInfo.Online.Count, Server.Config.MaxPlayers);
+                       name, Players.Count, PlayerInfo.Online.Count, Server.Config.MaxPlayers);
             Changed = false;
         }
 
@@ -350,7 +350,7 @@ namespace PattyKaki
             lock (dbLock) LevelDB.SaveBlockDB(this);
         }
 
-        public List<Player> getPlayers() {
+        public List<Player> GetPlayers() {
             Player[] players = PlayerInfo.Online.Items;
             List<Player> onLevel = new List<Player>();
             

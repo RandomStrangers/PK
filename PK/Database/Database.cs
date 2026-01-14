@@ -235,9 +235,8 @@ namespace PattyKaki.SQL
         }
         
         public static DateTime ParseDBDate(string value) {
-            DateTime date;
             // prefer the exact format
-            if (DateTime.TryParseExact(value, DateFormat, null, 0, out date)) return date;
+            if (DateTime.TryParseExact(value, DateFormat, null, 0, out DateTime date)) return date;
             return DateTime.Parse(value);
         }
     }

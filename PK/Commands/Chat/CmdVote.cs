@@ -22,14 +22,14 @@ namespace PattyKaki.Commands.Chatting
 {
     public sealed class CmdVote : Command2 
     {
-        public override string name { get { return "Vote"; } }
-        public override string shortcut { get { return "vo"; } }
-        public override string type { get { return CommandTypes.Chat; } }
-        public override LevelPermission defaultRank { get { return LevelPermission.Operator; } }
+        public override string Name { get { return "Vote"; } }
+        public override string Shortcut { get { return "vo"; } }
+        public override string Type { get { return CommandTypes.Chat; } }
+        public override LevelPermission DefaultRank { get { return LevelPermission.Operator; } }
 
         public override void Use(Player p, string message, CommandData data) {
             if (message.Length == 0) { Help(p); return; }
-            if (!MessageCmd.CanSpeak(p, name)) return;
+            if (!MessageCmd.CanSpeak(p, Name)) return;
             
             if (Server.voting) {
                 p.Message("A vote is in progress!"); return;

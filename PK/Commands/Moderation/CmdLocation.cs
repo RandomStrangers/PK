@@ -22,10 +22,10 @@ using PattyKaki.Network;
 
 namespace PattyKaki.Commands.Moderation {
     public class CmdLocation : Command2 {
-        public override string name { get { return "Location"; } }
-        public override string shortcut { get { return "GeoIP"; } }
-        public override string type { get { return CommandTypes.Moderation; } }
-        public override LevelPermission defaultRank { get { return LevelPermission.Admin; } }
+        public override string Name { get { return "Location"; } }
+        public override string Shortcut { get { return "GeoIP"; } }
+        public override string Type { get { return CommandTypes.Moderation; } }
+        public override LevelPermission DefaultRank { get { return LevelPermission.Admin; } }
         public override CommandPerm[] ExtraPerms {
             get { return new[] { new CommandPerm(LevelPermission.Admin, "can see state/province") }; }
         }

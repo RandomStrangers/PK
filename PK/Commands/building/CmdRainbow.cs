@@ -17,21 +17,25 @@
  */
 using PattyKaki.Drawing.Ops;
 
-namespace PattyKaki.Commands.Building {
-    public sealed class CmdRainbow : DrawCmd {
-        public override string name { get { return "Rainbow"; } }
-        public override LevelPermission defaultRank { get { return LevelPermission.AdvBuilder; } }
+namespace PattyKaki.Commands.Building
+{
+    public sealed class CmdRainbow : DrawCmd
+    {
+        public override string Name { get { return "Rainbow"; } }
+        public override LevelPermission DefaultRank { get { return LevelPermission.AdvBuilder; } }
 
         public override void GetBrush(DrawArgs dArgs) { dArgs.BrushName = "Normal"; }
 
-        public override DrawOp GetDrawOp(DrawArgs dArgs) {
+        public override DrawOp GetDrawOp(DrawArgs dArgs)
+        {
             string args = dArgs.Message;
             RainbowDrawOp op = new RainbowDrawOp();
             if (args.Length > 0 && !CommandParser.GetBool(dArgs.Player, args, ref op.AllowAir)) return null;
             return op;
         }
-        
-        public override void Help(Player p) {
+
+        public override void Help(Player p)
+        {
             p.Message("&T/Rainbow <replace air>");
             p.Message("&HReplaces blocks with a rainbow between two points.");
             p.Message("&H<replace air> if given, also replaces over air.");

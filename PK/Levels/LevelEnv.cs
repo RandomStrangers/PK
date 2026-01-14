@@ -178,8 +178,7 @@ namespace PattyKaki {
                 p.Message("Reset {0} for {1} &Sto normal", type, area);
                 target = Block.Invalid;
             } else {
-                BlockID block;
-                if (!CommandParser.GetBlock(p, input, out block)) return;
+                if (!CommandParser.GetBlock(p, input, out ushort block)) return;
                 if (Block.IsPhysicsType(block)) {
                     p.Message("&WCannot use physics block ids for &T/env"); return;
                 }

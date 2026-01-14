@@ -202,7 +202,7 @@ namespace PattyKaki.Commands.Moderation {
         public static string FindIP(Player p, string message, string cmd, out string name) {
             name = null;
 
-            if (IPAddress.TryParse(message, out IPAddress ip) && ValidIP(message)) {
+            if (IPAddress.TryParse(message, out _) && ValidIP(message)) {
                 string account = Server.FromRawUsername(message);
                 // TODO ip.ToString()
                 if (PlayerDB.FindName(account) == null) return message;

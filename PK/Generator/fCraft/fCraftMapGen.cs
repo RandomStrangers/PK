@@ -14,9 +14,9 @@ namespace PattyKaki.Generator.fCraft {
 
 
     /// <summary> Provides functionality for generating map files. </summary>
-    public sealed class fCraftMapGen 
+    public sealed class FCraftMapGen 
     {
-        public fCraftMapGenArgs args;
+        public FCraftMapGenArgs args;
         public Random rand;
         public Noise noise;
         public float[] heightmap, slopemap;
@@ -29,7 +29,7 @@ namespace PattyKaki.Generator.fCraft {
         public const int SeaFloorThickness = 3;
         public Tree tree;
 
-        public fCraftMapGen( fCraftMapGenArgs generatorArgs ) {
+        public FCraftMapGen( FCraftMapGenArgs generatorArgs ) {
             args  = generatorArgs;
             rand  = new Random( args.Seed );
             noise = new Noise( args.Seed, NoiseInterpolationMode.Bicubic );
@@ -45,11 +45,11 @@ namespace PattyKaki.Generator.fCraft {
             GenerateMap(map);
         }
 
-        public void ReportProgress(int relativeIncrease, string message) {
+        public void ReportProgress(int _, string message) {
             Logger.Log(LogType.SystemActivity, message);
         }
 
-        public void ApplyBiome(Level map) {
+        public void ApplyBiome(Level _) {
             MapGenBiome biome = MapGenBiome.Get(args.Biome);
             bGroundSurface    = biome.Surface;
             bWater    = biome.Water;
@@ -70,7 +70,7 @@ namespace PattyKaki.Generator.fCraft {
 
         #region Heightmap Processing
 
-        public void GenerateHeightmap(Level map) {
+        public void GenerateHeightmap(Level _) {
             ReportProgress( 10, "Heightmap: Priming" );
             heightmap  = new float[_width * _length];
             surfaceMap = new ushort[_width * _length];
@@ -387,7 +387,7 @@ namespace PattyKaki.Generator.fCraft {
         }
 
         public static bool Gen(Player p, Level lvl, MapGenArgs gen_args, MapGenTemplate type) {
-            fCraftMapGenArgs args = fCraftMapGenArgs.MakeTemplate(type);
+            FCraftMapGenArgs args = FCraftMapGenArgs.MakeTemplate(type);
             
             gen_args.Biome = args.Biome;
             if (!gen_args.ParseArgs(p)) return false;
@@ -401,7 +401,7 @@ namespace PattyKaki.Generator.fCraft {
             args.Biome      = gen_args.Biome;
             args.WaterLevel = (lvl.Height - 1) / 2;
 
-            new fCraftMapGen(args).Generate(lvl);
+            new FCraftMapGen(args).Generate(lvl);
             return true;
         }
     }

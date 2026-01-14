@@ -21,8 +21,8 @@ namespace PattyKaki.Commands.Info
 {
     public sealed class CmdHelp : Command2 
     {
-        public override string name { get { return "Help"; } }
-        public override string type { get { return CommandTypes.Information; } }
+        public override string Name { get { return "Help"; } }
+        public override string Type { get { return CommandTypes.Information; } }
         public override bool UseableWhenFrozen { get { return true; } }
         public override CommandAlias[] Aliases {
             get { return new[] { new CommandAlias("CmdHelp"), new CommandAlias("Ranks", "ranks"),
@@ -41,7 +41,7 @@ namespace PattyKaki.Commands.Info
             } else {
                 if (CmdCommands.ListCommands(p, message)) return;
                 if (ParseCommand(p, message) || ParseBlock(p, message) || ParsePlugin(p, message)) return;
-                p.Message("Could not find command, plugin or block specified.");
+                p.Message("Could not find command, plugin, simple plugin, or block specified.");
             }
         }
 
@@ -100,7 +100,7 @@ namespace PattyKaki.Commands.Info
 
         public static void PrintEmote(Player p, char emote) {
             List<string> keywords = new List<string>();
-            foreach (var kvp in EmotesHandler.Keywords) 
+            foreach (KeyValuePair<string, char> kvp in EmotesHandler.Keywords) 
             {
                 if (kvp.Value == emote) keywords.Add("(&S" + kvp.Key + ")");
             }
@@ -136,7 +136,7 @@ namespace PattyKaki.Commands.Info
             return true;
         }
 
-        public void DescribePhysics(Player p, string message, BlockID b) {
+        public void DescribePhysics(Player p, string _, BlockID b) {
             BlockProps props = p.IsSuper ? Block.Props[b] : p.level.Props[b];
             
             if (props.IsDoor) {
@@ -217,7 +217,6 @@ namespace PattyKaki.Commands.Info
             pl.Help(p); 
             return true;
         }
-
         public override void Help(Player p) {
             p.Message("...really? Wow. Just...wow.");
         }

@@ -21,9 +21,9 @@ namespace PattyKaki.Commands.CPE
 {
     public class CmdModel : EntityPropertyCmd 
     {
-        public override string name { get { return "Model"; } }
-        public override string type { get { return CommandTypes.Other; } }
-        public override LevelPermission defaultRank { get { return LevelPermission.AdvBuilder; } }
+        public override string Name { get { return "Model"; } }
+        public override string Type { get { return CommandTypes.Other; } }
+        public override LevelPermission DefaultRank { get { return LevelPermission.AdvBuilder; } }
         public override CommandPerm[] ExtraPerms {
             get { return new[] { new CommandPerm(LevelPermission.Operator, "can change the model of others"),
                     new CommandPerm(LevelPermission.Operator, "can change the model of bots") }; }

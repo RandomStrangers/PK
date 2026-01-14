@@ -18,9 +18,9 @@
 
 namespace PattyKaki.Commands.World {
     public sealed class CmdWaypoint : CmdWarp {
-        public override string name { get { return "Waypoint"; } }
-        public override string shortcut { get { return "wp"; } }
-        public override LevelPermission defaultRank { get { return LevelPermission.Builder; } }
+        public override string Name { get { return "Waypoint"; } }
+        public override string Shortcut { get { return "wp"; } }
+        public override LevelPermission DefaultRank { get { return LevelPermission.Builder; } }
         public override CommandPerm[] ExtraPerms { get { return null; } }
                 
         public override void Use(Player p, string message, CommandData data) {

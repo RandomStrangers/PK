@@ -20,9 +20,9 @@ namespace PattyKaki.Commands.World
 {
     public abstract class PermissionCmd : Command2
     {
-        public override string type { get { return CommandTypes.World; } }
-        public override bool museumUsable { get { return false; } }
-        public override LevelPermission defaultRank { get { return LevelPermission.Operator; } }
+        public override string Type { get { return CommandTypes.World; } }
+        public override bool MuseumUsable { get { return false; } }
+        public override LevelPermission DefaultRank { get { return LevelPermission.Operator; } }
         
         public static bool Do(Player p, string[] args, int offset, bool max,
                               AccessController access, CommandData data, Level lvl) {
@@ -101,8 +101,7 @@ namespace PattyKaki.Commands.World
         }
 
         public void UpdatePerms(Player p, string map, CommandData data, string[] args, bool max) {
-            Level lvl;
-            LevelConfig cfg = LevelInfo.GetConfig(map, out lvl);
+            LevelConfig cfg = LevelInfo.GetConfig(map, out Level lvl);
             int offset = args.Length == 1 ? 0 : 1;
             
             AccessController access;
@@ -118,21 +117,21 @@ namespace PattyKaki.Commands.World
         	string action = IsVisit ? "visit" : "Build on";
         	string verb   = IsVisit ? "visit" : "Build";
 
-            p.Message("&T/{0} [level] [rank]", name);
+            p.Message("&T/{0} [level] [rank]", Name);
             p.Message("&HSets the lowest rank able to {0} the given level.", action);
-            p.Message("&T/{0} -max [level] [Rank]", name);
+            p.Message("&T/{0} -max [level] [Rank]", Name);
             p.Message("&HSets the highest rank able to {0} the given level.", action);
-            p.Message("&T/{0} [level] +[name]", name);
+            p.Message("&T/{0} [level] +[name]", Name);
             p.Message("&HAllows [name] to {0}, even if their rank cannot.", verb);
-            p.Message("&T/{0} [level] -[name]", name);
+            p.Message("&T/{0} [level] -[name]", Name);
             p.Message("&HPrevents [name] from {0}ing, even if their rank can.", verb);
         }
     }
     
     public sealed class CmdPermissionBuild : LevelPermissionCmd
     {
-        public override string name { get { return "PerBuild"; } }
-        public override string shortcut { get { return "WBuild"; } }
+        public override string Name { get { return "PerBuild"; } }
+        public override string Shortcut { get { return "WBuild"; } }
         public override bool IsVisit { get { return false; } }
         
         public override CommandAlias[] Aliases {
@@ -145,8 +144,8 @@ namespace PattyKaki.Commands.World
     
     public sealed class CmdPermissionVisit : LevelPermissionCmd
     {
-        public override string name { get { return "PerVisit"; } }
-        public override string shortcut { get { return "WAccess"; } }
+        public override string Name { get { return "PerVisit"; } }
+        public override string Shortcut { get { return "WAccess"; } }
         public override bool IsVisit { get { return true; } }
         
         public override CommandAlias[] Aliases {

@@ -18,24 +18,31 @@
 using PattyKaki.Drawing.Ops;
 using BlockID = System.UInt16;
 
-namespace PattyKaki.Commands.Building {
-    public sealed class CmdHollow : DrawCmd {
-        public override string name { get { return "Hollow"; } }
+namespace PattyKaki.Commands.Building
+{
+    public sealed class CmdHollow : DrawCmd
+    {
+        public override string Name { get { return "Hollow"; } }
 
-        public override DrawOp GetDrawOp(DrawArgs dArgs) {
+        public override DrawOp GetDrawOp(DrawArgs dArgs)
+        {
             BlockID skip = Block.Invalid;
-            if (dArgs.Message.Length > 0) {
+            if (dArgs.Message.Length > 0)
+            {
                 if (!CommandParser.GetBlock(dArgs.Player, dArgs.Message, out skip)) return null;
             }
-            
-            HollowDrawOp op = new HollowDrawOp();
-            op.Skip = skip;
+
+            HollowDrawOp op = new HollowDrawOp
+            {
+                Skip = skip
+            };
             return op;
         }
 
         public override void GetBrush(DrawArgs dArgs) { dArgs.BrushName = "Normal"; }
-        
-        public override void Help(Player p) {
+
+        public override void Help(Player p)
+        {
             p.Message("&T/Hollow");
             p.Message("&HHollows out an area without flooding it");
             p.Message("&T/Hollow [block]");

@@ -21,27 +21,27 @@ using PattyKaki.SQL;
 
 namespace PattyKaki.Commands.Maintenance {
     public sealed class CmdServer : Command2 {
-        public override string name { get { return "Server"; } }
-        public override string shortcut { get { return "Serv"; } }
-        public override string type { get { return CommandTypes.Moderation; } }
-        public override LevelPermission defaultRank { get { return LevelPermission.Admin; } }
+        public override string Name { get { return "Server"; } }
+        public override string Shortcut { get { return "Serv"; } }
+        public override string Type { get { return CommandTypes.Moderation; } }
+        public override LevelPermission DefaultRank { get { return LevelPermission.Admin; } }
 
         public override void Use(Player p, string message, CommandData data) {
             string[] args = message.SplitSpaces();
             switch (args[0].ToLower()) {
-                    case "public": SetPublic(p, args); break;
-                    case "private": SetPrivate(p, args); break;
-                    case "reload": DoReload(p, args); break;
+                    case "public": SetPublic(p); break;
+                    case "private": SetPrivate(p); break;
+                    case "reload": DoReload(p); break;
                     case "backup": DoBackup(p, args); break;
                     case "restore": DoRestore(p); break;
                     case "import": DoImport(p, args); break;
-                    case "update" : Find("Updater").Use(p, message); break;
+                    case "update" : Find("Update").Use(p, message); break;
                     case "upgradeblockdb": DoBlockDBUpgrade(p, args); break;
                     default: Help(p); break;
             }
         }
 
-        public void SetPublic(Player p, string[] args) {
+        public void SetPublic(Player p) {
             Server.Config.Public = true;
             p.Message("Server is now public!");
             if (!p.IsPK)
@@ -51,7 +51,7 @@ namespace PattyKaki.Commands.Maintenance {
             SrvProperties.Save();
         }
 
-        public void SetPrivate(Player p, string[] args) {
+        public void SetPrivate(Player p) {
             Server.Config.Public = false; 
             p.Message("Server is now private!");
             if (!p.IsPK)
@@ -61,7 +61,7 @@ namespace PattyKaki.Commands.Maintenance {
             SrvProperties.Save();
         }
 
-        public void DoReload(Player p, string[] args) {
+        public void DoReload(Player p) {
             p.Message("Reloading settings...");
             Server.LoadAllSettings();
             Server.LoadPlayerLists();

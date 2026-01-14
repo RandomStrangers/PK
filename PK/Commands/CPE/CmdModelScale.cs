@@ -21,9 +21,9 @@ namespace PattyKaki.Commands.CPE
 {
     public class CmdModelScale : EntityPropertyCmd 
     {
-        public override string name { get { return "ModelScale"; } }
-        public override string type { get { return CommandTypes.Other; } }
-        public override LevelPermission defaultRank { get { return LevelPermission.AdvBuilder; } }
+        public override string Name { get { return "ModelScale"; } }
+        public override string Type { get { return CommandTypes.Other; } }
+        public override LevelPermission DefaultRank { get { return LevelPermission.AdvBuilder; } }
         public override CommandPerm[] ExtraPerms {
             get { return new[] { new CommandPerm(LevelPermission.Operator, "can change the model scale of others"),
                     new CommandPerm(LevelPermission.Operator, "can change the model scale of bots") }; }
@@ -34,8 +34,7 @@ namespace PattyKaki.Commands.CPE
         }
 
         public override void SetBotData(Player p, PlayerBot bot, string args) {
-            string axis;
-            if (!ParseArgs(p, bot, args, out axis)) return;
+            if (!ParseArgs(p, bot, args, out string axis)) return;
             bot.UpdateModel(bot.Model);
             
             p.Message("You changed the {1} scale of bot {0}", bot.ColoredName, axis);
@@ -43,8 +42,7 @@ namespace PattyKaki.Commands.CPE
         }
 
         public override void SetOnlineData(Player p, Player who, string args) {
-            string axis;
-            if (!ParseArgs(p, who, args, out axis)) return;
+            if (!ParseArgs(p, who, args, out string axis)) return;
             who.UpdateModel(who.Model);
 
             if (p != who) {

@@ -21,8 +21,8 @@ namespace PattyKaki.Commands.Info
 {
     public sealed class CmdOpRules : Command2 
     {
-        public override string name { get { return "OpRules"; } }
-        public override string type { get { return CommandTypes.Information; } }
+        public override string Name { get { return "OpRules"; } }
+        public override string Type { get { return CommandTypes.Information; } }
         public override bool UseableWhenFrozen { get { return true; } }
         
         public override void Use(Player p, string message, CommandData data) {

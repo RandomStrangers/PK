@@ -19,9 +19,9 @@ using System;
 
 namespace PattyKaki.Commands.Maintenance {
     public sealed class CmdLimit : Command2 {        
-        public override string name { get { return "Limit"; } }
-        public override string type { get { return CommandTypes.Moderation; } }
-        public override LevelPermission defaultRank { get { return LevelPermission.Admin; } }
+        public override string Name { get { return "Limit"; } }
+        public override string Type { get { return CommandTypes.Moderation; } }
+        public override LevelPermission DefaultRank { get { return LevelPermission.Admin; } }
 
         public override void Use(Player p, string message, CommandData data) {
             string[] args = message.SplitSpaces();

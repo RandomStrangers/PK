@@ -22,9 +22,9 @@ namespace PattyKaki.Commands.Eco
 {
     public sealed class CmdBalance : Command2 
     {
-        public override string name { get { return "Balance"; } }
-        public override string shortcut { get { return "Money"; } }
-        public override string type { get { return CommandTypes.Economy; } }
+        public override string Name { get { return "Balance"; } }
+        public override string Shortcut { get { return "Money"; } }
+        public override string Type { get { return CommandTypes.Economy; } }
         
         public override void Use(Player p, string message, CommandData data) {
             if (CheckSuper(p, message, "player name")) return;

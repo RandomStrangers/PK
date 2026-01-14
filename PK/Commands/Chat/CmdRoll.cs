@@ -21,7 +21,7 @@ namespace PattyKaki.Commands.Chatting
 {    
     public sealed class CmdRoll : MessageCmd 
     {
-        public override string name { get { return "Roll"; } }
+        public override string Name { get { return "Roll"; } }
         public static volatile Random rng;
         public static object rngLock = new object();
 

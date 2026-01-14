@@ -22,9 +22,9 @@ namespace PattyKaki.Modules.Moderation.Notes
 {
     public class CmdNotes : Command2
     {
-        public override string name { get { return "Notes"; } }
-        public override string type { get { return CommandTypes.Moderation; } }
-        public override LevelPermission defaultRank { get { return LevelPermission.Operator; } }
+        public override string Name { get { return "Notes"; } }
+        public override string Type { get { return CommandTypes.Moderation; } }
+        public override LevelPermission DefaultRank { get { return LevelPermission.Operator; } }
 
         public override void Use(Player p, string message, CommandData data) {
             string[] args = message.SplitSpaces();
@@ -85,7 +85,7 @@ namespace PattyKaki.Modules.Moderation.Notes
             if (arg.CaselessEq("K")) return "Kicked";
             if (arg.CaselessEq("M")) return "Muted";
             if (arg.CaselessEq("B")) return "Banned";
-            if (arg.CaselessEq("J")) return "Jailed";
+            if (arg.CaselessEq("J")) return "Frozen";
             if (arg.CaselessEq("F")) return "Frozen";
             if (arg.CaselessEq("T")) return "Temp-Banned";
             return arg;
@@ -99,10 +99,10 @@ namespace PattyKaki.Modules.Moderation.Notes
 
     public sealed class CmdMyNotes : CmdNotes
     {
-        public override string name { get { return "MyNotes"; } }
-        public override string type { get { return CommandTypes.Other; } }
+        public override string Name { get { return "MyNotes"; } }
+        public override string Type { get { return CommandTypes.Other; } }
         public override bool SuperUseable { get { return false; } }
-        public override LevelPermission defaultRank { get { return LevelPermission.Guest; } }
+        public override LevelPermission DefaultRank { get { return LevelPermission.Guest; } }
         
         public override void Use(Player p, string message, CommandData data) {
             PrintNotes(p, "MyNotes", p.name, message);

@@ -17,10 +17,10 @@
  */
 namespace PattyKaki.Commands.World {
     public sealed class CmdPhysics : Command2 {
-        public override string name { get { return "Physics"; } }
-        public override string type { get { return CommandTypes.World; } }
-        public override bool museumUsable { get { return false; } }
-        public override LevelPermission defaultRank { get { return LevelPermission.Operator; } }
+        public override string Name { get { return "Physics"; } }
+        public override string Type { get { return CommandTypes.World; } }
+        public override bool MuseumUsable { get { return false; } }
+        public override LevelPermission DefaultRank { get { return LevelPermission.Operator; } }
         public override CommandAlias[] Aliases {
             get { return new CommandAlias[] { new CommandAlias("KillPhysics", "kill") }; }
         }
@@ -50,16 +50,16 @@ namespace PattyKaki.Commands.World {
         public void ShowPhysics(Player p) {
             Level[] loaded = LevelInfo.Loaded.Items;
             foreach (Level lvl in loaded) {
-                if (lvl.physics == 0) continue;
+                if (lvl.Physics == 0) continue;
                 p.Message("{0} &Shas physics at &b{1}&S. &cChecks: {2}; Updates: {3}", 
-                               lvl.ColoredName, lvl.physics, lvl.lastCheck, lvl.lastUpdate);
+                               lvl.ColoredName, lvl.Physics, lvl.lastCheck, lvl.lastUpdate);
             }
         }
 
         public void KillPhysics(Player p) {
             Level[] levels = LevelInfo.Loaded.Items;
             foreach (Level lvl in levels) {
-                if (lvl.physics == 0) continue;
+                if (lvl.Physics == 0) continue;
                 SetPhysics(lvl, 0);
             }
             p.Message("Physics killed on all levels.");

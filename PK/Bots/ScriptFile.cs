@@ -18,17 +18,22 @@
 using System.IO;
 using PattyKaki.Commands;
 
-namespace PattyKaki.Bots {
-    public static class ScriptFile {
-        
-        public static bool Parse(Player p, PlayerBot bot, string ai) {
+namespace PattyKaki.Bots
+{
+    public static class ScriptFile
+    {
+
+        public static bool Parse(Player p, PlayerBot bot, string ai)
+        {
             string path = "bots/" + ai;
-            if (!File.Exists(path)) {
+            if (!File.Exists(path))
+            {
                 p.Message("Could not find specified AI."); return false;
             }
 
             string[] instructions = File.ReadAllLines(path);
-            if (instructions.Length == 0) {
+            if (instructions.Length == 0)
+            {
                 p.Message("No instructions in the AI."); return false;
             }
 
@@ -36,43 +41,54 @@ namespace PattyKaki.Bots {
             bot.Instructions.Clear();
             bot.cur = 0; bot.countdown = 0; bot.movementSpeed = 3;
 
-            foreach (string line in instructions) {
+            foreach (string line in instructions)
+            {
                 if (line.IsCommentLine()) continue;
                 string[] args = line.SplitSpaces();
 
-                try {
+                try
+                {
                     BotInstruction ins = BotInstruction.Find(args[0]);
                     if (ins == null) continue;
-                    
+
                     InstructionData data = ins.Parse(args);
                     data.Name = args[0];
                     bot.Instructions.Add(data);
-                } catch {
+                }
+                catch
+                {
                     p.Message("AI file corrupt."); return false;
                 }
             }
             return true;
         }
-        
-        public static string Append(Player p, string ai, string cmd, string[] args) {
-            using (StreamWriter w = new StreamWriter("bots/" + ai, true)) {
-                if (cmd.Length == 0)      cmd = "walk";
+
+        public static string Append(Player p, string ai, string cmd, string[] args)
+        {
+            using (StreamWriter w = new StreamWriter("bots/" + ai, true))
+            {
+                if (cmd.Length == 0) cmd = "walk";
                 if (cmd.CaselessEq("tp")) cmd = "teleport";
 
                 BotInstruction ins = BotInstruction.Find(cmd);
-                if (ins == null) {
+                if (ins == null)
+                {
                     p.Message("Could not find instruction \"" + cmd + "\""); return null;
                 }
-                
+
                 CommandExtraPerms killPerms = CommandExtraPerms.Find("BotSet", 1);
-                if (ins.Name.CaselessEq("kill") && !killPerms.UsableBy(p)) {
-                    killPerms.MessageCannotUse(p); 
+                if (ins.Name.CaselessEq("kill") && !killPerms.UsableBy(p))
+                {
+                    killPerms.MessageCannotUse(p);
                     return null;
                 }
-                
-                try {
+
+                try
+                {
                     ins.Output(p, args, w);
-                } catch {
+                }
+                catch
+                {
                     p.Message("Invalid arguments given for instruction " + ins.Name);
                     return null;
                 }

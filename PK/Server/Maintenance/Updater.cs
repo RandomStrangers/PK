@@ -16,7 +16,6 @@
     permissions and limitations under the Licenses.
  */
 using System;
-using System.IO;
 using System.Net;
 using PattyKaki.Network;
 using PattyKaki.Tasks;
@@ -30,7 +29,7 @@ namespace PattyKaki
         public static string SourceURL = "https://github.com/RandomStrangers/PK";
         public const string UploadsURL = "https://github.com/RandomStrangers/PK/tree/master/Uploads";
         public const string UpdatesURL = "https://github.com/RandomStrangers/PK/raw/master/Uploads/";
-        public static string WikiURL = "https://github.com/UnknownShadow200/MCGalaxy";
+        public static string WikiURL = "https://github.com/ClassiCube/MCGalaxy";
         public const string CurrentVersionURL = UpdatesURL + "current.txt";
         public const string URL = UpdatesURL + "PattyKaki.exe";
 
@@ -55,9 +54,9 @@ namespace PattyKaki
                 {
                     Logger.Log(LogType.SystemActivity, "No update found!");
                 }
-                else if (NewerVersionDetected != null)
+                else
                 {
-                    NewerVersionDetected(null, EventArgs.Empty);
+                    NewerVersionDetected?.Invoke(null, EventArgs.Empty);
                 }
             }
             catch (Exception ex)
@@ -93,8 +92,8 @@ namespace PattyKaki
 
                 Player[] players = PlayerInfo.Online.Items;
                 foreach (Player pl in players) pl.SaveStats();
-                AtomicIO.TryMove("PattyKaki.exe", "prev_PattyKaki.exe");
-                File.Move("PattyKaki.update", "PattyKaki.exe");
+                FileIO.TryMove("PattyKaki.exe", "prev_PattyKaki.exe");
+                FileIO.TryMove("PattyKaki.update", "PattyKaki.exe");
                 Server.Stop(true, "Updating server.");
             }
             catch (Exception ex)
@@ -104,7 +103,7 @@ namespace PattyKaki
         }
         static void DeleteFiles(params string[] paths)
         {
-            foreach (string path in paths) { AtomicIO.TryDelete(path); }
+            foreach (string path in paths) { FileIO.TryDelete(path); }
         }
     }
 }

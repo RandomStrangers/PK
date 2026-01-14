@@ -22,9 +22,9 @@ using PattyKaki.Network;
 
 namespace PattyKaki.Commands.World {
     public sealed class CmdImport : Command2 {
-        public override string name { get { return "Import"; } }
-        public override string type { get { return CommandTypes.World; } }
-        public override LevelPermission defaultRank { get { return LevelPermission.Operator; } }
+        public override string Name { get { return "Import"; } }
+        public override string Type { get { return CommandTypes.World; } }
+        public override LevelPermission DefaultRank { get { return LevelPermission.Operator; } }
 
         public override void Use(Player p, string message, CommandData data) {
             if (message.Length == 0) { Help(p); return; }

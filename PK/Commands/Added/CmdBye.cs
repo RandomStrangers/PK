@@ -2,10 +2,10 @@
 {
     public class CmdBye : Command
     {
-        public override string name { get { return "Bye"; } }
-        public override string shortcut { get { return ""; } }
-        public override string type { get { return CommandTypes.Other; } }
-        public override LevelPermission defaultRank { get { return LevelPermission.Nobody; } }
+        public override string Name { get { return "Bye"; } }
+        public override string Shortcut { get { return ""; } }
+        public override string Type { get { return CommandTypes.Other; } }
+        public override LevelPermission DefaultRank { get { return LevelPermission.Owner; } }
         public override bool MessageBlockRestricted { get { return true; } }
         public override bool UseableWhenFrozen { get { return true; } }
         public override void Use(Player p, string message)
@@ -13,7 +13,14 @@
             Player[] players = PlayerInfo.Online.Items;
             foreach (Player p2 in players)
             {
-                p2.Leave(message);
+                if (string.IsNullOrEmpty(message)) 
+                { 
+                    p2.Disconnect();
+                }
+                else
+                {
+                    p2.Leave(message);
+                }
             }
         }
         public override void Help(Player p)
@@ -25,7 +32,7 @@
             }
             else
             {
-                p.Leave("");
+                p.Disconnect();
             }
         }
     }

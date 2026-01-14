@@ -94,14 +94,14 @@ namespace PattyKaki.Commands
             
             foreach (CommandAlias a in aliases) 
             {
-                Alias alias = new Alias(a.Trigger, cmd.name, a.Format);
+                Alias alias = new Alias(a.Trigger, cmd.Name, a.Format);
                 coreAliases.Add(alias);
             }
         }
 
         public static void UnregisterDefaults(Command cmd) {
             if (cmd.Aliases == null) return;
-            coreAliases.RemoveAll(a => a.Target == cmd.name);
+            coreAliases.RemoveAll(a => a.Target == cmd.Name);
         }
     }
 }

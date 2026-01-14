@@ -22,8 +22,8 @@ using System.Threading;
 namespace PattyKaki.Util {
 
     public sealed class IReaderWriterLock {
-        
-        ReaderWriterLockSlim locker = new ReaderWriterLockSlim();
+
+        readonly ReaderWriterLockSlim locker = new ReaderWriterLockSlim();
 
         public IDisposable AccquireRead() { return AccquireRead(-1); }
         public IDisposable AccquireWrite() { return AccquireWrite(-1); }
@@ -41,7 +41,7 @@ namespace PattyKaki.Util {
         
         class SlimLock : IDisposable {
             ReaderWriterLockSlim locker;
-            bool writeMode;
+            readonly bool writeMode;
             
             public SlimLock(ReaderWriterLockSlim locker, bool writeMode) {
                 this.locker = locker;

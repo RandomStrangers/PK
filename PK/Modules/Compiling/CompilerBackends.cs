@@ -39,10 +39,12 @@ namespace PattyKaki.Modules.Compiling
     public static class ICodeDomCompiler
     {   
         public static CompilerParameters PrepareInput(string[] srcPaths, string dstPath, string commentPrefix) {
-            CompilerParameters args = new CompilerParameters();
-            args.GenerateExecutable      = false;
-            args.IncludeDebugInformation = true;
-            args.OutputAssembly          = dstPath;
+            CompilerParameters args = new CompilerParameters
+            {
+                GenerateExecutable = false,
+                IncludeDebugInformation = true,
+                OutputAssembly = dstPath
+            };
 
             List<string> referenced = ICompiler.ProcessInput(srcPaths, commentPrefix);
             foreach (string assembly in referenced)
@@ -70,13 +72,15 @@ namespace PattyKaki.Modules.Compiling
 
             foreach (CompilerError error in results.Errors)
             {
-                ICompilerError ce = new ICompilerError();
-                ce.Line        = error.Line;
-                ce.Column      = error.Column;
-                ce.ErrorNumber = error.ErrorNumber;
-                ce.ErrorText   = error.ErrorText;
-                ce.IsWarning   = error.IsWarning;
-                ce.FileName    = error.FileName;
+                ICompilerError ce = new ICompilerError
+                {
+                    Line = error.Line,
+                    Column = error.Column,
+                    ErrorNumber = error.ErrorNumber,
+                    ErrorText = error.ErrorText,
+                    IsWarning = error.IsWarning,
+                    FileName = error.FileName
+                };
 
                 errors.Add(ce);
             }

@@ -22,10 +22,10 @@ using PattyKaki.SQL;
 
 namespace PattyKaki.Commands.Maintenance {
     public sealed class CmdPlayerEdit : Command2 {
-        public override string name { get { return "PlayerEdit"; } }
-        public override string shortcut { get { return "pe"; } }
-        public override string type { get { return CommandTypes.Moderation; } }
-        public override LevelPermission defaultRank { get { return LevelPermission.Admin; } }
+        public override string Name { get { return "PlayerEdit"; } }
+        public override string Shortcut { get { return "pe"; } }
+        public override string Type { get { return CommandTypes.Moderation; } }
+        public override LevelPermission DefaultRank { get { return LevelPermission.Admin; } }
         public override CommandAlias[] Aliases {
             get { return new [] { new CommandAlias("SetInfo") }; }
         }

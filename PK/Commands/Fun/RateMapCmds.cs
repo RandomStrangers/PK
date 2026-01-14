@@ -21,8 +21,8 @@ namespace PattyKaki.Commands.Fun
 {
     public class CmdLike : Command2 
     {
-        public override string name { get { return "Like"; } }
-        public override string type { get { return CommandTypes.Games; } }
+        public override string Name { get { return "Like"; } }
+        public override string Type { get { return CommandTypes.Games; } }
         public override bool SuperUseable { get { return false; } }
         
         public override void Use(Player p, string message, CommandData data) { RateMap(p, true); }
@@ -67,7 +67,7 @@ namespace PattyKaki.Commands.Fun
     }
     
     public sealed class CmdDislike : CmdLike {
-        public override string name { get { return "Dislike"; } }        
+        public override string Name { get { return "Dislike"; } }        
         public override void Use(Player p, string message, CommandData data) { RateMap(p, false); }
         
         public override void Help(Player p) {

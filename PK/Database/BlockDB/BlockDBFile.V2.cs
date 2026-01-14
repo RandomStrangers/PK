@@ -41,7 +41,7 @@ namespace PattyKaki.DB
             
             uint lo = (uint)ReadInt32(data, 0);
             uint hi = (uint)ReadInt32(data, 4);
-            return (long)((ulong)lo | ((ulong)hi << 32));
+            return (long)(lo | ((ulong)hi << 32));
         }
         
         public unsafe override int ReadForward(Stream s, byte[] bulk, BlockDBEntry* entriesPtr) {

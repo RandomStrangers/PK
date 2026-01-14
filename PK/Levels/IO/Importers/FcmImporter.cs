@@ -35,13 +35,14 @@ namespace PattyKaki.Levels.IO {
         public override Level Read(Stream src, string name, bool metadata) {
             BinaryReader reader = new BinaryReader(src);
             Vec3U16 dims = ReadHeader(reader);
-            Level lvl = new Level(name, dims.X, dims.Y, dims.Z);
-
-            lvl.spawnx = (ushort)(reader.ReadInt32() / 32);
-            lvl.spawny = (ushort)(reader.ReadInt32() / 32);
-            lvl.spawnz = (ushort)(reader.ReadInt32() / 32);
-            lvl.rotx = reader.ReadByte();
-            lvl.roty = reader.ReadByte();
+            Level lvl = new Level(name, dims.X, dims.Y, dims.Z)
+            {
+                spawnx = (ushort)(reader.ReadInt32() / 32),
+                spawny = (ushort)(reader.ReadInt32() / 32),
+                spawnz = (ushort)(reader.ReadInt32() / 32),
+                rotx = reader.ReadByte(),
+                roty = reader.ReadByte()
+            };
 
             reader.ReadUInt32();  // date modified
             reader.ReadUInt32();  // date created

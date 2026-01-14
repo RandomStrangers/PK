@@ -19,8 +19,8 @@ using PattyKaki.Games;
 
 namespace PattyKaki.Commands.Fun {
     public abstract class RoundsGameCmd : Command2 {
-        public override string type { get { return CommandTypes.Games; } }
-        public override bool museumUsable { get { return false; } }
+        public override string Type { get { return CommandTypes.Games; } }
+        public override bool MuseumUsable { get { return false; } }
         public override bool SuperUseable { get { return false; } }
         public abstract RoundsGame Game { get; }
         

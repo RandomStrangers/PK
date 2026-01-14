@@ -21,10 +21,10 @@ namespace PattyKaki.Commands.CPE
 {    
     public sealed class CmdCustomColors : Command2 
     {        
-        public override string name { get { return "CustomColors"; } }
-        public override string shortcut { get { return "ccols"; } }
-        public override string type { get { return CommandTypes.Chat; } }
-        public override LevelPermission defaultRank { get { return LevelPermission.Admin; } }
+        public override string Name { get { return "CustomColors"; } }
+        public override string Shortcut { get { return "ccols"; } }
+        public override string Type { get { return CommandTypes.Chat; } }
+        public override LevelPermission DefaultRank { get { return LevelPermission.Admin; } }
 
         public override void Use(Player p, string message, CommandData data) {
             string[] args = message.SplitSpaces();

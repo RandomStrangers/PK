@@ -22,10 +22,10 @@ namespace PattyKaki.Commands.Eco
 {
     public abstract class MoneyCmd : Command2 
     {
-        public override string type { get { return CommandTypes.Economy; } }
+        public override string Type { get { return CommandTypes.Economy; } }
 
         public bool ParseArgs(Player p, string message, ref bool all, 
-                                 string action, out EcoTransaction data) {
+                                 string _, out EcoTransaction data) {
             data = new EcoTransaction();
             string[] args = message.SplitSpaces(3);
             if (args.Length < 2) { Help(p); return false; }

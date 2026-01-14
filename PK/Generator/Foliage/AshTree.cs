@@ -28,7 +28,7 @@ namespace PattyKaki.Generator.Foliage {
         public const int maxExtent = 5, maxBranchHeight = 10, maxCluster = 3;
         public List<Vec3S32> branch = new List<Vec3S32>();
         
-        public override int EstimateBlocksAffected() { return (int)height * height * height; }
+        public override int EstimateBlocksAffected() { return height * height * height; }
                 
         public override int DefaultSize(Random rnd) { return rnd.Next(5, 10); }
         

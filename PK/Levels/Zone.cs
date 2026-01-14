@@ -97,8 +97,8 @@ namespace PattyKaki {
         public bool Shows { get { return Config.ShowAlpha != 0 && Config.ShowColor.Length > 0; } }
         public void Show(Player p) {
             if (!p.Supports(CpeExt.SelectionCuboid) || !Shows) return;
-            
-            ColorDesc col; Colors.TryParseHex(Config.ShowColor, out col);
+
+            Colors.TryParseHex(Config.ShowColor, out ColorDesc col);
             Vec3U16 min = new Vec3U16(MinX, MinY, MinZ);
             Vec3U16 max = new Vec3U16((ushort)(MaxX + 1), (ushort)(MaxY + 1), (ushort)(MaxZ + 1));
             p.Send(Packet.MakeSelection(ID, Config.Name, min, max,

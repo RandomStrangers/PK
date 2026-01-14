@@ -51,15 +51,20 @@ namespace PattyKaki.Drawing.Transforms
         public override Transform Construct(Player p, string message) {
             string[] args = message.SplitSpaces();
             if (message.Length == 0 || args.Length > 4) { p.MessageLines(Help); return null; }
-            int mul = 0, div = 0;
+
             ScaleTransform scaler = new ScaleTransform();
-            
-            if (args.Length <= 2) {
+
+            int mul;
+            int div;
+            if (args.Length <= 2)
+            {
                 if (!ParseFraction(p, args[0], "Scale", out mul, out div)) return null;
                 scaler.XMul = mul; scaler.XDiv = div;
                 scaler.YMul = mul; scaler.YDiv = div;
                 scaler.ZMul = mul; scaler.ZDiv = div;
-            } else {
+            }
+            else
+            {
                 if (!ParseFraction(p, args[0], "X scale", out mul, out div)) return null;
                 scaler.XMul = mul; scaler.XDiv = div;
                 if (!ParseFraction(p, args[1], "Y scale", out mul, out div)) return null;

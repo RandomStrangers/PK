@@ -90,8 +90,10 @@ namespace PattyKaki.DB
         }
         
         void AddNextNode() {
-            BlockDBCacheNode newHead = new BlockDBCacheNode(nextSize);
-            newHead.Prev = Head;
+            BlockDBCacheNode newHead = new BlockDBCacheNode(nextSize)
+            {
+                Prev = Head
+            };
             if (Head != null) Head.Next = newHead;
             Head = newHead;
             if (Tail == null) Tail = Head;

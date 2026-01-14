@@ -48,8 +48,7 @@ namespace PattyKaki.Network {
         /// <remarks> Returns null if the exception did not contain a readable WebResponse </remarks>
         public static string GetErrorResponse(Exception ex) {
             try {
-                WebException webEx = ex as WebException;
-                if (webEx != null && webEx.Response != null)
+                if (ex is WebException webEx && webEx.Response != null)
                     return GetResponseText(webEx.Response);
             } catch {  }
             return null;
@@ -59,8 +58,7 @@ namespace PattyKaki.Network {
         /// <remarks> Does nothing if there is no WebResponse </remarks>
         public static void DisposeErrorResponse(Exception ex) {
             try {
-                WebException webEx = ex as WebException;
-                if (webEx != null && webEx.Response != null) webEx.Response.Close();
+                if (ex is WebException webEx && webEx.Response != null) webEx.Response.Close();
             } catch { }
         }
         
@@ -75,7 +73,7 @@ namespace PattyKaki.Network {
         }
         
         static IPEndPoint BindIPEndPointCallback(ServicePoint servicePoint, IPEndPoint remoteEP, int retryCount) {
-            IPAddress localIP = null;
+            IPAddress localIP;
             if (Server.Listener.IP != null) {
                 localIP = Server.Listener.IP;
             } else if (!IPAddress.TryParse(Server.Config.ListenIP, out localIP)) {
@@ -132,21 +130,19 @@ namespace PattyKaki.Network {
         /// <summary> Prefixes a URL by http:// if needed, and converts dropbox webpages to direct links. </summary>
         /// <remarks> Ensures URL is a valid http/https URI. </remarks>
         public static Uri GetUrl(Player p, ref string url) {
-            Uri uri;
             if (!CheckHttpOrHttps(p, url)) return null;
             FilterURL(ref url);
             
-            if (!Uri.TryCreate(url, UriKind.Absolute, out uri)) {
+            if (!Uri.TryCreate(url, UriKind.Absolute, out Uri uri)) {
                 p.Message("&W{0} is not a valid URL.", url); return null;
             }
             return uri;
         }
         
         static bool CheckHttpOrHttps(Player p, string url) {
-            Uri uri;
             // only check valid URLs here
             if (!url.Contains("://")) return true;
-            if (!Uri.TryCreate(url, UriKind.Absolute, out uri)) return true;
+            if (!Uri.TryCreate(url, UriKind.Absolute, out Uri uri)) return true;
             
             string scheme = uri.Scheme;
             if (scheme.CaselessEq("http") || scheme.CaselessEq("https")) return true;

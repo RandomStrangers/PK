@@ -15,17 +15,18 @@
     or implied. See the Licenses for the specific language governing
     permissions and limitations under the Licenses.
 */
-namespace PattyKaki.Commands.Chatting 
+namespace PattyKaki.Commands.Chatting
 {
-    public sealed class CmdEmote : Command2 
+    public sealed class CmdEmote : Command2
     {
-        public override string name { get { return "Emote"; } }
-        public override string shortcut { get { return "<3"; } }
-        public override string type { get { return CommandTypes.Chat; } }
+        public override string Name { get { return "Emote"; } }
+        public override string Shortcut { get { return "<3"; } }
+        public override string Type { get { return CommandTypes.Chat; } }
         public override bool SuperUseable { get { return false; } }
         public override bool UseableWhenFrozen { get { return true; } }
 
-        public override void Use(Player p, string message, CommandData data) {
+        public override void Use(Player p, string message, CommandData data)
+        {
             p.parseEmotes = !p.parseEmotes;
             bool addToList = p.parseEmotes != Server.Config.ParseEmotes;
             if (!addToList) Server.noEmotes.Remove(p.name);
@@ -33,8 +34,9 @@ namespace PattyKaki.Commands.Chatting
             Server.noEmotes.Save();
             p.Message("Emote parsing is {0}.", p.parseEmotes ? "enabled" : "disabled");
         }
-        
-        public override void Help(Player p) {
+
+        public override void Help(Player p)
+        {
             p.Message("&T/Emote");
             p.Message("&HEnables or disables emoticon parsing");
         }

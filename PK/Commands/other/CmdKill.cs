@@ -19,13 +19,13 @@ using PattyKaki.Commands.Chatting;
 
 namespace PattyKaki.Commands.Misc {
     public sealed class CmdKill : Command2 {
-        public override string name { get { return "Kill"; } }
-        public override string type { get { return CommandTypes.Other; } }
-        public override LevelPermission defaultRank { get { return LevelPermission.Operator; } }
+        public override string Name { get { return "Kill"; } }
+        public override string Type { get { return CommandTypes.Other; } }
+        public override LevelPermission DefaultRank { get { return LevelPermission.Operator; } }
 
         public override void Use(Player p, string message, CommandData data) {
             if (message.Length == 0) { Help(p); return; }
-            if (!MessageCmd.CanSpeak(p, name)) return; // do not allow using kill to spam every 2 secs
+            if (!MessageCmd.CanSpeak(p, Name)) return; // do not allow using kill to spam every 2 secs
             
             string[] args = message.SplitSpaces(2);
             Player target = PlayerInfo.FindMatches(p, args[0]);

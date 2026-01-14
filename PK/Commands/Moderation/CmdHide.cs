@@ -19,9 +19,9 @@ using PattyKaki.Events.PlayerEvents;
 
 namespace PattyKaki.Commands.Moderation {
     public sealed class CmdHide : Command2 {
-        public override string name { get { return "Hide"; } }
-        public override string type { get { return CommandTypes.Moderation; } }
-        public override LevelPermission defaultRank { get { return LevelPermission.Operator; } }
+        public override string Name { get { return "Hide"; } }
+        public override string Type { get { return CommandTypes.Moderation; } }
+        public override LevelPermission DefaultRank { get { return LevelPermission.Operator; } }
         public override bool SuperUseable { get { return false; } }
         public override bool UpdatesLastCmd { get { return false; } }
         public override CommandPerm[] ExtraPerms {

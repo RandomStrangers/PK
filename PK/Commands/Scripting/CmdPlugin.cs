@@ -21,9 +21,9 @@ namespace PattyKaki.Commands.Scripting
 {
     public sealed class CmdPlugin : Command2 
     {
-        public override string name { get { return "Plugin"; } }
-        public override string type { get { return CommandTypes.Other; } }
-        public override LevelPermission defaultRank { get { return LevelPermission.Owner; } }
+        public override string Name { get { return "Plugin"; } }
+        public override string Type { get { return CommandTypes.Other; } }
+        public override LevelPermission DefaultRank { get { return LevelPermission.Owner; } }
         public override CommandAlias[] Aliases {
             get { return new[] { new CommandAlias("PLoad", "load"), new CommandAlias("PUnload", "unload"),
                     new CommandAlias("Plugins", "list") }; }
@@ -36,7 +36,7 @@ namespace PattyKaki.Commands.Scripting
                 string modifier = args.Length > 1 ? args[1] : "";
                 
                 p.Message("Loaded plugins:");
-                Paginator.Output(p, Plugin.custom, pl => pl.name,
+                Paginator.Output(p, Plugin.custom, pl => pl.Name,
                                  "Plugins", "plugins", modifier);
                 return;
             }
@@ -51,9 +51,11 @@ namespace PattyKaki.Commands.Scripting
             } else if (cmd.CaselessEq("unload")) {
                 UnloadPlugin(p, name);
             } else if (cmd.CaselessEq("create")) {
-                p.Message("Use &T/PCreate &Sinstead");
+                Find("PCreate").Use(p, name);
+                //p.Message("Use &T/PCreate &Sinstead");
             } else if (cmd.CaselessEq("compile")) {
-                p.Message("Use &T/PCompile &Sinstead");
+                Find("PCompile").Use(p, name);
+                //p.Message("Use &T/PCompile &Sinstead");
             } else {
                 Help(p);
             }
@@ -61,7 +63,7 @@ namespace PattyKaki.Commands.Scripting
 
         public static void UnloadPlugin(Player p, string name) {
             Plugin plugin = Matcher.Find(p, name, out int matches, Plugin.custom,
-                                         null, pln => pln.name, "plugins");
+                                         null, pln => pln.Name, "plugins");
 
             if (plugin == null) return;
             ScriptingOperations.UnloadPlugin(p, plugin);

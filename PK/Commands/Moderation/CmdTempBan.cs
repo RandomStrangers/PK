@@ -20,10 +20,10 @@ using PattyKaki.Events;
 
 namespace PattyKaki.Commands.Moderation {
     public sealed class CmdTempBan : Command2 {       
-        public override string name { get { return "TempBan"; } }
-        public override string shortcut { get { return "tb"; } }
-        public override string type { get { return CommandTypes.Moderation; } }
-        public override LevelPermission defaultRank { get { return LevelPermission.AdvBuilder; } }
+        public override string Name { get { return "TempBan"; } }
+        public override string Shortcut { get { return "tb"; } }
+        public override string Type { get { return CommandTypes.Moderation; } }
+        public override LevelPermission DefaultRank { get { return LevelPermission.AdvBuilder; } }
 
         public override void Use(Player p, string message, CommandData data) {
             if (message.Length == 0) { Help(p); return; }

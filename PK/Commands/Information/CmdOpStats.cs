@@ -24,20 +24,23 @@ namespace PattyKaki.Commands.Info
 {
     public sealed class CmdOpStats : Command2 
     {
-        public override string name { get { return "OpStats"; } }
-        public override string type { get { return CommandTypes.Information; } }
+        public override string Name { get { return "OpStats"; } }
+        public override string Type { get { return CommandTypes.Information; } }
         public override bool UseableWhenFrozen { get { return true; } }
         
         public override void Use(Player p, string message, CommandData data) {
             string end = DateTime.Now.ToString(Database.DateFormat);
-            string start = "thismonth", name = null;
+            string start = "thismonth";
             string[] args = message.SplitSpaces();
-            
-            if (message.Length == 0 || ValidTimespan(message.ToLower())) {
+            string name;
+            if (message.Length == 0 || ValidTimespan(message.ToLower()))
+            {
                 if (p.IsSuper) { SuperRequiresArgs(p, "player name"); return; }
                 name = p.name;
                 if (message.Length > 0) start = message.ToLower();
-            } else {
+            }
+            else
+            {
                 name = PlayerInfo.FindMatchesPreferOnline(p, args[0]);
                 if (args.Length > 1 && ValidTimespan(args[1].ToLower()))
                     start = args[1].ToLower();

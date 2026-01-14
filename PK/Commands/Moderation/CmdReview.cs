@@ -23,9 +23,9 @@ using System.Collections.Generic;
 
 namespace PattyKaki.Commands.Moderation {
     public sealed class CmdReview : Command2 {
-        public override string name { get { return "Review"; } }
-        public override string shortcut { get { return "rvw"; } }
-        public override string type { get { return CommandTypes.Moderation; } }
+        public override string Name { get { return "Review"; } }
+        public override string Shortcut { get { return "rvw"; } }
+        public override string Type { get { return CommandTypes.Moderation; } }
         public override CommandPerm[] ExtraPerms {
             get { return new[] {
                     new CommandPerm(LevelPermission.Operator, "can see the review queue"),

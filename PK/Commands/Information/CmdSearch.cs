@@ -20,9 +20,9 @@ namespace PattyKaki.Commands.Info
 {
     public class CmdSearch : Command2 
     {
-        public override string name { get { return "Search"; } }
-        public override string type { get { return CommandTypes.Information; } }
-        public override LevelPermission defaultRank { get { return LevelPermission.Builder; } }
+        public override string Name { get { return "Search"; } }
+        public override string Type { get { return CommandTypes.Information; } }
+        public override LevelPermission DefaultRank { get { return LevelPermission.Builder; } }
         public override bool UseableWhenFrozen { get { return true; } }
         
         public override void Use(Player p, string message, CommandData data) {
@@ -68,10 +68,10 @@ namespace PattyKaki.Commands.Info
         }
 
         public static void SearchCommands(Player p, string keyword, string modifier) {
-            List<string> commands  = Wildcard.Filter(allCmds, keyword, cmd => cmd.name,
+            List<string> commands  = Wildcard.Filter(allCmds, keyword, cmd => cmd.Name,
                                                      null, GetColoredName);
-            List<string> shortcuts = Wildcard.Filter(allCmds, keyword, cmd => cmd.shortcut,
-                                                     cmd => !string.IsNullOrEmpty(cmd.shortcut), 
+            List<string> shortcuts = Wildcard.Filter(allCmds, keyword, cmd => cmd.Shortcut,
+                                                     cmd => !string.IsNullOrEmpty(cmd.Shortcut), 
                                                      GetColoredName);
             
             // Match both names and shortcuts

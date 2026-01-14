@@ -44,12 +44,11 @@ namespace PattyKaki.Scripting
 
         /// <summary> Attempts to compile the given source code files into a .dll </summary>
         /// <param name="p"> Player to send messages to </param>
-        /// <param name="type"> Type of files being compiled (e.g. Plugin, Command) </param>
         /// <param name="srcs"> Path of the source code files </param>
         /// <param name="dst"> Path to the destination .dll </param>
         /// <returns> The compiler results, or null if compilation failed </returns>
         /// <remarks> If dstPath is null, compiles to an in-memory .dll instead. </remarks>
-        public static CompilerResults Compile(Player p, ICompiler_Simple compiler, string type, string[] srcs, string dst)
+        public static CompilerResults Compile(Player p, ICompiler_Simple compiler, string[] srcs, string dst)
         {
             foreach (string path in srcs)
             {
@@ -62,8 +61,8 @@ namespace PattyKaki.Scripting
             CompilerResults results = compiler.Compile(srcs, dst);
             if (!results.Errors.HasErrors)
             {
-                p.Message("{0} compiled successfully from {1}",
-                        type, srcs.Join(file => Path.GetFileName(file)));
+                p.Message("Simple plugin compiled successfully from {0}",
+                         srcs.Join(file => Path.GetFileName(file)));
                 return results;
             }
 

@@ -21,10 +21,10 @@ namespace PattyKaki.Commands.Info
 {
     public sealed class CmdLastCmd : Command2 
     {
-        public override string name { get { return "LastCmd"; } }
-        public override string shortcut { get { return "Last"; } }
-        public override string type { get { return CommandTypes.Information; } }
-        public override LevelPermission defaultRank { get { return LevelPermission.Operator; } }
+        public override string Name { get { return "LastCmd"; } }
+        public override string Shortcut { get { return "Last"; } }
+        public override string Type { get { return CommandTypes.Information; } }
+        public override LevelPermission DefaultRank { get { return LevelPermission.Operator; } }
         public override bool UpdatesLastCmd { get { return false; } }
 
         public override void Use(Player p, string message, CommandData data) {

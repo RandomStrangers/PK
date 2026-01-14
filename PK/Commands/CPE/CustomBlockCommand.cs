@@ -40,14 +40,16 @@ namespace PattyKaki.Commands.CPE
             string[] parts = message.SplitSpaces(4);
             Level lvl = p.IsSuper ? null : p.level;
 
-            BlockDefinitionsArgs args = new BlockDefinitionsArgs();
-            args.global = global;
-            args.level  = lvl;
-            args.cmd    = cmd;
-            args.scope  = global ? "global" : "level";
-            args.defs   = global ? BlockDefinition.GlobalDefs : lvl.CustomBlockDefs;
-            args.curDef = global ? p.gbBlock : p.lbBlock;
-            
+            BlockDefinitionsArgs args = new BlockDefinitionsArgs
+            {
+                global = global,
+                level = lvl,
+                cmd = cmd,
+                scope = global ? "global" : "level",
+                defs = global ? BlockDefinition.GlobalDefs : lvl.CustomBlockDefs,
+                curDef = global ? p.gbBlock : p.lbBlock
+            };
+
             for (int i = 0; i < Math.Min(parts.Length, 3); i++)
                 parts[i] = parts[i].ToLower();
             
@@ -172,9 +174,8 @@ namespace PattyKaki.Commands.CPE
             BlockDefinition[] srcDefs = args.defs;
 
             BlockID dst;
-            int min, max;           
-            if (!CheckRawBlocks(p, parts[1], args, out min, out max, true)) return;
-            
+            if (!CheckRawBlocks(p, parts[1], args, out int min, out int max, true)) return;
+
             if (parts.Length > 2) {
                 if (!CheckBlock(p, parts[2], args, out dst)) return;
                 
@@ -222,9 +223,8 @@ namespace PattyKaki.Commands.CPE
 
         public static void InfoHandler(Player p, string[] parts, BlockDefinitionsArgs args) {
             if (parts.Length == 1) { Help(p, args.cmd); return; }
-            int min, max;
-            if (!CheckRawBlocks(p, parts[1], args, out min, out max)) return;
-            
+            if (!CheckRawBlocks(p, parts[1], args, out int min, out int max)) return;
+
             for (int i = min; i <= max; i++) 
             {
                 DoInfo(p, args, Block.FromRaw((BlockID)i));
@@ -298,9 +298,8 @@ namespace PattyKaki.Commands.CPE
 
         public static void RemoveHandler(Player p, string[] parts, BlockDefinitionsArgs args) {
             if (parts.Length <= 1) { Help(p, args.cmd); return; }
-            
-            int min, max;
-            if (!CheckRawBlocks(p, parts[1], args, out min, out max)) return;
+
+            if (!CheckRawBlocks(p, parts[1], args, out int min, out int max)) return;
             bool changed = false;
             
             for (int i = min; i <= max; i++)
@@ -566,9 +565,8 @@ namespace PattyKaki.Commands.CPE
                 }
                 return;
             }
-            
-            int min, max;
-            if (!CheckRawBlocks(p, parts[1], args, out min, out max)) return;
+
+            if (!CheckRawBlocks(p, parts[1], args, out int min, out int max)) return;
             bool changed = false;
             
             for (int i = min; i <= max; i++) 
@@ -607,9 +605,8 @@ namespace PattyKaki.Commands.CPE
         }
 
         public static BlockRaw GetFallback(Player p, string value) {
-            BlockID block;
-            if (!CommandParser.GetBlock(p, value, out block)) return Block.Invalid;
-            
+            if (!CommandParser.GetBlock(p, value, out ushort block)) return Block.Invalid;
+
             if (block >= Block.Extended) {
                 p.Message("&WCustom blocks cannot be used as fallback blocks.");
                 return Block.Invalid;
@@ -687,7 +684,6 @@ namespace PattyKaki.Commands.CPE
 
         public static bool CheckRaw(Player p, string arg, BlockDefinitionsArgs args,
                              out int raw, bool air = false) {
-            raw = -1;
             int min = (air ? 0 : 1);
             int max = Block.MaxRaw;
             
@@ -708,11 +704,10 @@ namespace PattyKaki.Commands.CPE
 
         public static bool CheckRawBlocks(Player p, string arg, BlockDefinitionsArgs args,
                                    out int min, out int max, bool air = false) {
-            string[] bits;
             bool success;
-            
+
             // Either "[id]" or "[min]-[max]"
-            if (CommandParser.IsRawBlockRange(arg, out bits)) {
+            if (CommandParser.IsRawBlockRange(arg, out string[] bits)) {
                 success = CheckRaw(p, bits[0], args, out min, air) 
                         & CheckRaw(p, bits[1], args, out max, air);                
             } else {
@@ -724,9 +719,8 @@ namespace PattyKaki.Commands.CPE
 
         public static bool CheckBlock(Player p, string arg, BlockDefinitionsArgs args,
                                out BlockID block, bool air = false) {
-            int raw;
-            bool success = CheckRaw(p, arg, args, out raw, air);
-            
+            bool success = CheckRaw(p, arg, args, out int raw, air);
+
             block = Block.FromRaw((BlockID)raw);
             return success;
         }
@@ -900,10 +894,10 @@ namespace PattyKaki.Commands.CPE
     }
     
     public sealed class CmdGlobalBlock : Command2 {
-        public override string name { get { return "GlobalBlock"; } }
-        public override string shortcut { get { return "gb"; } }
-        public override string type { get { return CommandTypes.Building; } }
-        public override LevelPermission defaultRank { get { return LevelPermission.Admin; } }
+        public override string Name { get { return "GlobalBlock"; } }
+        public override string Shortcut { get { return "gb"; } }
+        public override string Type { get { return CommandTypes.Building; } }
+        public override LevelPermission DefaultRank { get { return LevelPermission.Admin; } }
 
         public override void Use(Player p, string message, CommandData data) {
             CustomBlockCommand.Execute(p, message, data, true, "/gb");
@@ -919,10 +913,10 @@ namespace PattyKaki.Commands.CPE
     }
     
     public sealed class CmdLevelBlock : Command2 {
-        public override string name { get { return "LevelBlock"; } }
-        public override string shortcut { get { return "lb"; } }
-        public override string type { get { return CommandTypes.Building; } }
-        public override LevelPermission defaultRank { get { return LevelPermission.Admin; } }
+        public override string Name { get { return "LevelBlock"; } }
+        public override string Shortcut { get { return "lb"; } }
+        public override string Type { get { return CommandTypes.Building; } }
+        public override LevelPermission DefaultRank { get { return LevelPermission.Admin; } }
         public override bool SuperUseable { get { return false; } }
 
         public override void Use(Player p, string message, CommandData data) {

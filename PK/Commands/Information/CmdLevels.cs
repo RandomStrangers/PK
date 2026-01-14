@@ -22,9 +22,9 @@ namespace PattyKaki.Commands.Info
 {
     public sealed class CmdLevels : Command2 
     {
-        public override string name { get { return "Levels"; } }
-        public override string shortcut { get { return "Worlds"; } }
-        public override string type { get { return CommandTypes.Information; } }
+        public override string Name { get { return "Levels"; } }
+        public override string Shortcut { get { return "Worlds"; } }
+        public override string Type { get { return CommandTypes.Information; } }
         public override bool UseableWhenFrozen { get { return true; } }
         public override CommandAlias[] Aliases {
             get { return new[] { new CommandAlias("Maps") }; }

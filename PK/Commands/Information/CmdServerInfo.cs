@@ -25,9 +25,9 @@ namespace PattyKaki.Commands.Info
 {
     public sealed class CmdServerInfo : Command2 
     {
-        public override string name { get { return "ServerInfo"; } }
-        public override string shortcut { get { return "SInfo"; } }
-        public override string type { get { return CommandTypes.Information; } }
+        public override string Name { get { return "ServerInfo"; } }
+        public override string Shortcut { get { return "SInfo"; } }
+        public override string Type { get { return CommandTypes.Information; } }
         public override bool UseableWhenFrozen { get { return true; } }
         public override CommandAlias[] Aliases {
             get { return new[] { new CommandAlias("Host"), new CommandAlias("ZAll") }; }
@@ -84,8 +84,9 @@ namespace PattyKaki.Commands.Info
                 MeasureCPU(begUsg.ProcessorTime,   endUsg.ProcessorTime, TimeSpan.FromSeconds(1)),
                 MeasureCPU(startUsg.ProcessorTime, endUsg.ProcessorTime, DateTime.UtcNow - startTime));
 
-            uint idl  = allEnd.IdleTime      - allBeg.IdleTime;
-            uint sys  = allEnd.ProcessorTime - allBeg.ProcessorTime;
+
+            ulong idl = allEnd.IdleTime - allBeg.IdleTime;
+            ulong sys = allEnd.ProcessorTime - allBeg.ProcessorTime;
             double cpu = sys * 100.0 / (sys + idl);
             int cores  = Environment.ProcessorCount;
             p.Message("  &a{0}% &Sby all processes across {1} CPU core{2}", 

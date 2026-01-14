@@ -32,9 +32,11 @@ namespace PattyKaki.Modules.Awards
         public static bool Add(string name, string desc) {
             if (Exists(name)) return false;
 
-            Award award = new Award();
-            award.Name  = name;
-            award.Description = desc;
+            Award award = new Award
+            {
+                Name = name,
+                Description = desc
+            };
             Awards.Add(award);
             return true;
         }

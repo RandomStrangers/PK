@@ -64,7 +64,6 @@ namespace PattyKaki
         }
 
 
-        // non-const for external code (SUPPORTED_COUNT value differs when TEN_BIT_BLOCKS)
         public static readonly int ExtendedCount = SUPPORTED_COUNT;
         
         // Original blocks
@@ -423,7 +422,6 @@ namespace PattyKaki
         }
 
 
-        // non-const for external code (SUPPORTED_COUNT value differs when TEN_BIT_BLOCKS)
         public static readonly int ExtendedCount = SUPPORTED_COUNT;
 
         // Original blocks

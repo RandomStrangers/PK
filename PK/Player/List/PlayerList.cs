@@ -129,9 +129,11 @@ namespace PattyKaki {
         }
         
         public static PlayerList Load(string path) {
-            PlayerList list = new PlayerList();
-            list.Path = path;
-            
+            PlayerList list = new PlayerList
+            {
+                Path = path
+            };
+
             if (!File.Exists(path)) {
                 File.Create(path).Close();
                 Logger.Log(LogType.SystemActivity, "CREATED NEW: " + path);

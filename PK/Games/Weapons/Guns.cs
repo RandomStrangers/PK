@@ -35,19 +35,20 @@ namespace PattyKaki.Games
         }
 
         public AmmunitionData MakeArgs(Vec3F32 dir, BlockID block) {
-            AmmunitionData args = new AmmunitionData();
-            args.block  = block;
-            
-            args.start  = (Vec3U16)p.Pos.BlockCoords;
-            args.dir    = dir;
-            args.iterations = 4;
+            AmmunitionData args = new AmmunitionData
+            {
+                block = block,
+
+                start = (Vec3U16)p.Pos.BlockCoords,
+                dir = dir,
+                iterations = 4
+            };
             return args;
         }
 
         public void BufferedRevert(Vec3U16 pos, BufferedBlockSender buffer) {
-            int index;
-            BlockID block = p.level.GetBlock(pos.X, pos.Y, pos.Z, out index);
-            
+            BlockID block = p.level.GetBlock(pos.X, pos.Y, pos.Z, out int index);
+
             if (index == -1) return;
             buffer.Add(index, block);
         }
@@ -126,7 +127,7 @@ namespace PattyKaki.Games
         public override string Name { get { return "Penetrative gun"; } }
 
         public override bool OnHitBlock(AmmunitionData args, Vec3U16 pos, BlockID block) {
-            if (p.level.physics < 2) return true;
+            if (p.level.Physics < 2) return true;
             
             if (!p.level.Props[block].LavaKills) return true;
             // Penetrative gun goes through blocks lava can go through
@@ -140,12 +141,12 @@ namespace PattyKaki.Games
         public override string Name { get { return "Explosive gun"; } }
 
         public override bool OnHitBlock(AmmunitionData args, Vec3U16 pos, BlockID block) {
-            if (p.level.physics >= 3) p.level.MakeExplosion(pos.X, pos.Y, pos.Z, 1);
+            if (p.level.Physics >= 3) p.level.MakeExplosion(pos.X, pos.Y, pos.Z, 1);
             return true;
         }
 
         public override void OnHitPlayer(AmmunitionData args, Player pl) {
-            if (pl.level.physics >= 3) {
+            if (pl.level.Physics >= 3) {
                 pl.HandleDeath(Block.Cobblestone, "@p &Swas blown up by " + p.ColoredName, true);
             } else {
                 base.OnHitPlayer(args, pl);

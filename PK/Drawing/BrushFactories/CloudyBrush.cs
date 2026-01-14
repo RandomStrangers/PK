@@ -17,7 +17,6 @@
  */
 using System.Collections.Generic;
 using PattyKaki.Commands;
-using BlockID = System.UInt16;
 
 namespace PattyKaki.Drawing.Brushes 
 {
@@ -45,11 +44,9 @@ namespace PattyKaki.Drawing.Brushes
             n.Seed = int.MinValue;
             n.Persistence = 0.75f;
             n.Lacunarity = 2;
-            
-            List<BlockID> toAffect;
-            List<int> freqs;
-            
-            bool ok = FrequencyBrush.GetBlocks(args, out toAffect, out freqs,
+
+
+            bool ok = FrequencyBrush.GetBlocks(args, out List<ushort> toAffect, out List<int> freqs,
                                                Filter, arg => Handler(arg, args.Player, ref n));
             if (!ok) return null;
             

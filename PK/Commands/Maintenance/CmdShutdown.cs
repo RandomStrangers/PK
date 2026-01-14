@@ -24,9 +24,9 @@ namespace PattyKaki.Commands.Maintenance
 {
     public sealed class CmdShutdown : Command2
     {
-        public override string name { get { return "Shutdown"; } }
-        public override string type { get { return CommandTypes.Moderation; } }
-        public override LevelPermission defaultRank { get { return LevelPermission.Admin; } }
+        public override string Name { get { return "Shutdown"; } }
+        public override string Type { get { return CommandTypes.Moderation; } }
+        public override LevelPermission DefaultRank { get { return LevelPermission.Admin; } }
 
         public static SchedulerTask shutdownTask;
         public override void Use(Player p, string message, CommandData data)

@@ -19,9 +19,9 @@ namespace PattyKaki.Commands.Info
 {
     public sealed class CmdHasirc : Command2 
     {
-        public override string name { get { return "HasIRC"; } }
-        public override string shortcut { get { return "IRC"; } }
-        public override string type { get { return CommandTypes.Information; } }
+        public override string Name { get { return "HasIRC"; } }
+        public override string Shortcut { get { return "IRC"; } }
+        public override string Type { get { return CommandTypes.Information; } }
 
         public override void Use(Player p, string message, CommandData data) {
             if (message.Length > 0) { Help(p); return; }

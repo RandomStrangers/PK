@@ -21,10 +21,10 @@ namespace PattyKaki.Commands.CPE
 {
     public sealed class CmdEnvironment : Command2 
     {
-        public override string name { get { return "Environment"; } }
-        public override string shortcut { get { return "Env"; } }
-        public override string type { get { return CommandTypes.World; } }
-        public override LevelPermission defaultRank { get { return LevelPermission.Operator; } }
+        public override string Name { get { return "Environment"; } }
+        public override string Shortcut { get { return "Env"; } }
+        public override string Type { get { return CommandTypes.World; } }
+        public override LevelPermission DefaultRank { get { return LevelPermission.Operator; } }
 
         public override void Use(Player p, string message, CommandData data) {
             if (message.CaselessEq("preset")) {
@@ -111,7 +111,7 @@ namespace PattyKaki.Commands.CPE
             p.Message("&T/Env preset [type] &H- Applies an env preset on the map");
             p.Message("&HPresets: &f{0}", EnvPreset.Presets.Join(pr => pr.Key));
             
-            string[] files = AtomicIO.TryGetFiles("presets", "*.env");
+            string[] files = FileIO.TryGetFiles("presets", "*.env");
             if (files == null) return;
             
             string all = files.Join(f => Path.GetFileNameWithoutExtension(f));

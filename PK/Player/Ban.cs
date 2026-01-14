@@ -25,8 +25,8 @@ namespace PattyKaki
     /// <remarks> This is NOT the list of banned players (ranks/banned.txt) </remarks>
     public static class Ban 
     {        
-        static PlayerMetaList bans = new PlayerMetaList("text/bans.txt");
-        static PlayerMetaList unbans = new PlayerMetaList("text/unbans.txt");
+        static readonly PlayerMetaList bans = new PlayerMetaList("text/bans.txt");
+        static readonly PlayerMetaList unbans = new PlayerMetaList("text/unbans.txt");
         
         public static void EnsureExists() {
             bans.EnsureExists();
@@ -123,9 +123,8 @@ namespace PattyKaki
         
         static DateTime GetDate(string raw) {
             raw = raw.Replace("%20", " ").Replace(",", "");
-            int timestap;
-            if (int.TryParse(raw, out timestap)) return timestap.FromUnixTime();
-            
+            if (int.TryParse(raw, out int timestap)) return timestap.FromUnixTime();
+
             /* Old form of timestamps in bans/unbans:
                DateTime now = DateTime.Now;
                return now.DayOfWeek + "%20" + now.Day + "%20" + now.Month + "%20" + now.Year + ",%20at%20" + now.Hour + ":" + now.Minute;

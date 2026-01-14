@@ -254,7 +254,7 @@ namespace PattyKaki {
             
             // Disconnected before sent handshake
             if (name == null) {
-                if (Socket != null) Socket.Close();
+                Socket?.Close();
                 Logger.Log(LogType.UserActivity, "{0} disconnected.", IP);
                 return;
             }
@@ -266,7 +266,7 @@ namespace PattyKaki {
                     return;
                 }
 
-                if (weapon != null) weapon.Disable();
+                weapon?.Disable();
                 if (chatMsg != null) chatMsg = Colors.Escape(chatMsg);
                 discMsg = Colors.Escape(discMsg);
                 
@@ -318,12 +318,12 @@ namespace PattyKaki {
             Extras.Clear();
             
             foreach (CopyState cState in CopySlots) { 
-                if (cState != null) cState.Clear();
+                cState?.Clear();
             }
             CopySlots.Clear();
             
             DrawOps.Clear();
-            if (spamChecker != null) spamChecker.Clear();
+            spamChecker?.Clear();
             ClearSerialCommands();
         }
 
@@ -417,7 +417,7 @@ namespace PattyKaki {
         }
         
         public void CheckForMessageSpam() {
-            if (spamChecker != null) spamChecker.CheckChatSpam();
+            spamChecker?.CheckChatSpam();
         }
 
         internal void SetBaseTotalModified(long modified) {
@@ -472,7 +472,7 @@ namespace PattyKaki {
                 RevertBlock(x, y, z);
                 
                 selMarks[selIndex] = new Vec3S32(x, y, z);
-                if (selMarkCallback != null) selMarkCallback(p, selMarks, selIndex, selState, block);
+                selMarkCallback?.Invoke(p, selMarks, selIndex, selState, block);
                 // Mark callback cancelled selection
                 if (selCallback == null) return;
                 

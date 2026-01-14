@@ -46,21 +46,11 @@ namespace PattyKaki
         public Server() { s = this; }
         
         //True = cancel event
-        //Fale = dont cacnel event
+        //False = don't cancel event
         public static bool Check(string cmd, string message) {
             PKCommand?.Invoke(cmd, message);
             return cancelcommand;
         }
-        
-        [Obsolete("Use Logger.Log(LogType, String)")]
-        public void Log(string message) { Logger.Log(LogType.SystemActivity, message); }
-        
-        [Obsolete("Use Logger.Log(LogType, String)")]
-        public void Log(string message, bool systemMsg = false) {
-            LogType type = systemMsg ? LogType.BackgroundActivity : LogType.SystemActivity;
-            Logger.Log(type, message);
-        }
-        
         public static void CheckFile(string file) {
             if (File.Exists(file)) return;
             
@@ -124,7 +114,7 @@ namespace PattyKaki
             try { ServicePointManager.SecurityProtocol |= (SecurityProtocolType)0xC00; } catch { }
         }
         static void EnsureFilesExist() {
-            EnsureDirectoryExists("properties");
+            EnsureDirectoryExists("props");
             EnsureDirectoryExists("levels");
             EnsureDirectoryExists("bots");
             EnsureDirectoryExists("text");
@@ -250,7 +240,7 @@ namespace PattyKaki
                     continue;
                 }
 
-                autoload = autoload + lvl.name + "=" + lvl.physics + Environment.NewLine;
+                autoload = autoload + lvl.name + "=" + lvl.Physics + Environment.NewLine;
                 lvl.Save();
                 lvl.SaveBlockDBChanges();
             }
@@ -309,7 +299,7 @@ namespace PattyKaki
         }
         
         public static void DoGC() {
-            var sw = Stopwatch.StartNew();
+            Stopwatch sw = Stopwatch.StartNew();
             long start = GC.GetTotalMemory(false);
             GC.Collect();
             GC.WaitForPendingFinalizers();

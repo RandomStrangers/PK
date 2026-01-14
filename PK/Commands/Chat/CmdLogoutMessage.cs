@@ -20,10 +20,10 @@ namespace PattyKaki.Commands.Chatting
 {
     public sealed class CmdLogoutMessage : EntityPropertyCmd 
     {
-        public override string name { get { return "LogoutMessage"; } }
-        public override string shortcut { get { return "LogoutMsg"; } }
-        public override string type { get { return CommandTypes.Chat; } }
-        public override LevelPermission defaultRank { get { return LevelPermission.AdvBuilder; } }
+        public override string Name { get { return "LogoutMessage"; } }
+        public override string Shortcut { get { return "LogoutMsg"; } }
+        public override string Type { get { return CommandTypes.Chat; } }
+        public override LevelPermission DefaultRank { get { return LevelPermission.AdvBuilder; } }
         public override CommandPerm[] ExtraPerms {
             get { return new[] { new CommandPerm(LevelPermission.Operator, "can change the logout message of others") }; }
         }

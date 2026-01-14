@@ -99,11 +99,13 @@ namespace PattyKaki.DB
         }
         
         internal static PlayerData Parse(ISqlRecord record) {
-            PlayerData data = new PlayerData();
-            data.Name = record.GetText(ColumnName);
-            data.IP   = record.GetText(ColumnIP);
-            data.DatabaseID = record.GetInt(ColumnID);
-            
+            PlayerData data = new PlayerData
+            {
+                Name = record.GetText(ColumnName),
+                IP = record.GetText(ColumnIP),
+                DatabaseID = record.GetInt(ColumnID)
+            };
+
             // Backwards compatibility with old format
             string rawTime = record.GetText(ColumnTimeSpent);
             try {

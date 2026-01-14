@@ -19,8 +19,8 @@ using System.Threading;
 
 namespace PattyKaki.Commands.Misc {  
     public sealed class CmdTpA : Command2 {        
-        public override string name { get { return "TPA"; } }
-        public override string type { get { return CommandTypes.Other; } }
+        public override string Name { get { return "TPA"; } }
+        public override string Type { get { return CommandTypes.Other; } }
         public override bool SuperUseable { get { return false; } }
         public override CommandAlias[] Aliases {
             get { return new[] { new CommandAlias("TPAccept", "accept"), new CommandAlias("TPDeny", "deny") }; }

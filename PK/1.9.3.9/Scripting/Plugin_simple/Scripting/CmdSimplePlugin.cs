@@ -18,13 +18,16 @@
 using System.IO;
 using PattyKaki.Scripting;
 
-namespace PattyKaki.Commands.Scripting {
-    public sealed class CmdPlugin_simple : Command2 {
-        public override string name { get { return "SimplePlugin"; } }
-        public override string shortcut { get { return "p_s"; } }
-        public override string type { get { return CommandTypes.Other; } }
-        public override LevelPermission defaultRank { get { return LevelPermission.Nobody; } }
-        public override CommandAlias[] Aliases {
+namespace PattyKaki.Commands.Scripting
+{
+    public class CmdPlugin_simple : Command2
+    {
+        public override string Name { get { return "SimplePlugin"; } }
+        public override string Shortcut { get { return "p_s"; } }
+        public override string Type { get { return CommandTypes.Other; } }
+        public override LevelPermission DefaultRank { get { return LevelPermission.Owner; } }
+        public override CommandAlias[] Aliases
+        {
             get
             {
                 return new[] {
@@ -43,101 +46,122 @@ namespace PattyKaki.Commands.Scripting {
                     new CommandAlias("P_SCompile", "compile")
                 };
             }
-            }
+        }
         public override bool MessageBlockRestricted { get { return true; } }
-        
-        public override void Use(Player p, string message, CommandData data) {
+
+        public override void Use(Player p, string message, CommandData data)
+        {
             string[] args = message.SplitSpaces(3);
-            if (IsListCommand(args[0])) {
+            if (IsListCommand(args[0]))
+            {
                 string modifier = args.Length > 1 ? args[1] : "";
-                
+
                 p.Message("Loaded simple plugins:");
-                MultiPageOutput.Output(p, Plugin_Simple.all, pl => pl.name,
+                MultiPageOutput.Output(p, Plugin_Simple.all, pl => pl.Name,
                                       "Simple plugins", "simple plugins", modifier, false);
                 return;
             }
             if (args.Length == 1) { Help(p); return; }
-            
+
             string cmd = args[0], name = args[1];
             if (!Formatter.ValidFilename(p, name)) return;
             string language = args.Length > 2 ? args[2] : "";
-            
-            if (cmd.CaselessEq("load")) {
+
+            if (cmd.CaselessEq("load"))
+            {
                 LoadSimplePlugin(p, name);
-            } else if (cmd.CaselessEq("unload")) {
+            }
+            else if (cmd.CaselessEq("unload"))
+            {
                 UnloadSimplePlugin(p, name);
-            } else if (cmd.CaselessEq("create")) {
+            }
+            else if (cmd.CaselessEq("create"))
+            {
                 CreateSimplePlugin(p, name, language);
-            } else if (cmd.CaselessEq("compile")) {
+            }
+            else if (cmd.CaselessEq("compile"))
+            {
                 CompileSimplePlugin(p, name, language);
-            } else {
+            }
+            else
+            {
                 Help(p);
             }
         }
 
-        public static void CompileSimplePlugin(Player p, string name, string language) {
+        public static void CompileSimplePlugin(Player p, string name, string language)
+        {
             ICompiler_Simple compiler = ScriptingOperations_Simple.GetCompiler(p, language);
             if (compiler == null) return;
-            
+
             // either "source" or "source1,source2,source3"
             string[] paths = name.SplitComma();
             string dstPath = IScripting_Simple.SimplePluginPath(paths[0]);
-            
-            for (int i = 0; i < paths.Length; i++) {
-                 paths[i] = compiler.SimplePluginPath(paths[i]);
+
+            for (int i = 0; i < paths.Length; i++)
+            {
+                paths[i] = compiler.SimplePluginPath(paths[i]);
             }
-            ScriptingOperations_Simple.Compile(p, compiler, "Simple plugin", paths, dstPath);
+            ScriptingOperations_Simple.Compile(p, compiler, paths, dstPath);
         }
 
-        public static void LoadSimplePlugin(Player p, string name) {
+        public static void LoadSimplePlugin(Player p, string name)
+        {
             string path = IScripting_Simple.SimplePluginPath(name);
-            if (!File.Exists(path)) {
+            if (!File.Exists(path))
+            {
                 p.Message("File &9{0} &Snot found.", path); return;
             }
-            
-            if (IScripting_Simple.LoadSimplePlugin(path, false)) {
+
+            if (IScripting_Simple.LoadSimplePlugin(path))
+            {
                 p.Message("Simple plugin loaded successfully.");
-            } else {
+            }
+            else
+            {
                 p.Message("&WError loading simple plugin. See error logs for more information.");
             }
         }
 
-        public static void UnloadSimplePlugin(Player p, string name) {
-            Plugin_Simple plugin = Matcher.Find(p, name, out int matches, Plugin_Simple.all,
-                                         null, pln => pln.name, "");
-            if (plugin == null) return;
-            
-            if (Plugin_Simple.core.Contains(plugin)) {
-                p.Message(plugin.name + " is a core simple plugin and cannot be unloaded.");
-                return;
-            }
-            
-            if (plugin != null) {
-                if (Plugin_Simple.Unload(plugin, false)) {
+        public static void UnloadSimplePlugin(Player p, string name)
+        {
+            Plugin_Simple simpleplugin = Matcher.Find(p, name, out int matches, Plugin_Simple.all,
+                                         null, pln => pln.Name, "");
+            if (simpleplugin == null) return;
+            if (simpleplugin != null)
+            {
+                if (Plugin_Simple.Unload(simpleplugin))
+                {
                     p.Message("Simple plugin unloaded successfully.");
-                } else {
+                }
+                else
+                {
                     p.Message("&WError unloading simple plugin. See error logs for more information.");
                 }
-            } else {
-                p.Message("Loaded simple plugins: " + Plugin_Simple.all.Join(pl => pl.name));
+            }
+            else
+            {
+                p.Message("Loaded simple plugins: " + Plugin_Simple.all.Join(pl => pl.Name));
             }
         }
 
-        public static void CreateSimplePlugin(Player p, string name, string language) {
+        public static void CreateSimplePlugin(Player p, string name, string language)
+        {
             ICompiler_Simple engine = ScriptingOperations_Simple.GetCompiler(p, language);
             if (engine == null) return;
-            
+
             string path = engine.SimplePluginPath(name);
             p.Message("Creating a simple plugin example source");
-            
+
             string creator = p.IsSuper ? Server.Config.Name : p.truename;
-            string source  = engine.GenExamplePlugin(name, creator);
+            string source = engine.GenExampleSimplePlugin(name, creator);
             File.WriteAllText(path, source);
         }
-        
-        public override void Help(Player p) {
+
+        public override void Help(Player p)
+        {
             p.Message("&T/SimplePlugin create [name]");
-            p.Message("&HCreate a example .cs simple plugin file");
+            p.Message("&HCreate an example .cs simple plugin file");
             p.Message("&T/SimplePlugin compile [name]");
             p.Message("&HCompiles a .cs simple plugin file");
             p.Message("&T/SimplePlugin load [filename]");

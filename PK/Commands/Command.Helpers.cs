@@ -21,6 +21,8 @@ namespace PattyKaki
 {    
     public abstract partial class Command 
     {
+        public int LoopCount = 0;
+
         public bool CheckSuper(Player p, string message, string type) {
             if (message.Length > 0 || !p.IsSuper) return false;
             SuperRequiresArgs(p, type);
@@ -28,21 +30,21 @@ namespace PattyKaki
         }
 
         public void SuperRequiresArgs(Player p, string type) {
-            p.Message("When using /{0} from {2}, you must provide a {1}.", name, type, p.SuperName);
+            p.Message("When using /{0} from {2}, you must provide a {1}.", Name, type, p.SuperName);
         }
 
-        public bool HasExtraPerm(Player p, string cmd, LevelPermission plRank, int num) {
+        public bool HasExtraPerm(Player _, string cmd, LevelPermission plRank, int num) {
             return CommandExtraPerms.Find(cmd, num).UsableBy(plRank);
         }
 
         public bool HasExtraPerm(Player p, LevelPermission plRank, int num) {
-            return HasExtraPerm(p, name, plRank, num);
+            return HasExtraPerm(p, Name, plRank, num);
         }
 
         public bool CheckExtraPerm(Player p, CommandData data, int num) {
             if (HasExtraPerm(p, data.Rank, num)) return true;
             
-            CommandExtraPerms perms = CommandExtraPerms.Find(name, num);
+            CommandExtraPerms perms = CommandExtraPerms.Find(Name, num);
             perms.MessageCannotUse(p);
             return false;
         }
@@ -77,8 +79,7 @@ namespace PattyKaki
 
 
         public static bool IsListModifier(string str) {
-            int ignored;
-            return str.CaselessEq("all") || int.TryParse(str, out ignored);
+            return str.CaselessEq("all") || int.TryParse(str, out _);
         }
 
         public static bool IsCreateCommand(string str) {

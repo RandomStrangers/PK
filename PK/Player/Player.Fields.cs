@@ -216,10 +216,10 @@ namespace PattyKaki {
 
         // Extra storage for custom commands
         public ExtrasCollection Extras = new ExtrasCollection();
-        
-        SpamChecker spamChecker;
+
+        readonly SpamChecker spamChecker;
         internal DateTime cmdUnblocked;
-        List<DateTime> partialLog;
+        readonly List<DateTime> partialLog;
 
         public WarpList Waypoints = new WarpList();
         public DateTime LastPatrol;
@@ -236,9 +236,9 @@ namespace PattyKaki {
         
         public bool cancelcommand, cancelchat;
         public bool cancellogin, cancelconnecting;
-        
-        Queue<SerialCommand> serialCmds = new Queue<SerialCommand>();
-        object serialCmdsLock = new object();
+
+        readonly Queue<SerialCommand> serialCmds = new Queue<SerialCommand>();
+        readonly object serialCmdsLock = new object();
         struct SerialCommand { public Command cmd; public string args; public CommandData data; }
       
         /// <summary> Called when a player removes or places a block.

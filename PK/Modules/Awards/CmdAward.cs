@@ -20,9 +20,9 @@ namespace PattyKaki.Modules.Awards
 {
     public sealed class CmdAward : Command2 
     {
-        public override string name { get { return "Award"; } }
-        public override string type { get { return CommandTypes.Economy; } }
-        public override LevelPermission defaultRank { get { return LevelPermission.Operator; } }
+        public override string Name { get { return "Award"; } }
+        public override string Type { get { return CommandTypes.Economy; } }
+        public override LevelPermission DefaultRank { get { return LevelPermission.Operator; } }
         
         public override void Use(Player p, string message, CommandData data) {
             bool take = false;

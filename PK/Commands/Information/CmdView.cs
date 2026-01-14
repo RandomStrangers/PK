@@ -21,8 +21,8 @@ namespace PattyKaki.Commands.Info
 {
     public sealed class CmdView : Command2 
     {
-        public override string name { get { return "View"; } }
-        public override string type { get { return CommandTypes.Information; } }
+        public override string Name { get { return "View"; } }
+        public override string Type { get { return CommandTypes.Information; } }
         public override bool UseableWhenFrozen { get { return true; } }
         
         public override void Use(Player p, string message, CommandData data) {

@@ -19,9 +19,9 @@ using PattyKaki.Events;
 
 namespace PattyKaki.Commands.Moderation {    
     public sealed class CmdBan : Command2 {
-        public override string name { get { return "Ban"; } }
-        public override string type { get { return CommandTypes.Moderation; } }
-        public override LevelPermission defaultRank { get { return LevelPermission.Operator; } }
+        public override string Name { get { return "Ban"; } }
+        public override string Type { get { return CommandTypes.Moderation; } }
+        public override LevelPermission DefaultRank { get { return LevelPermission.Operator; } }
         public override CommandAlias[] Aliases {
             get { return new CommandAlias[] { new CommandAlias("KickBan"), new CommandAlias("kb") }; }
         }

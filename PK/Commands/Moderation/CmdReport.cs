@@ -25,8 +25,8 @@ using PattyKaki.Events;
 
 namespace PattyKaki.Commands.Moderation {
     public sealed class CmdReport : Command2 {
-        public override string name { get { return "Report"; } }
-        public override string type { get { return CommandTypes.Moderation; } }
+        public override string Name { get { return "Report"; } }
+        public override string Type { get { return CommandTypes.Moderation; } }
         public override CommandPerm[] ExtraPerms {
             get { return new[] { new CommandPerm(LevelPermission.Operator, "can manage reports") }; }
         }
@@ -44,7 +44,7 @@ namespace PattyKaki.Commands.Moderation {
             if (IsListCommand(cmd)) {
                 HandleList(p, args, data);
             } else if (cmd.CaselessEq("clear")) {
-                HandleClear(p, args, data);
+                HandleClear(p, data);
             } else if (IsDeleteCommand(cmd)) {
                 HandleDelete(p, args, data);
             } else if (IsInfoCommand(cmd)) {
@@ -111,7 +111,7 @@ namespace PattyKaki.Commands.Moderation {
             Logger.Log(LogType.UserActivity, "Reports on {1} were deleted by {0}", p.name, target);
         }
 
-        public void HandleClear(Player p, string[] args, CommandData data) {
+        public void HandleClear(Player p, CommandData data) {
             if (!CheckExtraPerm(p, data, 1)) return;
             if (!Directory.Exists("extra/reportedbackups"))
                 Directory.CreateDirectory("extra/reportedbackups");
@@ -137,11 +137,11 @@ namespace PattyKaki.Commands.Moderation {
             if (HasReports(target)) {
                 reports = Utils.ReadAllLinesList(ReportPath(target));
             }
-            ItemPerms checkPerms = CommandExtraPerms.Find(name, 1);
+            ItemPerms checkPerms = CommandExtraPerms.Find(Name, 1);
             
             if (reports.Count >= 5) {
                 p.Message("{0} &Walready has 5 reports! Please wait until an {1} &Whas reviewed these reports first!",
-                          nick, CommandExtraPerms.Find(name, 1).Describe());
+                          nick, CommandExtraPerms.Find(Name, 1).Describe());
                 return;
             }
             
@@ -181,7 +181,7 @@ namespace PattyKaki.Commands.Moderation {
 
         public static void DeleteReport(string user) {
             string backup = "extra/reportedbackups/" + user + ".txt";
-            AtomicIO.TryDelete(backup);           
+            FileIO.TryDelete(backup);           
             File.Move(ReportPath(user), backup);
         }
         

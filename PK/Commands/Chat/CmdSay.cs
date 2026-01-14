@@ -19,10 +19,10 @@ namespace PattyKaki.Commands.Chatting
 {  
     public sealed class CmdSay : Command2 
     {        
-        public override string name { get { return "Say"; } }
-        public override string shortcut { get { return "Broadcast"; } }
-        public override string type { get { return CommandTypes.Chat; } }
-        public override LevelPermission defaultRank { get { return LevelPermission.Operator; } }
+        public override string Name { get { return "Say"; } }
+        public override string Shortcut { get { return "Broadcast"; } }
+        public override string Type { get { return CommandTypes.Chat; } }
+        public override LevelPermission DefaultRank { get { return LevelPermission.Operator; } }
 
         public override void Use(Player p, string message, CommandData data) {
             if (message.Length == 0) { Help(p); return; }

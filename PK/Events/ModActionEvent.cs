@@ -104,10 +104,6 @@ namespace PattyKaki.Events
         Frozen,
         /// <summary> Player was unfrozen. </summary>
         Unfrozen,
-        /// <summary> Player was jailed. </summary>
-        Jailed,
-        /// <summary> Player was unjailed. </summary>
-        Unjailed,
         /// <summary> Player was given a warning. </summary>
         Warned,
         /// <summary> Player has their rank changed. </summary>

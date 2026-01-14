@@ -4,9 +4,9 @@ namespace PattyKaki.Commands.Chatting
 {
     public sealed class CmdEnd : Command2
     {
-        public override string name { get { return "End"; } }
-        public override string type { get { return CommandTypes.Other; } }
-        public override LevelPermission defaultRank { get { return LevelPermission.Nobody; } }
+        public override string Name { get { return "End"; } }
+        public override string Type { get { return CommandTypes.Other; } }
+        public override LevelPermission DefaultRank { get { return LevelPermission.Owner; } }
  
         public override void Use(Player p, string message, CommandData data)
         {

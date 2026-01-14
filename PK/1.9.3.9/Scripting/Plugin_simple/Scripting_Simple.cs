@@ -26,13 +26,13 @@ using System.Text;
 
 namespace PattyKaki.Scripting
 {
-    /// <summary> Utility methods for loading assemblies, commands, and plugins </summary>
+    /// <summary> Utility methods for loading assemblies and simple plugins </summary>
     public static class IScripting_Simple
     {
 
-        /// <summary> Returns the default .dll path for the plugin with the given name </summary>
+        /// <summary> Returns the default .dll path for the simple plugin with the given name </summary>
 
-        public static string SimplePluginPath(string name) { return "" + name + ".dll"; }
+        public static string SimplePluginPath(string name) { return name + ".dll"; }
 
         /// <summary> Constructs instances of all types which derive from T in the given assembly. </summary>
         /// <returns> The list of constructed instances. </returns>
@@ -44,32 +44,7 @@ namespace PattyKaki.Scripting
         public static Assembly LoadAssembly(string path)
         {
             byte[] data = File.ReadAllBytes(path);
-            byte[] debug = GetDebugData(path);
-            return Assembly.Load(data, debug);
-        }
-        public static byte[] GetDebugData(string path)
-        {
-            if (Server.RunningOnMono())
-            {
-                // Cmdtest.dll -> Cmdtest.dll.mdb
-                path += ".mdb";
-            }
-            else
-            {
-                // Cmdtest.dll -> Cmdtest.pdb
-                path = Path.ChangeExtension(path, ".pdb");
-            }
-
-            if (!File.Exists(path)) return null;
-            try
-            {
-                return File.ReadAllBytes(path);
-            }
-            catch (Exception ex)
-            {
-                Logger.LogError("Error loading .pdb " + path, ex);
-                return null;
-            }
+            return Assembly.Load(data);
         }
         public static List<T> LoadTypes<T>(Assembly lib)
         {
@@ -95,16 +70,16 @@ namespace PattyKaki.Scripting
         {
             string simplepluginpath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
 
-            string[] files = AtomicIO.TryGetFiles(simplepluginpath, "*.dll");
+            string[] files = FileIO.TryGetFiles(simplepluginpath, "*.dll");
             if (files != null)
             {
                 foreach (string file in files)
                 {
                     //TODO: Some system files might not contain these
-                    if (!file.CaselessContains("SQL") || file.CaselessContains("Newtonsoft")
-                        || file.CaselessContains("System"))
+                    if (!file.CaselessContains("SQL") && !file.CaselessContains("Newtonsoft")
+                        && !file.CaselessContains("System"))
                     {
-                        LoadSimplePlugin(file, true);
+                        LoadSimplePlugin(file);
                     }
                 }
             }
@@ -113,26 +88,33 @@ namespace PattyKaki.Scripting
                 Directory.CreateDirectory("");
             }
         }
-
-        /// <summary> Loads all plugins from the given .dll path. </summary>
-        public static bool LoadSimplePlugin(string path, bool auto)
+        public static bool LoadSimplePlugin(string path, out List<Plugin_Simple> simplepluginlist)
         {
             try
             {
                 Assembly lib = LoadAssembly(path);
-                List<Plugin_Simple> plugins = LoadTypes<Plugin_Simple>(lib);
-
-                foreach (Plugin_Simple plugin in plugins)
+                List<Plugin_Simple> simpleplugins = LoadTypes<Plugin_Simple>(lib);
+                simplepluginlist = simpleplugins;
+                foreach (Plugin_Simple simpleplugin in simpleplugins)
                 {
-                    if (!Plugin_Simple.Load(plugin, auto)) return false;
+                    if (!Plugin_Simple.Load(simpleplugin))
+                    {
+                        return false;
+                    }
                 }
                 return true;
             }
             catch (Exception ex)
             {
                 Logger.LogError("Error loading simple plugins from " + path, ex);
+                simplepluginlist = null;
                 return false;
             }
+        }
+        /// <summary> Loads all simple plugins from the given .dll path. </summary>
+        public static bool LoadSimplePlugin(string path)
+        {
+            return LoadSimplePlugin(path, out _);
         }
     }
 
@@ -150,7 +132,7 @@ namespace PattyKaki.Scripting
         /// <summary> The full name of this programming language </summary>
         /// <example> CSharp, Visual Basic </example>
         public abstract string FullName { get; }
-        /// <summary> Returns source code for an example Plugin </summary>
+        /// <summary> Returns source code for an example simple plugin </summary>
         public abstract string SimplePluginSkeleton { get; }
 
         public string SimplePluginPath(string name) { return "" + name + FileExtension; }
@@ -170,11 +152,11 @@ namespace PattyKaki.Scripting
             source = source.Replace("\n", "\r\n");
             return string.Format(source, args);
         }
-        /// <summary> Generates source code for an example plugin, 
+        /// <summary> Generates source code for an example simple plugin, 
         /// preformatted with the given name and Creator </summary>
-        public string GenExamplePlugin(string plugin, string creator)
+        public string GenExampleSimplePlugin(string simpleplugin, string creator)
         {
-            return FormatSource(SimplePluginSkeleton, plugin, creator, Server.Version);
+            return FormatSource(SimplePluginSkeleton, simpleplugin, creator, Server.Version);
         }
 
         /// <summary> Attempts to compile the given source code file to a .dll file. </summary>
@@ -292,7 +274,7 @@ namespace PattyKaki.Scripting
             CompilerParameters args = new CompilerParameters
             {
                 GenerateExecutable = false,
-                IncludeDebugInformation = true
+                IncludeDebugInformation = false
             };
 
             if (dstPath != null) args.OutputAssembly = dstPath;

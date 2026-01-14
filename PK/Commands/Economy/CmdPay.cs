@@ -20,7 +20,7 @@ using PattyKaki.Events.EconomyEvents;
 
 namespace PattyKaki.Commands.Eco {
     public sealed class CmdPay : MoneyCmd {
-        public override string name { get { return "Pay"; } }
+        public override string Name { get { return "Pay"; } }
         public override bool MessageBlockRestricted { get { return true; } }
         
         public override void Use(Player p, string message, CommandData data) {

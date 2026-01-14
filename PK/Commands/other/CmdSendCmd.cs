@@ -20,9 +20,9 @@
 namespace PattyKaki.Commands.Misc {
     
     public sealed class CmdSendCmd : Command2 {        
-        public override string name { get { return "SendCmd"; } }
-        public override string type { get { return CommandTypes.Other; } }
-        public override LevelPermission defaultRank { get { return LevelPermission.Owner; } }
+        public override string Name { get { return "SendCmd"; } }
+        public override string Type { get { return CommandTypes.Other; } }
+        public override LevelPermission DefaultRank { get { return LevelPermission.Owner; } }
         
         public override void Use(Player p, string message, CommandData data) {
             string[] args = message.SplitSpaces(3);

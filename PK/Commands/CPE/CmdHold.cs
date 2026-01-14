@@ -20,10 +20,10 @@ namespace PattyKaki.Commands.CPE
 {    
     public sealed class CmdHold : Command2 
     {
-        public override string name { get { return "Hold"; } }
-        public override string shortcut { get { return "HoldThis"; } }
-        public override string type { get { return CommandTypes.Building; } }
-        public override LevelPermission defaultRank { get { return LevelPermission.AdvBuilder; } }
+        public override string Name { get { return "Hold"; } }
+        public override string Shortcut { get { return "HoldThis"; } }
+        public override string Type { get { return CommandTypes.Building; } }
+        public override LevelPermission DefaultRank { get { return LevelPermission.AdvBuilder; } }
         public override bool SuperUseable { get { return false; } }
 
         public override void Use(Player p, string message, CommandData data) {

@@ -100,7 +100,7 @@ namespace PattyKaki
             }
             
             if (who != null) who.title = title;
-            if (who != null) who.SetPrefix();
+            who?.SetPrefix();
             PlayerDB.Update(target, PlayerData.ColumnTitle, title.UnicodeToCp437());
             return true;
         }
@@ -120,29 +120,32 @@ namespace PattyKaki
             }
             
             if (who != null) who.titlecolor = color;
-            if (who != null) who.SetPrefix();
+            who?.SetPrefix();
             PlayerDB.Update(target, PlayerData.ColumnTColor, color);
             return true;
         }
         
         /// <summary> Attempts to change the color of the target player </summary>
         public static bool SetColor(Player p, string target, string name) {
-            string color = "";
             Player who = PlayerInfo.FindExact(target);
-            
-            if (name.Length == 0) {
+
+            string color;
+            if (name.Length == 0)
+            {
                 color = Group.GroupIn(target).Color;
-                
+
                 PlayerDB.Update(target, PlayerData.ColumnColor, "");
                 MessageAction(p, target, who, "λACTOR &Sremoved λTARGET color");
-            } else {
+            }
+            else
+            {
                 color = Matcher.FindColor(p, name);
                 if (color == null) return false;
-                
+
                 PlayerDB.Update(target, PlayerData.ColumnColor, color);
                 MessageAction(p, target, who, "λACTOR &Schanged λTARGET color to " + color + Colors.Name(color));
             }
-            if (who != null) who.UpdateColor(color);
+            who?.UpdateColor(color);
             return true;
         }
         

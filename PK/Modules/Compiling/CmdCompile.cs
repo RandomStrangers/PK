@@ -22,9 +22,9 @@ namespace PattyKaki.Modules.Compiling
 {
     public class CmdCompile : Command2 
     {
-        public override string name { get { return "Compile"; } }
-        public override string type { get { return CommandTypes.Other; } }
-        public override LevelPermission defaultRank { get { return LevelPermission.Owner; } }
+        public override string Name { get { return "Compile"; } }
+        public override string Type { get { return CommandTypes.Other; } }
+        public override LevelPermission DefaultRank { get { return LevelPermission.Owner; } }
         public override CommandAlias[] Aliases {
             get { return new[] { new CommandAlias("PCompile", "plugin") }; }
         }

@@ -20,8 +20,8 @@ using PattyKaki.Games;
 
 namespace PattyKaki.Commands.Fun {
     public sealed class CmdTeam : Command2 {        
-        public override string name { get { return "Team"; } }
-        public override string type { get { return CommandTypes.Games; } }
+        public override string Name { get { return "Team"; } }
+        public override string Type { get { return CommandTypes.Games; } }
         public override bool SuperUseable { get { return false; } }
         public override CommandPerm[] ExtraPerms {
             get { return new[] { new CommandPerm(LevelPermission.AdvBuilder, "can create teams") }; }
@@ -131,7 +131,7 @@ namespace PattyKaki.Commands.Fun {
             Chat.MessageFrom(p, "λNICK &Screated the &a" + args[1] + " &Steam");
         }
 
-        public void HandleJoin(Player p, string[] args) {
+        public void HandleJoin(Player p, string[] _) {
             Team team = p.Game.Team;
             if (p.Game.TeamInvite == null) { p.Message("You do not currently have any invitation to join a team."); return; }
             if (team != null) { p.Message("You need to leave your current team before you can join another one."); return; }

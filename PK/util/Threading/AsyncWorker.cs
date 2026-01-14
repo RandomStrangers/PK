@@ -24,7 +24,7 @@ namespace PattyKaki
     /// <summary> Asynchronously performs work on a background thread </summary>
     public abstract class AsyncWorker<T> 
     {
-        AutoResetEvent handle = new AutoResetEvent(false);
+        readonly AutoResetEvent handle = new AutoResetEvent(false);
         volatile bool terminating;
 
         public Queue<T> queue = new Queue<T>();
@@ -66,9 +66,11 @@ namespace PattyKaki
         
         /// <summary> Starts the background worker thread </summary>
         public void RunAsync() {
-            Thread worker = new Thread(SendLoop);
-            worker.Name   = ThreadName;
-            worker.IsBackground = true;
+            Thread worker = new Thread(SendLoop)
+            {
+                Name = ThreadName,
+                IsBackground = true
+            };
             worker.Start();
         }
         

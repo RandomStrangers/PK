@@ -20,9 +20,9 @@ using PattyKaki.Eco;
 
 namespace PattyKaki.Commands.Eco {
     public sealed class CmdEconomy : Command2 {
-        public override string name { get { return "Economy"; } }
-        public override string shortcut { get { return "Eco"; } }
-        public override string type { get { return CommandTypes.Economy; } }
+        public override string Name { get { return "Economy"; } }
+        public override string Shortcut { get { return "Eco"; } }
+        public override string Type { get { return CommandTypes.Economy; } }
         public override CommandPerm[] ExtraPerms {
             get { return new[] { new CommandPerm(LevelPermission.Operator, "can setup the economy") }; }
         }

@@ -36,9 +36,9 @@ namespace PattyKaki.Generator
             
             for( int i = 0; i < 256; i++ ) {
                 int j = rnd.Next( i, 256 );
-                byte temp = p[i]; p[i] = p[j]; p[j] = temp;
+                (p[j], p[i]) = (p[i], p[j]);
             }
-            for( int i = 0; i < 256; i++ )
+            for ( int i = 0; i < 256; i++ )
                 p[i + 256] = p[i];
         }
         

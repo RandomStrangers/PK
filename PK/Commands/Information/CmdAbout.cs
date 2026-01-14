@@ -26,10 +26,10 @@ namespace PattyKaki.Commands.Info
 {
     public sealed class CmdAbout : Command2 
     {
-        public override string name { get { return "About"; } }
-        public override string shortcut { get { return "b"; } }
-        public override string type { get { return CommandTypes.Information; } }
-        public override bool museumUsable { get { return false; } }
+        public override string Name { get { return "About"; } }
+        public override string Shortcut { get { return "b"; } }
+        public override string Type { get { return CommandTypes.Information; } }
+        public override bool MuseumUsable { get { return false; } }
         public override bool SuperUseable { get { return false; } }
         public override CommandAlias[] Aliases {
             get { return new [] { new CommandAlias("BInfo"), new CommandAlias("WhoDid") }; }

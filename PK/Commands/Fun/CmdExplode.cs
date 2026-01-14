@@ -22,10 +22,10 @@ using PattyKaki.Maths;
 
 namespace PattyKaki.Commands.Fun {
     public sealed class CmdExplode : Command2 {
-        public override string name { get { return "Explode"; } }
-        public override string shortcut { get { return "ex"; } }
-        public override string type { get { return CommandTypes.Moderation; } }
-        public override LevelPermission defaultRank { get { return LevelPermission.Operator; } }
+        public override string Name { get { return "Explode"; } }
+        public override string Shortcut { get { return "ex"; } }
+        public override string Type { get { return CommandTypes.Moderation; } }
+        public override LevelPermission DefaultRank { get { return LevelPermission.Operator; } }
 
         public override void Use(Player p, string message, CommandData data) {
             if (message.Length == 0) { Help(p); return; }
@@ -53,7 +53,7 @@ namespace PattyKaki.Commands.Fun {
         }
 
         public static bool DoExplode(Player p, Level lvl, ref Vec3S32 pos) {
-            if (lvl.physics < 3 || lvl.physics == 5) {
+            if (lvl.Physics < 3 || lvl.Physics == 5) {
                 p.Message("&WThe physics on {0} &Ware not sufficient for exploding!", lvl.ColoredName); 
                 return false;
             }

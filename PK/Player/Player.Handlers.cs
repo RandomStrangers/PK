@@ -88,7 +88,7 @@ namespace PattyKaki
 
             if (!deletingBlock)
             {
-                PhysicsArgs args = level.foundInfo(x, y, z);
+                PhysicsArgs args = level.FoundInfo(x, y, z);
                 if (args.HasWait) return;
             }
 
@@ -189,7 +189,7 @@ namespace PattyKaki
             level.BlockDB.Cache.Add(this, x, y, z, flags, old, block);
             y--; // check for growth at block below
             
-            bool grow = level.Config.GrassGrow && (level.physics == 0 || level.physics == 5);
+            bool grow = level.Config.GrassGrow && (level.Physics == 0 || level.Physics == 5);
             if (!grow || level.CanAffect(this, x, y, z) != null) return result;
             BlockID below = level.GetBlock(x, y, z);
             
@@ -403,9 +403,8 @@ namespace PattyKaki
 
             if (text != "/afk" && IsAfk)
                 CmdAfk.ToggleAfk(this, "");
-            
-            bool isCommand;
-            text = Chat.ParseInput(text, out isCommand);
+
+            text = Chat.ParseInput(text, out bool isCommand);
             if (isCommand) { DoCommand(text); return; }
 
             // People who are muted can't speak or vote
@@ -503,9 +502,8 @@ namespace PattyKaki
                 }
                 Message("Repeating &T/" + text);
             }
-            
-            string cmd, args;
-            text.Separate(' ', out cmd, out args);
+
+            text.Separate(' ', out string cmd, out string args);
             HandleCommand(cmd, args, DefaultCmdData);
         }
         
@@ -568,9 +566,11 @@ namespace PattyKaki
                     messages.Add(args); commands.Add(command);
                 }
 
-                Thread thread = new Thread(() => UseCommands(commands, messages, data));
-                thread.Name = "CMDS_";
-                thread.IsBackground = true;
+                Thread thread = new Thread(() => UseCommands(commands, messages, data))
+                {
+                    Name = "CMDS_",
+                    IsBackground = true
+                };
                 thread.Start();
             } catch (Exception e) {
                 Logger.LogError(e);
@@ -616,18 +616,19 @@ namespace PattyKaki
         
         Command GetCommand(ref string cmdName, ref string cmdArgs, CommandData data) {
             if (!CheckCommand(cmdName)) return null;
-            
-            string bound;
-            byte bindIndex;
-            if (CmdBindings.TryGetValue(cmdName, out bound)) {
+
+            if (CmdBindings.TryGetValue(cmdName, out string bound))
+            {
                 // user defined command shortcuts take priority
                 bound.Separate(' ', out cmdName, out cmdArgs);
-            } else if (byte.TryParse(cmdName, out bindIndex) && bindIndex < 10) {
+            }
+            else if (byte.TryParse(cmdName, out byte bindIndex) && bindIndex < 10)
+            {
                 // backwards compatibility for old /cmdbind behaviour
                 Message("No command is bound to: &T/" + cmdName);
                 return null;
             }
-            
+
             Command.Search(ref cmdName, ref cmdArgs);
             OnPlayerCommandEvent.Call(this, cmdName, cmdArgs, data);
             if (cancelcommand) { cancelcommand = false; return null; }
@@ -648,17 +649,17 @@ namespace PattyKaki
                 return null;
             }
             
-            if (level != null && level.IsMuseum && !command.museumUsable) {
-                Message("Cannot use &T/{0} &Swhile in a museum.", command.name); return null;
+            if (level != null && level.IsMuseum && !command.MuseumUsable) {
+                Message("Cannot use &T/{0} &Swhile in a museum.", command.Name); return null;
             }
             if (frozen && !command.UseableWhenFrozen) {
-                Message("Cannot use &T/{0} &Swhile frozen.", command.name); return null;
+                Message("Cannot use &T/{0} &Swhile frozen.", command.Name); return null;
             }
             return command;
         }
         
         bool UseCommand(Command command, string args, CommandData data) {
-            string cmd = command.name;
+            string cmd = command.Name;
             if (command.UpdatesLastCmd) {
                 lastCMD = args.Length == 0 ? cmd : cmd + " " + args;
                 lastCmdTime = DateTime.UtcNow;
@@ -713,7 +714,7 @@ namespace PattyKaki
             
             if (cmd.Parallelism == CommandParallelism.NoAndWarn) {
                 Message("Waiting for &T/{0} {1} &Sto finish first before running &T/{2} {3}",
-                        head.cmd.name, head.args, cmd.name, args);
+                        head.cmd.Name, head.args, cmd.Name, args);
             }
             
             // Overly punish triggering forced serial execution of commands

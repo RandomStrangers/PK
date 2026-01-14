@@ -41,7 +41,7 @@ namespace PattyKaki.Core {
             }
         }
 
-        public static void LogAction(ModAction e, Player target, string action) {
+        public static void LogAction(ModAction e, Player _, string action) {
             // TODO should use per-player nick settings
             string targetNick = e.Actor.FormatNick(e.Target);
 
@@ -117,7 +117,7 @@ namespace PattyKaki.Core {
                 Server.tempBans.Update(e.Target, data);
                 Server.tempBans.Save();
 
-                if (who != null) who.Kick("Banned for " + e.Duration.Shorten(true) + "." + e.ReasonSuffixed);
+                who?.Kick("Banned for " + e.Duration.Shorten(true) + "." + e.ReasonSuffixed);
             } else {
                 Ban.DeleteBan(e.Target);
                 Ban.BanPlayer(e.Actor, e.Target, e.Reason, !e.Announce, e.TargetGroup.Name);

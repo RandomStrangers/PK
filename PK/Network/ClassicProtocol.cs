@@ -435,9 +435,8 @@ namespace PattyKaki.Network
 
         public override void SendChat(string message)
         {
-            int bufferLen;
             // See comment in CleanupColors
-            char[] buffer = LineWrapper.CleanupColors(message, out bufferLen,
+            char[] buffer = LineWrapper.CleanupColors(message, out int bufferLen,
                                                       hasTextColors, hasTextColors);
             List<string> lines = LineWrapper.Wordwrap(buffer, bufferLen, hasEmoteFix);
 
@@ -516,8 +515,7 @@ namespace PattyKaki.Network
         {
             if (!Supports(CpeExt.EnvColors)) return false;
 
-            ColorDesc c;
-            if (Colors.TryParseHex(hex, out c))
+            if (Colors.TryParseHex(hex, out ColorDesc c))
             {
                 Send(Packet.EnvColor(type, c.R, c.G, c.B));
             }
@@ -530,8 +528,7 @@ namespace PattyKaki.Network
 
         public override void SendChangeModel(byte id, string model)
         {
-            BlockID raw;
-            if (BlockID.TryParse(model, out raw) && raw > MaxRawBlock)
+            if (BlockID.TryParse(model, out ushort raw) && raw > MaxRawBlock)
             {
                 BlockID block = Block.FromRaw(raw);
                 if (block >= Block.SUPPORTED_COUNT)

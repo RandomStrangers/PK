@@ -19,9 +19,9 @@ using PattyKaki.Games;
 
 namespace PattyKaki.Commands.World {
     public sealed class CmdMain : Command2 {      
-        public override string name { get { return "Main"; } }
-        public override string shortcut { get { return "h"; } }
-        public override string type { get { return CommandTypes.World; } }
+        public override string Name { get { return "Main"; } }
+        public override string Shortcut { get { return "h"; } }
+        public override string Type { get { return CommandTypes.World; } }
         public override CommandPerm[] ExtraPerms {
             get { return new[] { new CommandPerm(LevelPermission.Admin, "can change the main level") }; }
         }

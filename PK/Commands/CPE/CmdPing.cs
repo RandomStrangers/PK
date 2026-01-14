@@ -21,8 +21,8 @@ namespace PattyKaki.Commands.Chatting
 {
     public sealed class CmdPing : Command2 
     {
-        public override string name { get { return "Ping"; } }
-        public override string type { get { return CommandTypes.Information; } }
+        public override string Name { get { return "Ping"; } }
+        public override string Type { get { return CommandTypes.Information; } }
         public override bool UseableWhenFrozen { get { return true; } }
         public override CommandPerm[] ExtraPerms {
             get { return new[] { new CommandPerm(LevelPermission.Operator, "can see ping of other players") }; }

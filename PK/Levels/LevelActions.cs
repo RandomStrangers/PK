@@ -63,7 +63,7 @@ namespace PattyKaki
             }
             
             List<Player> players = null;
-            if (lvl != null) players = lvl.getPlayers();
+            if (lvl != null) players = lvl.GetPlayers();
             
             if (lvl != null && !lvl.Unload()) {
                 p.Message("Unable to rename the level, because it could not be unloaded. " +
@@ -362,7 +362,7 @@ namespace PattyKaki
         }
         
         
-        public static Level LoadMuseum(Player p, string name, string mapName, string path) {
+        public static Level LoadMuseum(Player _, string name, string mapName, string path) {
             Level lvl    = GetMuseum(name, path);
             lvl.MapName  = mapName;
             lvl.IsMuseum = true;
@@ -381,11 +381,13 @@ namespace PattyKaki
             {
                 Level lvl = pl.level;
                 if (!lvl.IsMuseum || lvl.name != name) continue;
-                
-                Level clone        = new Level();
-                clone.blocks       = lvl.blocks;
-                clone.CustomBlocks = lvl.CustomBlocks;
-                
+
+                Level clone = new Level
+                {
+                    blocks = lvl.blocks,
+                    CustomBlocks = lvl.CustomBlocks
+                };
+
                 // Just in case museum was unloaded a split second before
                 if (clone.blocks == null || clone.CustomBlocks == null) break;
                 
@@ -398,9 +400,11 @@ namespace PattyKaki
         
         
         public static void Resize(ref Level lvl, int width, int height, int length) {
-            Level res = new Level(lvl.name, (ushort)width, (ushort)height, (ushort)length);
-            res.hasPortals       = lvl.hasPortals;
-            res.hasMessageBlocks = lvl.hasMessageBlocks;
+            Level res = new Level(lvl.name, (ushort)width, (ushort)height, (ushort)length)
+            {
+                hasPortals = lvl.hasPortals,
+                hasMessageBlocks = lvl.hasMessageBlocks
+            };
             byte[] src = lvl.blocks, dst = res.blocks;
             
             // Copy blocks in bulk
@@ -440,7 +444,7 @@ namespace PattyKaki
                 
                 // Make sure zones are kept
                 res.Zones = lvl.Zones;
-                lvl.Zones = new VolatileArray<Zone>(false);
+                lvl.Zones = new VolatileArray<Zone>();
             
                 IMapExporter.Formats[0].Write(LevelInfo.MapPath(lvl.name), res);
                 lvl.SaveChanges = false;

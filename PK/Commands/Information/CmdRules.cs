@@ -21,8 +21,8 @@ namespace PattyKaki.Commands.Info
 {
     public sealed class CmdRules : Command2 
     {
-        public override string name { get { return "Rules"; } }
-        public override string type { get { return CommandTypes.Information; } }
+        public override string Name { get { return "Rules"; } }
+        public override string Type { get { return CommandTypes.Information; } }
         public override CommandPerm[] ExtraPerms {
             get { return new[] { new CommandPerm(LevelPermission.Builder, "can send rules to others") }; }
         }

@@ -20,9 +20,9 @@ using BlockID = System.UInt16;
 
 namespace PattyKaki.Commands.Misc {
     public sealed class CmdDescend : Command2 {
-        public override string name { get { return "Descend"; } }
-        public override string type { get { return CommandTypes.Other; } }
-        public override LevelPermission defaultRank { get { return LevelPermission.Builder; } }
+        public override string Name { get { return "Descend"; } }
+        public override string Type { get { return CommandTypes.Other; } }
+        public override LevelPermission DefaultRank { get { return LevelPermission.Builder; } }
         public override bool SuperUseable { get { return false; } }
 
         public override void Use(Player p, string message, CommandData data) {

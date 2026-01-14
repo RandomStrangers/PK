@@ -19,9 +19,9 @@ using PattyKaki.Maths;
 
 namespace PattyKaki.Commands.World {
     public class CmdWarp : Command2 {
-        public override string name { get { return "Warp"; } }
-        public override string type { get { return CommandTypes.World; } }
-        public override bool museumUsable { get { return false; } }
+        public override string Name { get { return "Warp"; } }
+        public override string Type { get { return CommandTypes.World; } }
+        public override bool MuseumUsable { get { return false; } }
         public override bool SuperUseable { get { return false; } }
         public override CommandPerm[] ExtraPerms {
             get { return new[] { new CommandPerm(LevelPermission.Operator, "can manage warps") }; }

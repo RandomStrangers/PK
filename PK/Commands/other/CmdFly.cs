@@ -22,9 +22,9 @@ using PattyKaki.Tasks;
 
 namespace PattyKaki.Commands.Misc {
     public sealed class CmdFly : Command2 {
-        public override string name { get { return "Fly"; } }
-        public override string type { get { return CommandTypes.Other; } }
-        public override LevelPermission defaultRank { get { return LevelPermission.Operator; } }
+        public override string Name { get { return "Fly"; } }
+        public override string Type { get { return CommandTypes.Other; } }
+        public override LevelPermission DefaultRank { get { return LevelPermission.Operator; } }
         public override bool SuperUseable { get { return false; } }
 
         public override void Use(Player p, string message, CommandData data) {

@@ -91,12 +91,12 @@ namespace PattyKaki.DB
         /// <remarks> You must lock using Locker.AccquireRead() **before** entering this method. </remarks>
         public void FindChangesAt(ushort x, ushort y, ushort z, Action<BlockDBEntry> output) {
             if (!File.Exists(FilePath)) { FindInMemoryAt(x, y, z, output); return; }
-            Vec3U16 dims;
-            
-            using (Stream s = OpenRead()) {
-                BlockDBFile format = BlockDBFile.ReadHeader(s, out dims);
+
+            using (Stream s = OpenRead())
+            {
+                BlockDBFile format = BlockDBFile.ReadHeader(s, out Vec3U16 dims);
                 if (x >= dims.X || y >= dims.Y || z >= dims.Z) return;
-                
+
                 int index = (y * dims.Z + z) * dims.X + x;
                 format.FindChangesAt(s, index, output);
             }

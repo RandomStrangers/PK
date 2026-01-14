@@ -18,9 +18,9 @@
 
 namespace PattyKaki.Commands.World {
     public sealed class CmdRenameLvl : Command2 {
-        public override string name { get { return "RenameLvl"; } }
-        public override string type { get { return CommandTypes.World; } }
-        public override LevelPermission defaultRank { get { return LevelPermission.Admin; } }
+        public override string Name { get { return "RenameLvl"; } }
+        public override string Type { get { return CommandTypes.World; } }
+        public override LevelPermission DefaultRank { get { return LevelPermission.Admin; } }
         public override CommandAlias[] Aliases {
             get { return new[] { new CommandAlias("WRename"), new CommandAlias("WorldRename") }; }
         }
@@ -29,11 +29,10 @@ namespace PattyKaki.Commands.World {
         public override void Use(Player p, string message, CommandData data) {
             string[] args = message.SplitSpaces();
             if (args.Length != 2) { Help(p); return; }
-            LevelConfig cfg;
-                       
+
             string src = Matcher.FindMaps(p, args[0]);
             if (src == null) return;
-            if (!LevelInfo.Check(p, data.Rank, src, "rename this map", out cfg)) return;
+            if (!LevelInfo.Check(p, data.Rank, src, "rename this map", out LevelConfig cfg)) return;
             
             string dst = args[1].ToLower();
             if (!Formatter.ValidMapName(p, dst)) return;

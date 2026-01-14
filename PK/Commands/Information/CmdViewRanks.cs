@@ -20,8 +20,8 @@ namespace PattyKaki.Commands.Info
 {
     public sealed class CmdViewRanks : Command2 
     {
-        public override string name { get { return "ViewRanks"; } }
-        public override string type { get { return CommandTypes.Information; } }
+        public override string Name { get { return "ViewRanks"; } }
+        public override string Type { get { return CommandTypes.Information; } }
         public override bool UseableWhenFrozen { get { return true; } }
         public override CommandAlias[] Aliases {
             get { return new[] { new CommandAlias("Ops", "@80"), new CommandAlias("Admins", "@100"),

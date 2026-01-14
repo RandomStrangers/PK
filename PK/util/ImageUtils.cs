@@ -68,7 +68,7 @@ namespace PattyKaki.Util
         }
 
         static void OnDecodeError(Player p, IBitmap2D bmp) {
-            if (bmp != null) bmp.Dispose();
+            bmp?.Dispose();
             // TODO failed to decode the image. make sure you are using the URL of the image directly, not just the webpage it is hosted on              
             p.Message("&WThere was an error reading the downloaded image.");
             p.Message("&WThe url may need to end with its extension (such as .jpg).");
@@ -115,7 +115,7 @@ namespace PattyKaki.Util
 
         public override void Dispose() {
             UnlockBits();
-            if (img != null) img.Dispose();
+            img?.Dispose();
 
             img = null;
             bmp = null;

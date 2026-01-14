@@ -51,9 +51,11 @@ namespace PattyKaki.Levels.IO
         public override Level Read(Stream src, string name, bool metadata) {
             using (GZipStream s = new GZipStream(src, CompressionMode.Decompress)) {
                 Level lvl   = new Level(name, 0, 0, 0);
-                DatReader r = new DatReader();
-                r.src = new BinaryReader(s);
-                
+                DatReader r = new DatReader
+                {
+                    src = new BinaryReader(s)
+                };
+
                 int signature = r.ReadInt32();
                 // Format version 0 - preclassic to classic 0.12
                 //  (technically this format doesn't have a signature, 
@@ -221,8 +223,10 @@ namespace PattyKaki.Levels.IO
         }
 
         public static JObject NewObject(DatReader r) {
-            JObject obj = new JObject();
-            obj.Desc = ClassDesc(r);
+            JObject obj = new JObject
+            {
+                Desc = ClassDesc(r)
+            };
             r.handles.Add(obj);
             
             List<JClassDesc> descs = new List<JClassDesc>();
@@ -242,8 +246,10 @@ namespace PattyKaki.Levels.IO
         }
 
         public static JArray NewArray(DatReader r) {
-            JArray array = new JArray();
-            array.Desc = ClassDesc(r);
+            JArray array = new JArray
+            {
+                Desc = ClassDesc(r)
+            };
             r.handles.Add(array);
             char type = array.Desc.Name[1];
             int size  = r.ReadInt32();
@@ -261,8 +267,10 @@ namespace PattyKaki.Levels.IO
         }
 
         public static JClassDesc NewClassDesc(DatReader r) {
-            JClassDesc desc = new JClassDesc();
-            desc.Name = r.ReadUtf8();
+            JClassDesc desc = new JClassDesc
+            {
+                Name = r.ReadUtf8()
+            };
             //r.ReadInt64(); // serial UID
             r.handles.Add(desc);
             
@@ -291,9 +299,11 @@ namespace PattyKaki.Levels.IO
             if ((desc.Flags & SC_SERIALIZABLE) == 0) {
                 throw new InvalidDataException("Invalid class data flags: " + desc.Flags);
             }
-            
-            JClassData data = new JClassData();
-            data.Values = new object[desc.Fields.Length];
+
+            JClassData data = new JClassData
+            {
+                Values = new object[desc.Fields.Length]
+            };
             for (int i = 0; i < data.Values.Length; i++) {
                 data.Values[i] = Value(r, desc.Fields[i].Type);
             }

@@ -19,10 +19,10 @@
 */
 
 namespace PattyKaki.Commands.World {   
-    public class CmdCopyLVL : Command2 {        
-        public override string name { get { return "CopyLvl"; } }
-        public override string type { get { return CommandTypes.World; } }
-        public override LevelPermission defaultRank { get { return LevelPermission.Admin; } }
+    public class CmdCopyLvl : Command2 {        
+        public override string Name { get { return "CopyLvl"; } }
+        public override string Type { get { return CommandTypes.World; } }
+        public override LevelPermission DefaultRank { get { return LevelPermission.Admin; } }
         public override CommandAlias[] Aliases {
             get { return new[] { new CommandAlias("WCopy"), new CommandAlias("WorldCopy") }; }
         }

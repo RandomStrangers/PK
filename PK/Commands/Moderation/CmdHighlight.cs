@@ -24,10 +24,10 @@ using BlockID = System.UInt16;
 
 namespace PattyKaki.Commands.Moderation {
     public sealed class CmdHighlight : Command2 {
-        public override string name { get { return "Highlight"; } }
-        public override string type { get { return CommandTypes.Moderation; } }
-        public override bool museumUsable { get { return false; } }
-        public override LevelPermission defaultRank { get { return LevelPermission.AdvBuilder; } }
+        public override string Name { get { return "Highlight"; } }
+        public override string Type { get { return CommandTypes.Moderation; } }
+        public override bool MuseumUsable { get { return false; } }
+        public override LevelPermission DefaultRank { get { return LevelPermission.AdvBuilder; } }
         public override bool SuperUseable { get { return false; } }        
         public override CommandAlias[] Aliases {
             get { return new CommandAlias[] { new CommandAlias("HighlightArea", "area") }; }

@@ -20,8 +20,8 @@ using System.Threading;
 
 namespace PattyKaki.Commands.World {
     public sealed class CmdMuseum : Command2 {
-        public override string name { get { return "Museum"; } }
-        public override string type { get { return CommandTypes.World; } }
+        public override string Name { get { return "Museum"; } }
+        public override string Type { get { return CommandTypes.World; } }
         public override bool SuperUseable { get { return false; } }
 
         public const string currentFlag = "*current";

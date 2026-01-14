@@ -19,8 +19,8 @@ namespace PattyKaki.Commands.Chatting
 {
     public sealed class CmdWhisper : Command2 
     {
-        public override string name { get { return "Whisper"; } }
-        public override string type { get { return CommandTypes.Chat; } }
+        public override string Name { get { return "Whisper"; } }
+        public override string Type { get { return CommandTypes.Chat; } }
         public override bool SuperUseable { get { return false; } }
         public override bool UseableWhenFrozen { get { return true; } }
         public override bool MessageBlockRestricted { get { return true; } }

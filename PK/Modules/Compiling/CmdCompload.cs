@@ -22,8 +22,8 @@ namespace PattyKaki.Modules.Compiling
 {
     public sealed class CmdCompLoad : CmdCompile 
     {
-        public override string name { get { return "CompLoad"; } }
-        public override string shortcut { get { return "cml"; } }
+        public override string Name { get { return "CompLoad"; } }
+        public override string Shortcut { get { return "cml"; } }
         public override CommandAlias[] Aliases { get { return null; } }
 
         public override void CompilePlugin(Player p, string[] paths, ICompiler compiler) {

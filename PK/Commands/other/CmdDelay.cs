@@ -20,8 +20,8 @@ using System.Threading;
 
 namespace PattyKaki.Commands.Misc {
     public sealed class CmdDelay : Command2 {
-        public override string name { get { return "Delay"; } }
-        public override string type { get { return CommandTypes.Other; } }
+        public override string Name { get { return "Delay"; } }
+        public override string Type { get { return CommandTypes.Other; } }
 
         public override void Use(Player p, string message, CommandData data) {
             TimeSpan duration = TimeSpan.Zero;

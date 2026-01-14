@@ -34,10 +34,12 @@ namespace PattyKaki.Games
         public override void OnDisabled(Player p) { }
 
         public override void OnActivated(Vec3F32 dir, BlockID block) {
-            MissileData args = new MissileData();
-            args.block = block;
-            args.type  = type;
-            args.pos   = (Vec3U16)p.Pos.BlockCoords;
+            MissileData args = new MissileData
+            {
+                block = block,
+                type = type,
+                pos = (Vec3U16)p.Pos.BlockCoords
+            };
 
             SchedulerTask task = new SchedulerTask(MissileCallback, args,
                                                    TimeSpan.FromMilliseconds(100), true);
@@ -116,7 +118,7 @@ namespace PattyKaki.Games
             args.all.Add(pos);
             if (HitsPlayer(args, pos)) return false;
 
-            if (pos == target && p.level.physics >= 3 && args.type >= WeaponType.Explode) {
+            if (pos == target && p.level.Physics >= 3 && args.type >= WeaponType.Explode) {
                 p.level.MakeExplosion(target.X, target.Y, target.Z, 2);
                 return false;
             }
@@ -150,7 +152,7 @@ namespace PattyKaki.Games
         public override string Name { get { return "Penetrative missile"; } }
 
         public override bool OnHitBlock(MissileData args, Vec3U16 pos, BlockID block) {
-            if (p.level.physics < 2) return true;
+            if (p.level.Physics < 2) return true;
             
             if (!p.level.Props[block].LavaKills) return true;
             // Penetrative missile goes through blocks lava can go through
@@ -164,7 +166,7 @@ namespace PattyKaki.Games
         public override string Name { get { return "Explosive missile"; } }
 
         public override void OnHitPlayer(MissileData args, Player pl) {
-            if (pl.level.physics >= 3) {
+            if (pl.level.Physics >= 3) {
                 pl.HandleDeath(Block.Cobblestone, "@p &Swas blown up by " + p.ColoredName, true);
             } else {
                 base.OnHitPlayer(args, pl);
@@ -172,7 +174,7 @@ namespace PattyKaki.Games
         }
 
         public override bool OnHitBlock(MissileData args, Vec3U16 pos, BlockID block) {
-            if (p.level.physics >= 3) p.level.MakeExplosion(pos.X, pos.Y, pos.Z, 1);
+            if (p.level.Physics >= 3) p.level.MakeExplosion(pos.X, pos.Y, pos.Z, 1);
             return true;
         }
     }

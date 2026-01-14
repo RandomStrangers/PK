@@ -19,10 +19,10 @@ using PattyKaki.Generator;
 
 namespace PattyKaki.Commands.World {
     public sealed class CmdNewLvl : Command2 {
-        public override string name { get { return "NewLvl"; } }
-        public override string shortcut { get { return "Gen"; } }
-        public override string type { get { return CommandTypes.World; } }
-        public override LevelPermission defaultRank { get { return LevelPermission.Admin; } }
+        public override string Name { get { return "NewLvl"; } }
+        public override string Shortcut { get { return "Gen"; } }
+        public override string Type { get { return CommandTypes.World; } }
+        public override LevelPermission DefaultRank { get { return LevelPermission.Admin; } }
         public override CommandPerm[] ExtraPerms {
             get { return new[] { new CommandPerm(LevelPermission.Admin, "can generate maps with advanced themes") }; }
         }
@@ -38,7 +38,7 @@ namespace PattyKaki.Commands.World {
                 
                 lvl.Save(true);
             } finally {
-                if (lvl != null) lvl.Dispose();
+                lvl?.Dispose();
                 Server.DoGC();
             }
         }

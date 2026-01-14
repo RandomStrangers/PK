@@ -20,8 +20,8 @@ namespace PattyKaki.Commands.Info
 {
     public sealed class CmdLoaded : Command2 
     {
-        public override string name { get { return "Loaded"; } }
-        public override string type { get { return CommandTypes.Information; } }
+        public override string Name { get { return "Loaded"; } }
+        public override string Type { get { return CommandTypes.Information; } }
         public override bool UseableWhenFrozen { get { return true; } }
         
         public override void Use(Player p, string message, CommandData data) {
@@ -34,7 +34,7 @@ namespace PattyKaki.Commands.Info
 
         public static string FormatMap(Player p, Level lvl) {            
             bool canVisit = p.IsSuper || lvl.VisitAccess.CheckAllowed(p);
-            string physics = " [" +  lvl.physics + "]";
+            string physics = " [" +  lvl.Physics + "]";
             string visit = canVisit ? "" : " &c[no]";
             return lvl.ColoredName + physics + visit;
         }

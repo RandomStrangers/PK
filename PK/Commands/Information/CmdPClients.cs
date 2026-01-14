@@ -22,9 +22,9 @@ namespace PattyKaki.Commands.Info
 {
     public sealed class CmdPClients : Command2 
     {
-        public override string name { get { return "PClients"; } }
-        public override string shortcut { get { return "Clients"; } }
-        public override string type { get { return CommandTypes.Information; } }
+        public override string Name { get { return "PClients"; } }
+        public override string Shortcut { get { return "Clients"; } }
+        public override string Type { get { return CommandTypes.Information; } }
         public override bool UseableWhenFrozen { get { return true; } }
         
         public override void Use(Player p, string message, CommandData data) {
@@ -45,7 +45,7 @@ namespace PattyKaki.Commands.Info
             }
             
             p.Message("Players using:");
-            foreach (var kvp in clients) 
+            foreach (KeyValuePair<string, List<Player>> kvp in clients) 
             {
                 StringBuilder builder = new StringBuilder();
                 List<Player> players  = kvp.Value;

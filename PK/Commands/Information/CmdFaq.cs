@@ -19,8 +19,8 @@ using PattyKaki.Util;
 
 namespace PattyKaki.Commands.Info {
     public sealed class CmdFaq : Command2 {        
-        public override string name { get { return "FAQ"; } }
-        public override string type { get { return CommandTypes.Information; } }
+        public override string Name { get { return "FAQ"; } }
+        public override string Type { get { return CommandTypes.Information; } }
         public override bool UseableWhenFrozen { get { return true; } }
         
         public override void Use(Player p, string message, CommandData data) {

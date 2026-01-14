@@ -30,7 +30,7 @@ namespace PattyKaki
         /// to minimise the amount of time the object is locked for. </remarks>
         public readonly object locker = new object();
         
-        public VolatileArray(bool ignored = false) { } // used to mean 'useList'
+        public VolatileArray() { } // used to mean 'useList'
         
         public bool Add(T value) {
             lock (locker) {

@@ -3,41 +3,42 @@ using System.IO;
 using PattyKaki.Network;
 namespace PattyKaki.Commands
 {
-    public class CmdCCHeartbeat : Command
+    public class CmdHeartbeat : Command
     {
-        public override string name { get { return "ccheartbeat"; } }
-        public override string shortcut { get { return "ccbeat"; } }
-        public override string type { get { return "moderation"; } }
-        public override bool museumUsable { get { return true; } }
-        public override LevelPermission defaultRank { get { return LevelPermission.Owner; } }
+        public override string Name { get { return "Heartbeat"; } }
+        public override string Shortcut { get { return "beat"; } }
+        public override string Type { get { return CommandTypes.Moderation; } }
+        public override bool MuseumUsable { get { return true; } }
+        public override LevelPermission DefaultRank { get { return LevelPermission.Owner; } }
 
         public override void Use(Player p, string message)
         {
-            try
+            for (int i = 0; i <= Heartbeat.Heartbeats.Count; i++)
             {
-                Heartbeat.Heartbeats[0].Pump();
-                p.Message("Heartbeat pump sent.");
-                p.Message("Server URL: " + ((ClassiCubeBeat)Heartbeat.Heartbeats[0]).LastResponse);
-
-            }
-            catch (Exception e)
-            {
-                Logger.Log(LogType.Error, "Error with ClassiCube pump.", e);
-                p.Message("Error with ClassiCube pump: " + e + ".");
+                try
+                {
+                    Heartbeat.Heartbeats[i].Pump();
+                    p.Message("Heartbeat pump sent.");
+                }
+                catch (Exception e)
+                {
+                    Logger.Log(LogType.Error, "Error with heartbeat pump.", e);
+                    p.Message("Error with heartbeat pump: " + e + ".");
+                }
             }
         }
         public override void Help(Player p)
         {
-            p.Message("/ccheartbeat - Forces a pump for the ClassiCube heartbeat.  DEBUG PURPOSES ONLY.");
+            p.Message("&T/Heartbeat &H- Forces a pump for the server heartbeats.");
         }
     }
-    public sealed class CmdUrl : Command2
+    public sealed class CmdURL : Command2
     {
-        public override string name { get { return "ServerUrl"; } }
-        public override string shortcut { get { return "url"; } }
-        public override string type { get { return "information"; } }
+        public override string Name { get { return "ServerURL"; } }
+        public override string Shortcut { get { return "URL"; } }
+        public override string Type { get { return CommandTypes.Information; } }
         public override bool SuperUseable { get { return true; } }
-        public override LevelPermission defaultRank { get { return LevelPermission.Banned; } }
+        public override LevelPermission DefaultRank { get { return LevelPermission.Banned; } }
 
 
         public override void Use(Player p, string message, CommandData data)
@@ -49,7 +50,7 @@ namespace PattyKaki.Commands
         }
         public override void Help(Player p)
         {
-            p.Message("%T/ServerUrl %H- Shows the server's ClassiCube URL.");
+            p.Message("&T/ServerURL &H- Shows the server's URL.");
         }
     }
 }

@@ -72,11 +72,11 @@ namespace PattyKaki.Generator.Foliage
             { "Oak", () => new OakTree() },       { "Ash", () => new AshTree() },            
             { "Round", () => new RoundTree() },   { "Cone", () => new ConeTree() }, 
             { "Rainforest", () => new RainforestTree() }, { "Mangrove", () => new MangroveTree() },
-            { "fCraft", () => new fCraftTree() }
+            { "fCraft", () => new FCraftTree() }
         };
         
         public static Tree Find(string name) {
-            foreach (var entry in TreeTypes) 
+            foreach (KeyValuePair<string, TreeConstructor> entry in TreeTypes) 
             {
                 if (entry.Key.CaselessEq(name)) return entry.Value();
             }

@@ -19,9 +19,9 @@ namespace PattyKaki.Commands.Chatting
 {
     public class CmdTColor : EntityPropertyCmd 
     {
-        public override string name { get { return "TColor"; } }
-        public override string type { get { return CommandTypes.Chat; } }
-        public override LevelPermission defaultRank { get { return LevelPermission.AdvBuilder; } }
+        public override string Name { get { return "TColor"; } }
+        public override string Type { get { return CommandTypes.Chat; } }
+        public override LevelPermission DefaultRank { get { return LevelPermission.AdvBuilder; } }
         public override CommandPerm[] ExtraPerms {
             get { return new[] { new CommandPerm(LevelPermission.Operator, "can change the title color of others") }; }
         }

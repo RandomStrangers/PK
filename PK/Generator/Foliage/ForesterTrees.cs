@@ -29,7 +29,7 @@ namespace PattyKaki.Generator.Foliage {
     public abstract class ForesterTree : Tree {
 
         public Vec3S32 pos;
-        public double random() { return rnd.NextDouble(); }
+        public double Random() { return rnd.NextDouble(); }
         public const double none = double.MaxValue;
         public TreeOutput output;
 
@@ -40,7 +40,7 @@ namespace PattyKaki.Generator.Foliage {
         public const float EDGE_HEIGHT     =  25f;
         public const bool  ROOT_BUTTRESSES = true;
         
-        public override int EstimateBlocksAffected() { return (int)height * height * height; }
+        public override int EstimateBlocksAffected() { return height * height * height; }
         
         public override void SetData(Random rnd, int value) { this.rnd = rnd; height = value; }
 
@@ -115,7 +115,7 @@ namespace PattyKaki.Generator.Foliage {
         /// <remarks> If no foliage cluster is to be created, return None
         /// Designed for sublcassing.  Only makes clusters close to the trunk. </remarks>
         public virtual double ShapeFunc(int y) {
-            if (random() < (100.0 / (height * height)) && y < trunkheight)
+            if (Random() < (100.0 / (height * height)) && y < trunkheight)
                 return height * 0.12;
             return none;
         }
@@ -211,15 +211,15 @@ namespace PattyKaki.Generator.Foliage {
                 // you get enough on small trees, but not too many on larger trees.
                 // Very difficult to get right... do not touch!
                 double value = (branchdensity * 220 * height) / (Math.Pow(ydist + dist, 3));
-                if (value < random()) continue;
+                if (value < Random()) continue;
                 
-                float slope = (float)(branchslope + (0.5 - random()) * 0.16);
+                float slope = (float)(branchslope + (0.5 - Random()) * 0.16);
                 float branchy, basesize;
                 if ((coord.Y - dist * slope) > topy) {
                     // Another random rejection, for branches between
                     // the top of the trunk and the crown of the tree
                     float threshhold = 1.0f / height;
-                    if (random() < threshhold) continue;
+                    if (Random() < threshhold) continue;
                     
                     branchy = topy;
                     basesize = endrad;
@@ -229,9 +229,9 @@ namespace PattyKaki.Generator.Foliage {
                                 (topy - branchy) / trunkheight);
                 }
                 
-                double startsize = basesize * (1 + random()) * 0.618 * Math.Pow(dist / height, 0.618);
-                double rndr = Math.Sqrt(random()) * basesize * 0.618;
-                double rndang = random() * 2 * Math.PI;
+                double startsize = basesize * (1 + Random()) * 0.618 * Math.Pow(dist / height, 0.618);
+                double rndr = Math.Sqrt(Random()) * basesize * 0.618;
+                double rndang = Random() * 2 * Math.PI;
                 
                 int rndx = (int)(rndr * Math.Sin(rndang) + 0.5);
                 int rndz = (int)(rndr * Math.Cos(rndang) + 0.5);
@@ -253,45 +253,49 @@ namespace PattyKaki.Generator.Foliage {
             int x = treeposition.X, z = treeposition.Z;
             
             float end_size_factor = trunkheight / height;
-            float startrad = 0;
             float midrad = trunkradius * (1 - end_size_factor * 0.5f);
             float endrad = trunkradius * (1 - end_size_factor);
             if (endrad < 1) endrad = 1;
             if (midrad < endrad) midrad = endrad;
             
             bool mangrove = this is MangroveTree;
+            float startrad;
             // Make the root buttresses, if indicated
-            if (ROOT_BUTTRESSES || mangrove) {
+            if (ROOT_BUTTRESSES || mangrove)
+            {
                 // The start radius of the trunk should be a little smaller if we are using root buttresses.
                 startrad = trunkradius * 0.8f;
                 float buttress_radius = trunkradius * 0.382f;
                 // posradius is how far the root buttresses should be offset from the trunk.
                 float posradius = trunkradius;
                 // In mangroves, the root buttresses are much more extended.
-                if (mangrove) posradius = posradius * 2.618f;
+                if (mangrove) posradius *= 2.618f;
                 int num_of_buttresses = (int)(Math.Sqrt(trunkradius) + 3.5);
-                
-                for (int i = 0; i < num_of_buttresses; i++) {
-                    double rndang = random()* 2 * Math.PI;
-                    double thisposradius = posradius * (0.9 + random() * 0.2);
+
+                for (int i = 0; i < num_of_buttresses; i++)
+                {
+                    double rndang = Random() * 2 * Math.PI;
+                    double thisposradius = posradius * (0.9 + Random() * 0.2);
                     // thisx and thisz are the x and z position for the base of the root buttress.
                     int thisx = x + (int)(thisposradius * Math.Sin(rndang));
                     int thisz = z + (int)(thisposradius * Math.Cos(rndang));
-                    
+
                     // thisbuttressradius is the radius of the buttress.
                     // Currently, root buttresses do not taper.
-                    float thisbuttressradius = buttress_radius * (float)(0.618 + random());
+                    float thisbuttressradius = buttress_radius * (float)(0.618 + Random());
                     if (thisbuttressradius < 1) thisbuttressradius = 1;
-                    
+
                     // Make the root buttress.
                     TaperedCylinder(new Vec3S32(thisx, starty, thisz), new Vec3S32(x, midy, z),
                                     thisbuttressradius, thisbuttressradius);
                 }
-            } else {
+            }
+            else
+            {
                 // If root buttresses are turned off, set the trunk radius to normal size.
                 startrad = trunkradius;
             }
-            
+
             // Make the lower and upper sections of the trunk.
             TaperedCylinder(new Vec3S32(x, starty, z), new Vec3S32(x, midy, z), startrad, midrad);
             TaperedCylinder(new Vec3S32(x, midy, z),   new Vec3S32(x, topy, z), midrad,   endrad);
@@ -309,7 +313,6 @@ namespace PattyKaki.Generator.Foliage {
             int ystart = treeposition.Y, yend = treeposition.Y + height;
             
             branchdensity = BRANCH_DENSITY / FOLIAGE_DENSITY;
-            int topy = treeposition.Y + (int)(trunkheight + 0.5);
             int num_of_clusters_per_y = (int)(1.5 + Math.Pow(FOLIAGE_DENSITY * height / 19.0, 2));
             if (num_of_clusters_per_y < 1) num_of_clusters_per_y = 1;
             
@@ -321,9 +324,9 @@ namespace PattyKaki.Generator.Foliage {
             {
                 double shapefac = ShapeFunc(y - ystart);
                 if (shapefac == none) continue;
-                double r = (Math.Sqrt(random()) + 0.328) * shapefac;
+                double r = (Math.Sqrt(Random()) + 0.328) * shapefac;
                 
-                double theta = random() * 2 * Math.PI;
+                double theta = Random() * 2 * Math.PI;
                 int x = (int)(r * Math.Sin(theta)) + treeposition.X;
                 int z = (int)(r * Math.Cos(theta)) + treeposition.Z;
                 foliage_coords.Add(new Vec3S32(x, y, z));
@@ -341,20 +344,19 @@ namespace PattyKaki.Generator.Foliage {
             base.Prepare();
             branchslope = 0.382f;
             foliage_shape = new float[] { 2, 3, 3, 2.5f, 1.6f };
-            trunkradius = trunkradius * 0.8f;
+            trunkradius *= 0.8f;
             trunkheight = TRUNK_HEIGHT * trunkheight;
         }
 
         public override double ShapeFunc(int y) {
             double twigs = base.ShapeFunc(y);
             if (twigs != none) return twigs;
-            if (y < height * (0.282 + 0.1 * Math.Sqrt(random())))
+            if (y < height * (0.282 + 0.1 * Math.Sqrt(Random())))
                 return none;
             
             double radius = height / 2.0;
             double adj    = height / 2.0 - y;
-            double dist   = 0;
-            
+            double dist;
             if (adj == 0) {
                 dist = radius;
             } else if (Math.Abs(adj) >= radius) {
@@ -375,13 +377,13 @@ namespace PattyKaki.Generator.Foliage {
             base.Prepare();
             branchslope = 0.15f;
             foliage_shape = new float[] { 3, 2.6f, 2, 1 };
-            trunkradius = trunkradius * 0.5f;
+            trunkradius *= 0.5f;
         }
 
         public override double ShapeFunc(int y) {
             double twigs = base.ShapeFunc(y);
             if (twigs != none) return twigs;
-            if (y < height * (0.25 + 0.05 * Math.Sqrt(random())))
+            if (y < height * (0.25 + 0.05 * Math.Sqrt(Random())))
                 return none;
             
             double radius = (height - y) * 0.382;
@@ -399,22 +401,22 @@ namespace PattyKaki.Generator.Foliage {
             base.Prepare();
             foliage_shape = new float[] { 3.4f, 2.6f };
             branchslope = 1.0f;
-            trunkradius = trunkradius * 0.382f;
-            trunkheight = trunkheight * 0.9f;
+            trunkradius *= 0.382f;
+            trunkheight *= 0.9f;
         }
 
         public override double ShapeFunc(int y) {
             if (y < height * 0.8) {
                 if (EDGE_HEIGHT < height) {
                     double twigs = base.ShapeFunc(y);
-                    if (twigs != none && random() < 0.07f)
+                    if (twigs != none && Random() < 0.07f)
                         return twigs;
                 }
                 return none;
             } else {
                 double width = height * 0.382;
                 double topdist = (height - y) / (height * 0.2f);
-                double dist = width * (0.618f + topdist) * (0.618f + random()) * 0.382f;
+                double dist = width * (0.618f + topdist) * (0.618f + Random()) * 0.382f;
                 return dist;
             }
         }
@@ -429,7 +431,7 @@ namespace PattyKaki.Generator.Foliage {
         public override void Prepare() {
             base.Prepare();
             branchslope = 1.0f;
-            trunkradius = trunkradius * 0.618f;
+            trunkradius *= 0.618f;
         }
 
         public override double ShapeFunc(int y) {

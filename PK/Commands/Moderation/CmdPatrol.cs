@@ -22,9 +22,9 @@ using System.Collections.Generic;
 
 namespace PattyKaki.Commands.Moderation {
     public sealed class CmdPatrol : Command2 {
-        public override string name { get { return "Patrol"; } }
-        public override string type { get { return CommandTypes.Moderation; } }
-        public override LevelPermission defaultRank { get { return LevelPermission.AdvBuilder; } }
+        public override string Name { get { return "Patrol"; } }
+        public override string Type { get { return CommandTypes.Moderation; } }
+        public override LevelPermission DefaultRank { get { return LevelPermission.AdvBuilder; } }
         public override bool SuperUseable { get { return false; } }
         public override CommandPerm[] ExtraPerms {
             get { return new[] { new CommandPerm(LevelPermission.Builder, "are not patrolled") }; }
@@ -47,7 +47,7 @@ namespace PattyKaki.Commands.Moderation {
 
         public List<Player> GetPatrolCandidates(Player p, CommandData data) {
             List<Player> candidates = new List<Player>();
-            ItemPerms except = CommandExtraPerms.Find(name, 1);
+            ItemPerms except = CommandExtraPerms.Find(Name, 1);
             Player[] players = PlayerInfo.Online.Items;
             DateTime cutoff  = DateTime.UtcNow.AddSeconds(-15);
             
@@ -62,7 +62,7 @@ namespace PattyKaki.Commands.Moderation {
         
         public override void Help(Player p) {
             p.Message("&T/Patrol");
-            ItemPerms except = CommandExtraPerms.Find(name, 1);
+            ItemPerms except = CommandExtraPerms.Find(Name, 1);
             p.Message("&HTeleports you to a random player. {0} &Hare not patrolled", except.Describe());
             p.Message("&HPlayers patrolled within the last 15 seconds are ignored");
         }

@@ -17,11 +17,11 @@
 */
 namespace PattyKaki.Commands.Moderation {
     public sealed class CmdMoveAll : Command2 {
-        public override string name { get { return "MoveAll"; } }
-        public override string shortcut { get { return "ma"; } }
-        public override string type { get { return CommandTypes.Moderation; } }
-        public override bool museumUsable { get { return false; } }
-        public override LevelPermission defaultRank { get { return LevelPermission.Operator; } }
+        public override string Name { get { return "MoveAll"; } }
+        public override string Shortcut { get { return "ma"; } }
+        public override string Type { get { return CommandTypes.Moderation; } }
+        public override bool MuseumUsable { get { return false; } }
+        public override LevelPermission DefaultRank { get { return LevelPermission.Operator; } }
         
         public override void Use(Player p, string message, CommandData data) {
             Level level = Matcher.FindLevels(p, message);
